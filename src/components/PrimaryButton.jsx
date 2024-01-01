@@ -5,11 +5,7 @@ import { hp, wp } from "../utils";
 
 const PrimaryButton = ({ text, styles, onPress }) => {
   return (
-    <TouchableOpacity
-      activeOpacity={0.8}
-      onPress={onPress}
-      style={[styles, { marginBottom: hp(5) }]}
-    >
+    <TouchableOpacity activeOpacity={0.8} onPress={onPress} style={[styles]}>
       <LinearGradient
         colors={Colors.green_gradient}
         start={{ x: 0, y: 0 }}

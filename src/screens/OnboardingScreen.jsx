@@ -121,7 +121,11 @@ const OnboardingScreen = ({ navigation }) => {
         showsHorizontalScrollIndicator={false}
       />
 
-      <PrimaryButton text={"Next"} onPress={goToNextSlide} />
+      <PrimaryButton
+        text={"Next"}
+        onPress={goToNextSlide}
+        styles={{ marginBottom: hp(5) }}
+      />
     </View>
   );
 };

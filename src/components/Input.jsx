@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { Image, StyleSheet, Text, TextInput, View } from "react-native";
 import { Colors } from "../constants";
 import { hp, wp } from "../utils";
 
@@ -14,6 +14,7 @@ const Input = ({
   errors,
   onPressIconRight,
   onPressIconLeft,
+  image,
   ...props
 }) => {
   return (
@@ -38,7 +39,7 @@ const Input = ({
           },
         ]}
       >
-        {IconPack && (
+        {IconPack ? (
           <IconPack
             name={icon}
             size={wp(6)}
@@ -52,7 +53,13 @@ const Input = ({
                 : Colors.greyScale400
             }
           />
-        )}
+        ) : image ? (
+          <Image
+            source={image}
+            resizeMode="contain"
+            style={{ width: wp(7), aspectRatio: 1 }}
+          />
+        ) : null}
         <TextInput
           {...props}
           style={[

@@ -13,7 +13,7 @@ import {
 } from "react-native";
 import * as Yup from "yup";
 import { appDescription, appName, logoStyles } from ".././constants";
-import { Input, PrimaryButton } from "../components/";
+import { CustomSwitch, Input, PrimaryButton } from "../components/";
 import { Colors } from "../constants";
 import { hp, wp } from "../utils";
 
@@ -28,12 +28,29 @@ const validationSchema = Yup.object().shape({
   password: Yup.string()
     .min(8, ({ min }) => `password should be at least ${min} characters`)
     .required(),
+  userName: Yup.string()
+    .test(
+      "no-white-space",
+      "User Name cannot contain white spaces",
+      (value) => {
+        return !/\s/.test(value); // Test if value contains white spaces
+      }
+    )
+    .matches(/^@[^-]/, 'User Name must start with "@" symbol')
+    .min(3)
+    .max(15)
+    .required()
+    .label("User Name"),
 });
 
-const SignInScreen = () => {
+const SignUpScreen = () => {
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [passwordFocused, setPasswordFocused] = useState(false);
   const [emailFocused, setEmailFocused] = useState(false);
+  const [userNameFocused, setUserNameFocused] = useState(false);
+  const [rememberMe, setRememberMe] = useState(true);
+  const [emailMe, setEmailMe] = useState(true);
 
   const navigation = useNavigation();
 
@@ -117,10 +134,10 @@ const SignInScreen = () => {
             marginVertical: hp(5),
           }}
         >
-          Login To Your Account
+          Sign Up For Free
         </Text>
         <Formik
-          initialValues={{ email: "", password: "" }}
+          initialValues={{ email: "", password: "", userNameFocused: "" }}
           onSubmit={(values) =>
             handleSubmitValues(values.email, values.password)
           }
@@ -135,7 +152,24 @@ const SignInScreen = () => {
             errors,
             touched,
           }) => (
-            <View style={{ paddingHorizontal: wp(3), gap: 12 }}>
+            <View style={{ paddingHorizontal: wp(3), gap: 12, flex: 1 }}>
+              <Input
+                name="userName"
+                placeholder="Username"
+                onChangeText={handleChange("userName")}
+                onBlur={(e) => {
+                  handleBlur("userName")(e);
+                  setUserNameFocused(false);
+                }}
+                active={userNameFocused}
+                onFocus={() => setUserNameFocused(true)}
+                value={values.userName}
+                autoComplete="name"
+                image={require("../../assets/images/Profile.png")}
+                errors={errors.userName}
+                touched={touched.userName}
+                autoCapitalize="words"
+              />
               <Input
                 name="email"
                 placeholder="Email"
@@ -149,6 +183,7 @@ const SignInScreen = () => {
                 value={values.email}
                 keyboardType="email-address"
                 autoComplete="email"
+                image={require("../../assets/images/Message.png")}
                 errors={errors.email}
                 touched={touched.email}
                 autoCapitalize="none"
@@ -168,118 +203,74 @@ const SignInScreen = () => {
                 onFocus={() => setPasswordFocused(true)}
                 value={values.password}
                 keyboardType="default"
-                secureTextEntry={true}
+                image={require("../../assets/images/Lock.png")}
+                iconRight={showPassword ? "eye" : "eye-off"}
+                secureTextEntry={showPassword ? false : true}
+                onPressIconRight={() => setShowPassword(!showPassword)}
                 errors={errors.password}
                 touched={touched.password}
                 inputMode="text"
                 autoComplete="password-new"
               />
-              <TouchableOpacity style={{ alignItems: "flex-end" }}>
-                <Text
+              <View style={{ flexGrow: 1, flex: 1, marginBottom: hp(3) }}>
+                <View
                   style={{
-                    fontFamily: "medium",
-                    fontSize: wp(3.5),
-                    letterSpacing: 0.5,
-                    textDecorationLine: "underline",
-                    textAlign: "center",
-                    color: Colors.success,
-                  }}
-                >
-                  Forgot Your Password?
-                </Text>
-              </TouchableOpacity>
-              <Text
-                style={{
-                  fontFamily: "bold",
-                  fontSize: wp(4),
-                  letterSpacing: 0.5,
-                  textAlign: "center",
-                  marginVertical: hp(1),
-                }}
-              >
-                Or Continue With
-              </Text>
-
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
-                <TouchableOpacity
-                  style={{
-                    backgroundColor: Colors.white,
-                    borderRadius: wp(4),
-                    borderWidth: 1,
-                    borderColor: Colors.greyScale200,
-                    elevation: 0.3,
-                    justifyContent: "center",
-                    alignItems: "center",
                     flexDirection: "row",
+                    alignItems: "center",
                     gap: 13,
-                    width: wp(45),
+                    marginTop: hp(1),
                   }}
                 >
-                  <Image
-                    source={require("../../assets/images/facebook.png")}
-                    style={{ width: hp(4), aspectRatio: 1 }}
-                    resizeMode="contain"
+                  <CustomSwitch
+                    status={rememberMe}
+                    onPress={() => setRememberMe(!rememberMe)}
+                    size={0.5}
                   />
                   <Text
                     style={{
-                      fontFamily: "bold",
+                      fontFamily: "book",
                       fontSize: wp(4),
                       letterSpacing: 0.5,
                       textAlign: "center",
-                      marginVertical: hp(4),
+                      color: Colors.greyScale500,
                     }}
                   >
-                    Facebook
+                    Keep Me Signed In
                   </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
+                </View>
+                <View
                   style={{
-                    backgroundColor: Colors.white,
-                    borderRadius: wp(4),
-                    borderWidth: 1,
-                    borderColor: Colors.greyScale200,
-                    elevation: 0.3,
-                    justifyContent: "center",
-                    alignItems: "center",
                     flexDirection: "row",
+                    alignItems: "center",
                     gap: 13,
-                    width: wp(45),
+                    marginTop: hp(1),
                   }}
                 >
-                  <Image
-                    source={require("../../assets/images/google.png")}
-                    style={{ width: hp(4), aspectRatio: 1 }}
-                    resizeMode="contain"
+                  <CustomSwitch
+                    status={emailMe}
+                    onPress={() => setEmailMe(!emailMe)}
+                    size={0.5}
                   />
                   <Text
                     style={{
-                      fontFamily: "bold",
+                      fontFamily: "book",
                       fontSize: wp(4),
                       letterSpacing: 0.5,
                       textAlign: "center",
-                      marginVertical: hp(4),
+                      color: Colors.greyScale500,
                     }}
                   >
-                    Google
+                    Email Me About Special Pricing
                   </Text>
-                </TouchableOpacity>
+                </View>
               </View>
 
               <PrimaryButton
-                text={"Login"}
+                text={"Create Account"}
                 onPress={handleSubmit}
-                styles={{ marginTop: hp(4) }}
+                styles={{ marginBottom: hp(2) }}
               />
-              <TouchableOpacity
-                style={{}}
-                onPress={() => navigation.navigate("signUp")}
-              >
+              <TouchableOpacity style={{}}>
                 <Text
                   style={{
                     fontFamily: "medium",
@@ -290,7 +281,7 @@ const SignInScreen = () => {
                     color: Colors.success,
                   }}
                 >
-                  Don't have an account? sign up
+                  already Have an account?
                 </Text>
               </TouchableOpacity>
             </View>
@@ -301,7 +292,7 @@ const SignInScreen = () => {
   );
 };
 
-export default SignInScreen;
+export default SignUpScreen;
 
 const styles = StyleSheet.create({
   imageContainer: {
