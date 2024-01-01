@@ -1,13 +1,20 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import { HomeScreen } from "../screens";
+import {
+  HomeScreen,
+  OnboardingScreen,
+  SignInScreen,
+  SplashScreen,
+} from "../screens";
 
 const Stack = createStackNavigator();
 
 const AuthNavigator = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} />
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="splash" component={SplashScreen} />
+      <Stack.Screen name="Onboarding" component={OnboardingScreen} />
+      <Stack.Screen name="signIn" component={SignInScreen} />
     </Stack.Navigator>
   );
 };
