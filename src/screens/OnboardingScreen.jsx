@@ -11,6 +11,7 @@ import { Colors } from ".././constants";
 import { DEVICE_WIDTH, hp, wp } from "../utils";
 import { LinearGradient } from "expo-linear-gradient";
 import colors from "../constants/colors";
+import { PrimaryButton } from "../components";
 
 const ITEMS = [
   {
@@ -47,20 +48,22 @@ const SlideComponent = ({ title, description, image }) => {
         <Text
           style={{
             fontFamily: "black",
-            fontSize: hp(4),
+            fontSize: wp(7),
             textAlign: "center",
             lineHeight: hp(5),
           }}
+          numberOfLines={2}
         >
           {title}
         </Text>
         <Text
           style={{
             fontFamily: "regular",
-            fontSize: hp(2.5),
+            fontSize: wp(4.5),
             textAlign: "center",
-            lineHeight: hp(3.5),
+            lineHeight: hp(3),
           }}
+          numberOfLines={2}
         >
           {description}
         </Text>
@@ -118,33 +121,7 @@ const OnboardingScreen = ({ navigation }) => {
         showsHorizontalScrollIndicator={false}
       />
 
-      <TouchableOpacity activeOpacity={0.8} onPress={goToNextSlide}>
-        <LinearGradient
-          colors={colors.green_gradient}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 0 }}
-          style={{
-            justifyContent: "center",
-            alignItems: "center",
-            width: wp(35),
-            height: hp(7),
-            marginBottom: hp(5),
-            padding: wp(3),
-            borderRadius: wp(3),
-            overflow: "hidden",
-          }}
-        >
-          <Text
-            style={{
-              fontFamily: "bold",
-              fontSize: hp(3),
-              color: Colors.white,
-            }}
-          >
-            Next
-          </Text>
-        </LinearGradient>
-      </TouchableOpacity>
+      <PrimaryButton text={"Next"} onPress={goToNextSlide} />
     </View>
   );
 };

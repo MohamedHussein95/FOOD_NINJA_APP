@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
-import { Colors, appDescription, appName } from ".././constants";
+import { Colors, appDescription, appName, logoStyles } from ".././constants";
 
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -45,15 +45,11 @@ const SplashScreen = ({ navigation }) => {
       <View style={styles.logoContainer}>
         <Image
           source={require("../../assets/images/Logo.png")}
-          style={{ height: hp(25), aspectRatio: 1 }}
+          style={logoStyles.logo}
           resizeMode="contain"
         />
         <MaskedView
-          style={{
-            height: hp(7.5),
-            flexDirection: "row",
-            backgroundColor: "red",
-          }}
+          style={logoStyles.maskedContainer}
           maskElement={
             <View
               style={{
@@ -63,15 +59,7 @@ const SplashScreen = ({ navigation }) => {
                 alignItems: "center",
               }}
             >
-              <Text
-                style={{
-                  fontFamily: "viga_regular",
-                  fontSize: hp(6),
-                  letterSpacing: 0.5,
-                }}
-              >
-                {appName}
-              </Text>
+              <Text style={logoStyles.appName}>{appName}</Text>
             </View>
           }
         >
@@ -87,16 +75,7 @@ const SplashScreen = ({ navigation }) => {
             }}
           />
         </MaskedView>
-        <Text
-          style={{
-            fontFamily: "inter_semiBold",
-            fontSize: hp(2),
-            letterSpacing: 1,
-            marginTop: hp(0.2),
-          }}
-        >
-          {appDescription}
-        </Text>
+        <Text style={logoStyles.appDescription}>{appDescription}</Text>
       </View>
     </View>
   );
