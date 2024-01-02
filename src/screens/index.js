@@ -12,3 +12,5 @@ export { default as VerificationScreen } from "./VerificationScreen";
 export { default as ForgotPasswordScreen } from "./ForgotPasswordScreen";
 export { default as ForgotPasswordEmailPromptScreen } from "./ForgotPasswordEmailPromptScreen";
 export { default as ForgotPasswordNumberPromptScreen } from "./ForgotPasswordNumberPromptScreen";
+export { default as ResetPasswordScreen } from "./ResetPasswordScreen";
+export { default as ResetPasswordSuccessScreen } from "./ResetPasswordSuccessScreen";

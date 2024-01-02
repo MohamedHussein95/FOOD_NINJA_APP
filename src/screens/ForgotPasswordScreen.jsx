@@ -18,6 +18,9 @@ const ForgotPasswordScreen = ({ navigation, route }) => {
 
   const { email, phoneNumber } = route.params || {};
 
+  const EmailView = email ? TouchableOpacity : View;
+  const NumberView = phoneNumber ? TouchableOpacity : View;
+
   return (
     <ScrollView
       style={styles.screen}
@@ -72,13 +75,15 @@ const ForgotPasswordScreen = ({ navigation, route }) => {
           Select which contact details should we use to reset your password
         </Text>
 
-        <TouchableOpacity
+        <EmailView
           style={{
             alignItems: "center",
             backgroundColor:
               selectedMethod === "sms"
                 ? Colors.backgroundPrimary
-                : Colors.white,
+                : phoneNumber
+                ? Colors.white
+                : Colors.greyScale100,
             borderWidth: selectedMethod === "sms" ? 1 : 0,
             borderColor: selectedMethod === "sms" ? Colors.success : null,
             borderRadius: wp(4),
@@ -136,14 +141,16 @@ const ForgotPasswordScreen = ({ navigation, route }) => {
               Edit
             </Text>
           </TouchableOpacity>
-        </TouchableOpacity>
-        <TouchableOpacity
+        </EmailView>
+        <NumberView
           style={{
             alignItems: "center",
             backgroundColor:
               selectedMethod === "email"
                 ? Colors.backgroundPrimary
-                : Colors.white,
+                : email
+                ? Colors.white
+                : Colors.greyScale100,
             borderWidth: selectedMethod === "email" ? 1 : 0,
             borderColor: selectedMethod === "email" ? Colors.success : null,
             borderRadius: wp(4),
@@ -201,7 +208,7 @@ const ForgotPasswordScreen = ({ navigation, route }) => {
               Edit
             </Text>
           </TouchableOpacity>
-        </TouchableOpacity>
+        </NumberView>
       </View>
       <PrimaryButton
         text={"Next"}

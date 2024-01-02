@@ -4,9 +4,10 @@ import {
   ForgotPasswordEmailPromptScreen,
   ForgotPasswordNumberPromptScreen,
   ForgotPasswordScreen,
-  HomeScreen,
   OnboardingScreen,
   PaymentMethodScreen,
+  ResetPasswordScreen,
+  ResetPasswordSuccessScreen,
   SetLocationScreen,
   SetupAccountScreen,
   SignInScreen,
@@ -40,6 +41,11 @@ const AuthNavigator = () => {
       <Stack.Screen
         name="forgot_password_email"
         component={ForgotPasswordEmailPromptScreen}
+      />
+      <Stack.Screen name="reset" component={ResetPasswordScreen} />
+      <Stack.Screen
+        name="reset_success"
+        component={ResetPasswordSuccessScreen}
       />
     </Stack.Navigator>
   );

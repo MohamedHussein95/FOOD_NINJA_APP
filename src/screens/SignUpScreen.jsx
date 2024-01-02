@@ -1,3 +1,4 @@
+import { Ionicons } from "@expo/vector-icons";
 import MaskedView from "@react-native-masked-view/masked-view";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
@@ -207,6 +208,7 @@ const SignUpScreen = () => {
               keyboardType="default"
               image={require("../../assets/images/Lock.png")}
               iconRight={showPassword ? "eye" : "eye-off"}
+              IconPack={Ionicons}
               secureTextEntry={showPassword ? false : true}
               onPressIconRight={() => setShowPassword(!showPassword)}
               errors={errors.password}

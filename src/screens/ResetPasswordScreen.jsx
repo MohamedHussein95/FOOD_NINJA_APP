@@ -12,29 +12,28 @@ import * as Yup from "yup";
 import { hp, wp } from "../utils";
 import { Colors } from "../constants";
 import { Input, PrimaryButton } from "../components";
-import { Octicons } from "@expo/vector-icons";
+import { Ionicons, Octicons } from "@expo/vector-icons";
 
 const validationSchema = Yup.object().shape({
-  email: Yup.string()
-    .email("Please enter a valid email address")
-    .required("Email is required")
-    .label("Email")
-    .test("email", "Invalid email address", (value) => {
-      return /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value);
-    }),
+  password: Yup.string()
+    .min(8, ({ min }) => `password should be at least ${min} characters`)
+    .required(),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref("password")], "password does not match")
+    .required("Password Is Required"),
 });
 
-const ForgotPasswordEmailPromptScreen = ({ navigation }) => {
+const ResetPasswordScreen = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
-  const [emailFocused, setEmailFocused] = useState(false);
 
-  const handleSendOtp = async (email) => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [passwordFocused, setPasswordFocused] = useState(false);
+  const [confirmPasswordFocused, setConfirmPasswordFocused] = useState(false);
+
+  const handleResetPassword = async (email) => {
     try {
       console.log(email);
-      navigation.navigate("verification", {
-        email: email || "",
-        reset: true,
-      });
+      navigation.navigate("reset_success");
     } catch (error) {}
   };
 
@@ -84,7 +83,7 @@ const ForgotPasswordEmailPromptScreen = ({ navigation }) => {
               marginVertical: hp(4),
             }}
           >
-            Enter Your Email Address
+            Reset your password here
           </Text>
           <Text
             style={{
@@ -94,16 +93,17 @@ const ForgotPasswordEmailPromptScreen = ({ navigation }) => {
               marginVertical: hp(0),
             }}
           >
-            Please enter your Email so we can help you recover your password
+            Please choose a new strong password that you wont forget
           </Text>
         </View>
 
         <Formik
           initialValues={{
             email: "",
+            confirmPassword: "",
           }}
           validationSchema={validationSchema}
-          onSubmit={(values) => handleSendOtp(values.email)}
+          onSubmit={(values) => handleResetPassword(values.email)}
         >
           {({
             handleChange,
@@ -117,24 +117,43 @@ const ForgotPasswordEmailPromptScreen = ({ navigation }) => {
           }) => (
             <View style={{ paddingHorizontal: wp(4), gap: 12, flex: 1 }}>
               <Input
-                name="email"
-                placeholder="Email"
-                onChangeText={handleChange("email")}
+                name="password"
+                placeholder="New Password"
+                onChangeText={handleChange("password")}
                 onBlur={(e) => {
-                  handleBlur("email")(e);
-                  setEmailFocused(false);
+                  handleBlur("password")(e);
+                  setPasswordFocused(false);
                 }}
-                active={emailFocused}
-                onFocus={() => setEmailFocused(true)}
-                value={values.email}
-                keyboardType="email-address"
-                autoComplete="email"
-                image={require("../../assets/images/Message.png")}
-                errors={errors.email}
-                touched={touched.email}
-                autoCapitalize="none"
-                returnKeyType="done"
-                inputMode="email"
+                active={passwordFocused}
+                onFocus={() => setPasswordFocused(true)}
+                value={values.password}
+                keyboardType="default"
+                IconPack={Ionicons}
+                iconRight={showPassword ? "eye" : "eye-off"}
+                secureTextEntry={showPassword ? false : true}
+                onPressIconRight={() => setShowPassword(!showPassword)}
+                errors={errors.password}
+                touched={touched.password}
+                inputMode="text"
+                autoComplete="password-new"
+              />
+              <Input
+                name="confirmPassword"
+                placeholder="Confirm Password"
+                onChangeText={handleChange("confirmPassword")}
+                onBlur={(e) => {
+                  handleBlur("confirmPassword")(e);
+                  setConfirmPasswordFocused(false);
+                }}
+                active={confirmPasswordFocused}
+                onFocus={() => setConfirmPasswordFocused(true)}
+                value={values.confirmPassword}
+                IconPack={Ionicons}
+                iconRight={showPassword ? "eye" : "eye-off"}
+                secureTextEntry={showPassword ? false : true}
+                onPressIconRight={() => setShowPassword(!showPassword)}
+                errors={errors.confirmPassword}
+                touched={touched.confirmPassword}
               />
               <View
                 style={{
@@ -156,7 +175,7 @@ const ForgotPasswordEmailPromptScreen = ({ navigation }) => {
   );
 };
 
-export default ForgotPasswordEmailPromptScreen;
+export default ResetPasswordScreen;
 
 const styles = StyleSheet.create({
   screen: {

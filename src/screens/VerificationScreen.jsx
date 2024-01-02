@@ -11,12 +11,14 @@ import {
 } from "react-native";
 import { PrimaryButton } from "../components";
 import { Colors } from "../constants";
-import { hp, wp } from "../utils";
+import { hideCharacters, hp, wp } from "../utils";
 
-const VerificationScreen = ({ navigation }) => {
+const VerificationScreen = ({ navigation, route }) => {
   const [loading, setLoading] = useState(false);
   const [code, setCode] = useState("");
   const [seconds, setSeconds] = useState(59);
+
+  const { email, phoneNumber, reset } = route.params || {};
 
   useEffect(() => {
     let interval = null;
@@ -66,7 +68,7 @@ const VerificationScreen = ({ navigation }) => {
             alignItems: "center",
             justifyContent: "center",
           }}
-          onPress={() => {}}
+          onPress={() => navigation.goBack()}
         >
           <Octicons name="chevron-left" size={30} color={Colors.secondary400} />
         </TouchableOpacity>
@@ -88,7 +90,13 @@ const VerificationScreen = ({ navigation }) => {
             marginVertical: hp(0),
           }}
         >
-          Code sent to +2547123***** . This code will expire in{" "}
+          Code sent to{" "}
+          {phoneNumber
+            ? hideCharacters(phoneNumber, "end")
+            : email
+            ? hideCharacters(email, "middle")
+            : "Not found"}{" "}
+          . This code will expire in{" "}
           {seconds === 0 ? (
             <Text onPress={() => setSeconds(59)} style={styles.timerText}>
               Resend
@@ -128,7 +136,13 @@ const VerificationScreen = ({ navigation }) => {
 
       <PrimaryButton
         text={"Next"}
-        onPress={() => navigation.navigate("payment")}
+        onPress={() => {
+          if (reset) {
+            navigation.navigate("reset");
+          } else {
+            navigation.navigate("payment");
+          }
+        }}
         styles={{ marginBottom: hp(2) }}
         disabled={code.trim().length <= 3}
       />

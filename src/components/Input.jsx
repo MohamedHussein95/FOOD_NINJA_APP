@@ -45,12 +45,12 @@ const Input = ({
             size={wp(6)}
             color={
               active
-                ? Colors.primary
+                ? Colors.success
                 : errors && touched
                 ? Colors.danger
                 : !errors && touched
-                ? Colors.primary
-                : Colors.greyScale400
+                ? Colors.backgroundPrimary
+                : Colors.success
             }
           />
         ) : image ? (
@@ -78,12 +78,12 @@ const Input = ({
             size={wp(6)}
             color={
               active
-                ? Colors.primary
+                ? Colors.success
                 : errors && touched
                 ? Colors.danger
                 : !errors && touched
-                ? Colors.primary
-                : Colors.greyScale400
+                ? Colors.backgroundPrimary
+                : Colors.success
             }
             onPress={onPressIconRight}
           />

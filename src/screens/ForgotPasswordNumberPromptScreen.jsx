@@ -27,12 +27,20 @@ const ForgotPasswordNumberPromptScreen = ({ navigation }) => {
 
   const phoneInput = useRef(null);
   const [phoneNumberError, setPhoneNumberError] = useState("");
-  const handleSendOtp = async (email) => {
+
+  const handleSendOtp = async (phoneNumber) => {
     try {
-      navigation.navigate("verification_email", {
-        userContacts: {
-          email: email || "",
-        },
+      const checkValid = phoneInput.current?.isValidNumber(phoneNumber);
+
+      if (!checkValid) {
+        setPhoneNumberError("Invalid phone number");
+        return;
+      }
+
+      console.log(phoneNumber);
+      navigation.navigate("verification", {
+        phoneNumber: phoneNumber || "",
+        reset: true,
       });
     } catch (error) {}
   };
@@ -103,7 +111,7 @@ const ForgotPasswordNumberPromptScreen = ({ navigation }) => {
             phoneNumber: "",
           }}
           validationSchema={validationSchema}
-          onSubmit={(values) => handleSendOtp(values.email)}
+          onSubmit={(values) => handleSendOtp(values.phoneNumber)}
         >
           {({
             handleChange,
