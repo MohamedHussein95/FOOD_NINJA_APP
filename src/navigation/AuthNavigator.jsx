@@ -3,6 +3,7 @@ import React from "react";
 import {
   HomeScreen,
   OnboardingScreen,
+  SetupAccountScreen,
   SignInScreen,
   SignUpScreen,
   SplashScreen,
@@ -17,6 +18,7 @@ const AuthNavigator = () => {
       <Stack.Screen name="Onboarding" component={OnboardingScreen} />
       <Stack.Screen name="signIn" component={SignInScreen} />
       <Stack.Screen name="signUp" component={SignUpScreen} />
+      <Stack.Screen name="setup" component={SetupAccountScreen} />
     </Stack.Navigator>
   );
 };

@@ -57,6 +57,7 @@ const SignUpScreen = () => {
   const handleSubmitValues = async (email, password) => {
     try {
       setLoading(true);
+      navigation.navigate("setup");
     } catch (error) {
       setLoading(false);
       console.error(error);
@@ -137,7 +138,11 @@ const SignUpScreen = () => {
           Sign Up For Free
         </Text>
         <Formik
-          initialValues={{ email: "", password: "", userNameFocused: "" }}
+          initialValues={{
+            email: "asd@gmail.com",
+            password: "U12345678",
+            userName: "@asdsad",
+          }}
           onSubmit={(values) =>
             handleSubmitValues(values.email, values.password)
           }
