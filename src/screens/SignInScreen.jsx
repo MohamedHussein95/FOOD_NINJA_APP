@@ -133,7 +133,7 @@ const SignInScreen = () => {
           touched,
         }) => (
           <View
-            style={{ paddingHorizontal: wp(3), gap: 12, flex: 1, flexGrow: 1 }}
+            style={{ paddingHorizontal: wp(4), gap: 12, flex: 1, flexGrow: 1 }}
           >
             <Input
               name="email"

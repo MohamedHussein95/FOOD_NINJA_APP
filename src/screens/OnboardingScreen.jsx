@@ -115,7 +115,7 @@ const OnboardingScreen = ({ navigation }) => {
       <PrimaryButton
         text={"Next"}
         onPress={goToNextSlide}
-        styles={{ marginBottom: hp(5) }}
+        styles={{ marginBottom: hp(2) }}
       />
     </View>
   );

@@ -83,7 +83,7 @@ const SetupAccountScreen = ({ navigation }) => {
         />
       </View>
 
-      <View style={{ paddingHorizontal: wp(3) }}>
+      <View style={{ paddingHorizontal: wp(4) }}>
         <TouchableOpacity
           style={{
             backgroundColor: Colors.secondary100,
@@ -149,7 +149,7 @@ const SetupAccountScreen = ({ navigation }) => {
               flex: 1,
               flexGrow: 1,
               marginTop: hp(5),
-              paddingHorizontal: wp(3),
+              paddingHorizontal: wp(4),
             }}
           >
             <Input
@@ -252,6 +252,8 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: Colors.white,
     height: hp(8),
+    borderWidth: 1,
+    borderColor: Colors.greyScale200,
     borderRadius: wp(4),
     elevation: 0.2,
     shadowColor: Colors.primary400,

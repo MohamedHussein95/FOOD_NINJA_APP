@@ -8,6 +8,7 @@ import {
   SignInScreen,
   SignUpScreen,
   SplashScreen,
+  UploadPhotoScreen,
 } from "../screens";
 
 const Stack = createStackNavigator();
@@ -21,6 +22,7 @@ const AuthNavigator = () => {
       <Stack.Screen name="signUp" component={SignUpScreen} />
       <Stack.Screen name="setup" component={SetupAccountScreen} />
       <Stack.Screen name="payment" component={PaymentMethodScreen} />
+      <Stack.Screen name="upload_photo" component={UploadPhotoScreen} />
     </Stack.Navigator>
   );
 };

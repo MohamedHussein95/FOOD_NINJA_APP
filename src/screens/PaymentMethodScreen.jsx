@@ -8,10 +8,9 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { PrimaryButton } from "../components";
 import { Colors } from "../constants";
 import { hp, wp } from "../utils";
-import { PrimaryButton } from "../components";
 
 const PaymentMethodtScreen = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
@@ -35,7 +34,7 @@ const PaymentMethodtScreen = ({ navigation }) => {
         />
       </View>
 
-      <View style={{ paddingHorizontal: wp(3), flex: 1 }}>
+      <View style={{ paddingHorizontal: wp(4), flex: 1 }}>
         <TouchableOpacity
           style={{
             backgroundColor: Colors.secondary100,
@@ -140,7 +139,7 @@ const PaymentMethodtScreen = ({ navigation }) => {
       </View>
       <PrimaryButton
         text={"Next"}
-        onPress={() => {}}
+        onPress={() => navigation.navigate("upload_photo")}
         styles={{ marginBottom: hp(2) }}
         disabled={selectedMethod.trim().length <= 0}
       />

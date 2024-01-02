@@ -154,7 +154,7 @@ const SignUpScreen = () => {
           errors,
           touched,
         }) => (
-          <View style={{ paddingHorizontal: wp(3), gap: 12, flex: 1 }}>
+          <View style={{ paddingHorizontal: wp(4), gap: 12, flex: 1 }}>
             <Input
               name="userName"
               placeholder="Username"
