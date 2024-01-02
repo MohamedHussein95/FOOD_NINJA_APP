@@ -4,6 +4,7 @@ import {
   HomeScreen,
   OnboardingScreen,
   PaymentMethodScreen,
+  SetLocationScreen,
   SetupAccountScreen,
   SignInScreen,
   SignUpScreen,
@@ -23,6 +24,7 @@ const AuthNavigator = () => {
       <Stack.Screen name="setup" component={SetupAccountScreen} />
       <Stack.Screen name="payment" component={PaymentMethodScreen} />
       <Stack.Screen name="upload_photo" component={UploadPhotoScreen} />
+      <Stack.Screen name="set_location" component={SetLocationScreen} />
     </Stack.Navigator>
   );
 };

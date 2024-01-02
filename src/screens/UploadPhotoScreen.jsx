@@ -1,6 +1,6 @@
 import { Octicons } from "@expo/vector-icons";
-import React, { useState } from "react";
 import * as ImagePicker from "expo-image-picker";
+import React, { useState } from "react";
 import {
   Image,
   ScrollView,
@@ -187,7 +187,7 @@ const UploadPhotoScreen = ({ navigation }) => {
       </View>
       <PrimaryButton
         text={"Next"}
-        onPress={() => {}}
+        onPress={() => navigation.navigate("set_location")}
         styles={{ marginBottom: hp(2) }}
         disabled={imgUrl.trim().length <= 0}
       />
