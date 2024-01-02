@@ -3,6 +3,7 @@ import React from "react";
 import {
   HomeScreen,
   OnboardingScreen,
+  PaymentMethodScreen,
   SetupAccountScreen,
   SignInScreen,
   SignUpScreen,
@@ -19,6 +20,7 @@ const AuthNavigator = () => {
       <Stack.Screen name="signIn" component={SignInScreen} />
       <Stack.Screen name="signUp" component={SignUpScreen} />
       <Stack.Screen name="setup" component={SetupAccountScreen} />
+      <Stack.Screen name="payment" component={PaymentMethodScreen} />
     </Stack.Navigator>
   );
 };

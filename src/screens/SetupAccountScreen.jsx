@@ -7,7 +7,7 @@ import {
   View,
 } from "react-native";
 import PhoneInput from "react-native-phone-number-input";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Colors } from "../constants";
 import { LinearGradient } from "expo-linear-gradient";
 import { hp, wp } from "../utils";
@@ -39,19 +39,32 @@ const validationSchema = Yup.object().shape({
 const SetupAccountScreen = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
   const [phoneNumberFocused, setPhoneNumberFocused] = useState(false);
+  const phoneInput = useRef(null);
+
   const [lastNameFocused, setLastNameFocused] = useState(false);
   const [firstNameFocused, setFirstNameFocused] = useState(false);
   const [phoneNumberError, setPhoneNumberError] = useState("");
 
-  const handleSubmitValues = async (email, mobileNumber) => {
+  const handleSubmitValues = async (firstName, lastName, phoneNumber) => {
     try {
       setLoading(true);
-      navigation.navigate("setup");
+      setPhoneNumberError("");
+      if (!phoneNumber) {
+        setPhoneNumberError("Phone number is required");
+        return;
+      }
+      const checkValid = phoneInput.current?.isValidNumber(phoneNumber);
+      if (!checkValid) {
+        setPhoneNumberError("Invalid phone number");
+        return;
+      }
+      navigation.navigate("payment");
     } catch (error) {
       setLoading(false);
       console.error(error);
     }
   };
+
   return (
     <SafeAreaView style={styles.screen}>
       <ScrollView
@@ -116,7 +129,11 @@ const SetupAccountScreen = ({ navigation }) => {
               phoneNumber: "",
             }}
             onSubmit={(values) =>
-              handleSubmitValues(values.email, values.phoneNumber)
+              handleSubmitValues(
+                values.firstName,
+                values.lastName,
+                values.phoneNumber
+              )
             }
             validationSchema={validationSchema}
             enableReinitialize
@@ -163,7 +180,7 @@ const SetupAccountScreen = ({ navigation }) => {
                   autoCapitalize="words"
                 />
                 <PhoneInput
-                  // ref={phoneInput}
+                  ref={phoneInput}
                   defaultValue={values.phoneNumber}
                   defaultCode="KE"
                   layout="first"
@@ -171,7 +188,7 @@ const SetupAccountScreen = ({ navigation }) => {
                   onChangeFormattedText={(text) => {
                     handleChange("phoneNumber")(text);
                   }}
-                  containerStyle={styles.phoneContainer}
+                  containerStyle={[styles.phoneContainer, {}]}
                   textContainerStyle={styles.phoneTextContainer}
                   textInputStyle={styles.phoneText}
                   codeTextStyle={styles.phoneText}
