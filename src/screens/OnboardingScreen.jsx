@@ -1,17 +1,8 @@
-import {
-  FlatList,
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
 import React, { useRef, useState } from "react";
+import { FlatList, Image, StyleSheet, Text, View } from "react-native";
 import { Colors } from ".././constants";
-import { DEVICE_WIDTH, hp, wp } from "../utils";
-import { LinearGradient } from "expo-linear-gradient";
-import colors from "../constants/colors";
 import { PrimaryButton } from "../components";
+import { DEVICE_WIDTH, hp, wp } from "../utils";
 
 const ITEMS = [
   {

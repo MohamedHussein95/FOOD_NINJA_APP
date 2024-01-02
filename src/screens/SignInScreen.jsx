@@ -47,257 +47,257 @@ const SignInScreen = () => {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: Colors.light_white }}>
-      <ScrollView
-        style={{ flex: 1 }}
-        contentContainerStyle={{ flexGrow: 1, paddingBottom: hp(5) }}
-        showsVerticalScrollIndicator={false}
-      >
-        <View style={styles.imageContainer}>
-          <Image
-            source={require("../../assets/images/Pattern.png")}
-            style={styles.imagePattern}
-            resizeMode="cover"
-          />
-          <LinearGradient
-            colors={["transparent", Colors.light_white]}
-            start={{ x: 1, y: 0 }}
-            end={{ x: 1, y: 1 }}
-            style={{
-              position: "absolute",
-              left: 0,
-              right: 0,
-              bottom: 0,
-              height: "50%",
-            }}
-          />
-        </View>
+    <ScrollView
+      style={{ flex: 1, backgroundColor: Colors.light_white }}
+      contentContainerStyle={{ flexGrow: 1, paddingBottom: hp(1) }}
+      showsVerticalScrollIndicator={false}
+    >
+      <View style={styles.imageContainer}>
+        <Image
+          source={require("../../assets/images/Pattern.png")}
+          style={styles.imagePattern}
+          resizeMode="cover"
+        />
+        <LinearGradient
+          colors={["transparent", Colors.light_white]}
+          start={{ x: 1, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={{
+            position: "absolute",
+            left: 0,
+            right: 0,
+            bottom: 0,
+            height: "50%",
+          }}
+        />
+      </View>
 
-        <View style={[styles.logoContainer, { marginTop: hp(4.5) }]}>
-          <Image
-            source={require("../../assets/images/Logo.png")}
-            style={logoStyles.logo}
-            resizeMode="contain"
-          />
-          <MaskedView
-            style={logoStyles.maskedContainer}
-            maskElement={
-              <View
-                style={{
-                  backgroundColor: "transparent",
-                  flex: 1,
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Text style={logoStyles.appName}>{appName}</Text>
-              </View>
-            }
-          >
-            <LinearGradient
-              colors={Colors.green_gradient}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 0 }}
+      <View style={[styles.logoContainer, { marginTop: hp(2) }]}>
+        <Image
+          source={require("../../assets/images/Logo.png")}
+          style={logoStyles.logo}
+          resizeMode="contain"
+        />
+        <MaskedView
+          style={logoStyles.maskedContainer}
+          maskElement={
+            <View
               style={{
+                backgroundColor: "transparent",
                 flex: 1,
-                height: "100%",
                 justifyContent: "center",
                 alignItems: "center",
               }}
-            />
-          </MaskedView>
-          <Text style={logoStyles.appDescription}>{appDescription}</Text>
-        </View>
-        <Text
-          style={{
-            fontFamily: "bold",
-            fontSize: wp(5),
-            letterSpacing: 0.5,
-            textAlign: "center",
-            marginVertical: hp(5),
-          }}
-        >
-          Login To Your Account
-        </Text>
-        <Formik
-          initialValues={{ email: "", password: "" }}
-          onSubmit={(values) =>
-            handleSubmitValues(values.email, values.password)
+            >
+              <Text style={logoStyles.appName}>{appName}</Text>
+            </View>
           }
-          validationSchema={validationSchema}
-          enableReinitialize
         >
-          {({
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            values,
-            errors,
-            touched,
-          }) => (
-            <View style={{ paddingHorizontal: wp(3), gap: 12 }}>
-              <Input
-                name="email"
-                placeholder="Email"
-                onChangeText={handleChange("email")}
-                onBlur={(e) => {
-                  handleBlur("email")(e);
-                  setEmailFocused(false);
-                }}
-                active={emailFocused}
-                onFocus={() => setEmailFocused(true)}
-                value={values.email}
-                keyboardType="email-address"
-                autoComplete="email"
-                errors={errors.email}
-                touched={touched.email}
-                autoCapitalize="none"
-                returnKeyType="done"
-                inputMode="email"
-              />
+          <LinearGradient
+            colors={Colors.green_gradient}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            style={{
+              flex: 1,
+              height: "100%",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          />
+        </MaskedView>
+        <Text style={logoStyles.appDescription}>{appDescription}</Text>
+      </View>
+      <Text
+        style={{
+          fontFamily: "bold",
+          fontSize: wp(5),
+          letterSpacing: 0.5,
+          textAlign: "center",
+          marginVertical: hp(5),
+        }}
+      >
+        Login To Your Account
+      </Text>
+      <Formik
+        initialValues={{ email: "", password: "" }}
+        onSubmit={(values) => handleSubmitValues(values.email, values.password)}
+        validationSchema={validationSchema}
+        enableReinitialize
+      >
+        {({
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          values,
+          errors,
+          touched,
+        }) => (
+          <View
+            style={{ paddingHorizontal: wp(3), gap: 12, flex: 1, flexGrow: 1 }}
+          >
+            <Input
+              name="email"
+              placeholder="Email"
+              onChangeText={handleChange("email")}
+              onBlur={(e) => {
+                handleBlur("email")(e);
+                setEmailFocused(false);
+              }}
+              active={emailFocused}
+              onFocus={() => setEmailFocused(true)}
+              value={values.email}
+              keyboardType="email-address"
+              autoComplete="email"
+              errors={errors.email}
+              touched={touched.email}
+              autoCapitalize="none"
+              returnKeyType="done"
+              inputMode="email"
+            />
 
-              <Input
-                name="password"
-                placeholder="Password"
-                onChangeText={handleChange("password")}
-                onBlur={(e) => {
-                  handleBlur("password")(e);
-                  setPasswordFocused(false);
-                }}
-                active={passwordFocused}
-                onFocus={() => setPasswordFocused(true)}
-                value={values.password}
-                keyboardType="default"
-                secureTextEntry={true}
-                errors={errors.password}
-                touched={touched.password}
-                inputMode="text"
-                autoComplete="password-new"
-              />
-              <TouchableOpacity style={{ alignItems: "flex-end" }}>
-                <Text
-                  style={{
-                    fontFamily: "medium",
-                    fontSize: wp(3.5),
-                    letterSpacing: 0.5,
-                    textDecorationLine: "underline",
-                    textAlign: "center",
-                    color: Colors.success,
-                  }}
-                >
-                  Forgot Your Password?
-                </Text>
-              </TouchableOpacity>
+            <Input
+              name="password"
+              placeholder="Password"
+              onChangeText={handleChange("password")}
+              onBlur={(e) => {
+                handleBlur("password")(e);
+                setPasswordFocused(false);
+              }}
+              active={passwordFocused}
+              onFocus={() => setPasswordFocused(true)}
+              value={values.password}
+              keyboardType="default"
+              secureTextEntry={true}
+              errors={errors.password}
+              touched={touched.password}
+              inputMode="text"
+              autoComplete="password-new"
+            />
+            <TouchableOpacity style={{ alignItems: "flex-end" }}>
               <Text
                 style={{
-                  fontFamily: "bold",
-                  fontSize: wp(4),
+                  fontFamily: "medium",
+                  fontSize: wp(3.5),
                   letterSpacing: 0.5,
+                  textDecorationLine: "underline",
                   textAlign: "center",
-                  marginVertical: hp(1),
+                  color: Colors.success,
                 }}
               >
-                Or Continue With
+                Forgot Your Password?
               </Text>
+            </TouchableOpacity>
+            <Text
+              style={{
+                fontFamily: "bold",
+                fontSize: wp(4),
+                letterSpacing: 0.5,
+                textAlign: "center",
+                marginVertical: hp(1),
+              }}
+            >
+              Or Continue With
+            </Text>
 
-              <View
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+                flexGrow: 1,
+                flex: 1,
+              }}
+            >
+              <TouchableOpacity
                 style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
+                  backgroundColor: Colors.white,
+                  borderRadius: wp(4),
+                  borderWidth: 1,
+                  borderColor: Colors.greyScale200,
+                  elevation: 0.3,
+                  justifyContent: "center",
                   alignItems: "center",
+                  flexDirection: "row",
+                  gap: 13,
+                  width: wp(45),
                 }}
               >
-                <TouchableOpacity
-                  style={{
-                    backgroundColor: Colors.white,
-                    borderRadius: wp(4),
-                    borderWidth: 1,
-                    borderColor: Colors.greyScale200,
-                    elevation: 0.3,
-                    justifyContent: "center",
-                    alignItems: "center",
-                    flexDirection: "row",
-                    gap: 13,
-                    width: wp(45),
-                  }}
-                >
-                  <Image
-                    source={require("../../assets/images/facebook.png")}
-                    style={{ width: hp(4), aspectRatio: 1 }}
-                    resizeMode="contain"
-                  />
-                  <Text
-                    style={{
-                      fontFamily: "bold",
-                      fontSize: wp(4),
-                      letterSpacing: 0.5,
-                      textAlign: "center",
-                      marginVertical: hp(4),
-                    }}
-                  >
-                    Facebook
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={{
-                    backgroundColor: Colors.white,
-                    borderRadius: wp(4),
-                    borderWidth: 1,
-                    borderColor: Colors.greyScale200,
-                    elevation: 0.3,
-                    justifyContent: "center",
-                    alignItems: "center",
-                    flexDirection: "row",
-                    gap: 13,
-                    width: wp(45),
-                  }}
-                >
-                  <Image
-                    source={require("../../assets/images/google.png")}
-                    style={{ width: hp(4), aspectRatio: 1 }}
-                    resizeMode="contain"
-                  />
-                  <Text
-                    style={{
-                      fontFamily: "bold",
-                      fontSize: wp(4),
-                      letterSpacing: 0.5,
-                      textAlign: "center",
-                      marginVertical: hp(4),
-                    }}
-                  >
-                    Google
-                  </Text>
-                </TouchableOpacity>
-              </View>
-
-              <PrimaryButton
-                text={"Login"}
-                onPress={handleSubmit}
-                styles={{ marginTop: hp(4) }}
-              />
-              <TouchableOpacity
-                style={{}}
-                onPress={() => navigation.navigate("signUp")}
-              >
+                <Image
+                  source={require("../../assets/images/facebook.png")}
+                  style={{ width: hp(4), aspectRatio: 1 }}
+                  resizeMode="contain"
+                />
                 <Text
                   style={{
-                    fontFamily: "medium",
-                    fontSize: wp(3.5),
+                    fontFamily: "bold",
+                    fontSize: wp(4),
                     letterSpacing: 0.5,
-                    textDecorationLine: "underline",
                     textAlign: "center",
-                    color: Colors.success,
+                    marginVertical: hp(4),
                   }}
                 >
-                  Don't have an account? sign up
+                  Facebook
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  backgroundColor: Colors.white,
+                  borderRadius: wp(4),
+                  borderWidth: 1,
+                  borderColor: Colors.greyScale200,
+                  elevation: 0.3,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flexDirection: "row",
+                  gap: 13,
+                  width: wp(45),
+                }}
+              >
+                <Image
+                  source={require("../../assets/images/google.png")}
+                  style={{ width: hp(4), aspectRatio: 1 }}
+                  resizeMode="contain"
+                />
+                <Text
+                  style={{
+                    fontFamily: "bold",
+                    fontSize: wp(4),
+                    letterSpacing: 0.5,
+                    textAlign: "center",
+                    marginVertical: hp(4),
+                  }}
+                >
+                  Google
                 </Text>
               </TouchableOpacity>
             </View>
-          )}
-        </Formik>
-      </ScrollView>
-    </View>
+
+            <PrimaryButton
+              text={"Login"}
+              onPress={handleSubmit}
+              styles={{ marginBottom: hp(2) }}
+            />
+          </View>
+        )}
+      </Formik>
+      <TouchableOpacity
+        style={{}}
+        onPress={() => navigation.navigate("signUp")}
+      >
+        <Text
+          style={{
+            fontFamily: "medium",
+            fontSize: wp(3.5),
+            letterSpacing: 0.5,
+            textDecorationLine: "underline",
+            textAlign: "center",
+            color: Colors.success,
+          }}
+        >
+          Don't have an account?
+        </Text>
+      </TouchableOpacity>
+    </ScrollView>
   );
 };
 

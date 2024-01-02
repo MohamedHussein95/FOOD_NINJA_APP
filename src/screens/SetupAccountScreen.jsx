@@ -54,10 +54,10 @@ const SetupAccountScreen = ({ navigation }) => {
         return;
       }
       const checkValid = phoneInput.current?.isValidNumber(phoneNumber);
-      if (!checkValid) {
-        setPhoneNumberError("Invalid phone number");
-        return;
-      }
+      // if (!checkValid) {
+      //   setPhoneNumberError("Invalid phone number");
+      //   return;
+      // }
       navigation.navigate("payment");
     } catch (error) {
       setLoading(false);
@@ -66,154 +66,164 @@ const SetupAccountScreen = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView style={styles.screen}>
-      <ScrollView
-        style={{ flex: 1 }}
-        contentContainerStyle={{
-          flexGrow: 1,
-          paddingBottom: hp(5),
-          paddingTop: hp(4),
-        }}
-        showsVerticalScrollIndicator={false}
-      >
-        <View style={styles.imageContainer}>
-          <Image
-            source={require("../../assets/images/Pattern_diagnol.png")}
-            style={styles.imagePattern}
-            resizeMode="cover"
-          />
-        </View>
+    <ScrollView
+      style={styles.screen}
+      contentContainerStyle={{
+        flexGrow: 1,
+        paddingBottom: hp(1),
+        paddingTop: hp(8),
+      }}
+      showsVerticalScrollIndicator={false}
+    >
+      <View style={styles.imageContainer}>
+        <Image
+          source={require("../../assets/images/Pattern_diagnol.png")}
+          style={styles.imagePattern}
+          resizeMode="cover"
+        />
+      </View>
 
-        <View style={{ paddingHorizontal: wp(3) }}>
-          <TouchableOpacity
+      <View style={{ paddingHorizontal: wp(3) }}>
+        <TouchableOpacity
+          style={{
+            backgroundColor: Colors.secondary100,
+            padding: wp(1),
+            borderRadius: wp(3),
+            width: wp(13),
+            aspectRatio: 1,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+          onPress={() => navigation.goBack()}
+        >
+          <Octicons name="chevron-left" size={30} color={Colors.secondary400} />
+        </TouchableOpacity>
+        <Text
+          style={{
+            fontFamily: "bold",
+            fontSize: wp(7),
+            lineHeight: hp(4),
+            marginVertical: hp(4),
+          }}
+        >
+          Fill in your bio to get started
+        </Text>
+        <Text
+          style={{
+            fontFamily: "book",
+            fontSize: wp(4),
+            lineHeight: hp(3),
+            marginVertical: hp(0),
+          }}
+        >
+          This data will be displayed in your account profile for security
+        </Text>
+      </View>
+      <Formik
+        initialValues={{
+          firstName: "Mohamed",
+          lastName: "Abdikafi",
+          phoneNumber: "712345678",
+        }}
+        onSubmit={(values) =>
+          handleSubmitValues(
+            values.firstName,
+            values.lastName,
+            values.phoneNumber
+          )
+        }
+        validationSchema={validationSchema}
+        enableReinitialize
+      >
+        {({
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          values,
+          errors,
+          touched,
+        }) => (
+          <View
             style={{
-              backgroundColor: Colors.secondary100,
-              padding: wp(1),
-              borderRadius: wp(3),
-              width: wp(13),
-              aspectRatio: 1,
-              alignItems: "center",
-              justifyContent: "center",
+              gap: 12,
+              flex: 1,
+              flexGrow: 1,
+              marginTop: hp(5),
+              paddingHorizontal: wp(3),
             }}
           >
-            <Octicons
-              name="chevron-left"
-              size={30}
-              color={Colors.secondary400}
+            <Input
+              name="firstName"
+              placeholder="First Name"
+              onChangeText={handleChange("firstName")}
+              onBlur={(e) => {
+                handleBlur("firstName")(e);
+                setFirstNameFocused(false);
+              }}
+              active={firstNameFocused}
+              onFocus={() => setFirstNameFocused(true)}
+              value={values.firstName}
+              autoComplete="name"
+              errors={errors.firstName}
+              touched={touched.firstName}
+              autoCapitalize="words"
             />
-          </TouchableOpacity>
-          <Text
-            style={{
-              fontFamily: "bold",
-              fontSize: wp(7),
-              lineHeight: hp(4),
-              marginVertical: hp(4),
-            }}
-          >
-            Fill in your bio to get started
-          </Text>
-          <Text
-            style={{
-              fontFamily: "book",
-              fontSize: wp(4),
-              lineHeight: hp(3),
-              marginVertical: hp(0),
-            }}
-          >
-            This data will be displayed in your account profile for security
-          </Text>
-          <Formik
-            initialValues={{
-              firstName: "",
-              lastName: "",
-              phoneNumber: "",
-            }}
-            onSubmit={(values) =>
-              handleSubmitValues(
-                values.firstName,
-                values.lastName,
-                values.phoneNumber
-              )
-            }
-            validationSchema={validationSchema}
-            enableReinitialize
-          >
-            {({
-              handleChange,
-              handleBlur,
-              handleSubmit,
-              values,
-              errors,
-              touched,
-            }) => (
-              <View style={{ gap: 12, flex: 1, marginTop: hp(5) }}>
-                <Input
-                  name="firstName"
-                  placeholder="First Name"
-                  onChangeText={handleChange("firstName")}
-                  onBlur={(e) => {
-                    handleBlur("firstName")(e);
-                    setFirstNameFocused(false);
-                  }}
-                  active={firstNameFocused}
-                  onFocus={() => setFirstNameFocused(true)}
-                  value={values.firstName}
-                  autoComplete="name"
-                  errors={errors.firstName}
-                  touched={touched.firstName}
-                  autoCapitalize="words"
-                />
-                <Input
-                  name="lastName"
-                  placeholder="Last Name"
-                  onChangeText={handleChange("lastName")}
-                  onBlur={(e) => {
-                    handleBlur("lastName")(e);
-                    setFirstNameFocused(false);
-                  }}
-                  active={lastNameFocused}
-                  onFocus={() => setLastNameFocused(true)}
-                  value={values.lastName}
-                  autoComplete="name"
-                  errors={errors.lastName}
-                  touched={touched.lastName}
-                  autoCapitalize="words"
-                />
-                <PhoneInput
-                  ref={phoneInput}
-                  defaultValue={values.phoneNumber}
-                  defaultCode="KE"
-                  layout="first"
-                  value={values.phoneNumber}
-                  onChangeFormattedText={(text) => {
-                    handleChange("phoneNumber")(text);
-                  }}
-                  containerStyle={[styles.phoneContainer, {}]}
-                  textContainerStyle={styles.phoneTextContainer}
-                  textInputStyle={styles.phoneText}
-                  codeTextStyle={styles.phoneText}
-                  placeholder="Mobile Number"
-                />
-                {phoneNumberError ? (
-                  <View style={[styles.errorContainer]}>
-                    <Text style={[styles.errorText]}>{phoneNumberError}</Text>
-                  </View>
-                ) : errors.phoneNumber && touched.phoneNumber ? (
-                  <View style={[styles.errorContainer]}>
-                    <Text style={[styles.errorText]}>{errors.phoneNumber}</Text>
-                  </View>
-                ) : null}
-                <PrimaryButton
-                  text={"Next"}
-                  onPress={handleSubmit}
-                  styles={{ marginBottom: hp(2) }}
-                />
+            <Input
+              name="lastName"
+              placeholder="Last Name"
+              onChangeText={handleChange("lastName")}
+              onBlur={(e) => {
+                handleBlur("lastName")(e);
+                setFirstNameFocused(false);
+              }}
+              active={lastNameFocused}
+              onFocus={() => setLastNameFocused(true)}
+              value={values.lastName}
+              autoComplete="name"
+              errors={errors.lastName}
+              touched={touched.lastName}
+              autoCapitalize="words"
+            />
+            <PhoneInput
+              ref={phoneInput}
+              defaultValue={values.phoneNumber}
+              defaultCode="KE"
+              layout="first"
+              value={values.phoneNumber}
+              onChangeFormattedText={(text) => {
+                handleChange("phoneNumber")(text);
+              }}
+              containerStyle={[styles.phoneContainer, {}]}
+              textContainerStyle={styles.phoneTextContainer}
+              textInputStyle={styles.phoneText}
+              codeTextStyle={styles.phoneText}
+              placeholder="Mobile Number"
+            />
+            {phoneNumberError ? (
+              <View style={[styles.errorContainer]}>
+                <Text style={[styles.errorText]}>{phoneNumberError}</Text>
               </View>
-            )}
-          </Formik>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+            ) : errors.phoneNumber && touched.phoneNumber ? (
+              <View style={[styles.errorContainer]}>
+                <Text style={[styles.errorText]}>{errors.phoneNumber}</Text>
+              </View>
+            ) : null}
+            <View
+              style={{
+                flex: 1,
+                justifyContent: "flex-end",
+              }}
+            >
+              <PrimaryButton
+                text={"Next"}
+                onPress={handleSubmit}
+                styles={{ marginBottom: hp(2) }}
+              />
+            </View>
+          </View>
+        )}
+      </Formik>
+    </ScrollView>
   );
 };
 
@@ -222,7 +232,6 @@ export default SetupAccountScreen;
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    flexGrow: 1,
     backgroundColor: Colors.light_white,
   },
   imageContainer: {

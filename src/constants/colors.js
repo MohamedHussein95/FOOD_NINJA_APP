@@ -13,6 +13,7 @@ export default {
   black100: "#CECDD2",
   holder_text: "#3B3B3B",
   green_gradient: ["#53E88B", "#15BE77"],
+  disabled_gradient: ["#86848F", "#CECDD2"],
   red: "#FF4B4B",
   white: "#FFFFFF",
   success: "#15BE77",
