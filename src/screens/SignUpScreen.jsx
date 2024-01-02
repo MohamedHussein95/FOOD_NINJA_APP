@@ -90,7 +90,7 @@ const SignUpScreen = () => {
         />
       </View>
 
-      <View style={[styles.logoContainer, { marginTop: hp(2) }]}>
+      <View style={[styles.logoContainer, { marginTop: hp(1) }]}>
         <Image
           source={require("../../assets/images/Logo.png")}
           style={logoStyles.logo}

@@ -128,7 +128,7 @@ const VerificationScreen = ({ navigation }) => {
 
       <PrimaryButton
         text={"Next"}
-        onPress={() => navigation.navigate("signUp_success")}
+        onPress={() => navigation.navigate("payment")}
         styles={{ marginBottom: hp(2) }}
         disabled={code.trim().length <= 3}
       />

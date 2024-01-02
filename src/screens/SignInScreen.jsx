@@ -2,7 +2,7 @@ import MaskedView from "@react-native-masked-view/masked-view";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Formik } from "formik";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Image,
   ScrollView,
@@ -15,7 +15,7 @@ import * as Yup from "yup";
 import { appDescription, appName, logoStyles } from ".././constants";
 import { Input, PrimaryButton } from "../components/";
 import { Colors } from "../constants";
-import { hp, wp } from "../utils";
+import { getStoredValues, hp, wp } from "../utils";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -34,6 +34,9 @@ const SignInScreen = () => {
   const [loading, setLoading] = useState(false);
   const [passwordFocused, setPasswordFocused] = useState(false);
   const [emailFocused, setEmailFocused] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
 
   const navigation = useNavigation();
 
@@ -45,6 +48,20 @@ const SignInScreen = () => {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    (async function () {
+      const { email, password, phoneNumber } = await getStoredValues([
+        "email",
+        "password",
+        "phoneNumber",
+      ]);
+
+      setEmail(email);
+      setPassword(password);
+      setPhoneNumber(phoneNumber);
+    })();
+  }, []);
 
   return (
     <ScrollView
@@ -72,7 +89,7 @@ const SignInScreen = () => {
         />
       </View>
 
-      <View style={[styles.logoContainer, { marginTop: hp(2) }]}>
+      <View style={[styles.logoContainer, { marginTop: hp(1) }]}>
         <Image
           source={require("../../assets/images/Logo.png")}
           style={logoStyles.logo}
@@ -119,7 +136,7 @@ const SignInScreen = () => {
         Login To Your Account
       </Text>
       <Formik
-        initialValues={{ email: "", password: "" }}
+        initialValues={{ email, password }}
         onSubmit={(values) => handleSubmitValues(values.email, values.password)}
         validationSchema={validationSchema}
         enableReinitialize
@@ -173,7 +190,10 @@ const SignInScreen = () => {
               inputMode="text"
               autoComplete="password-new"
             />
-            <TouchableOpacity style={{ alignItems: "flex-end" }}>
+            <TouchableOpacity
+              style={{ alignItems: "flex-end" }}
+              onPress={() => navigation.navigate("forgot_password")}
+            >
               <Text
                 style={{
                   fontFamily: "medium",
@@ -274,7 +294,9 @@ const SignInScreen = () => {
 
             <PrimaryButton
               text={"Login"}
-              onPress={handleSubmit}
+              onPress={() =>
+                navigation.navigate("forgot_password", { email, phoneNumber })
+              }
               styles={{ marginBottom: hp(2) }}
             />
           </View>

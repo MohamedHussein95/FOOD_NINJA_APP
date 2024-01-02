@@ -9,3 +9,6 @@ export { default as UploadPhotoScreen } from "./UploadPhotoScreen";
 export { default as SetLocationScreen } from "./SetLocationScreen";
 export { default as SignUpSuccessScreen } from "./SignUpSuccessScreen";
 export { default as VerificationScreen } from "./VerificationScreen";
+export { default as ForgotPasswordScreen } from "./ForgotPasswordScreen";
+export { default as ForgotPasswordEmailPromptScreen } from "./ForgotPasswordEmailPromptScreen";
+export { default as ForgotPasswordNumberPromptScreen } from "./ForgotPasswordNumberPromptScreen";

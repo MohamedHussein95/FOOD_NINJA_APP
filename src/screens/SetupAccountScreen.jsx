@@ -56,7 +56,7 @@ const SetupAccountScreen = ({ navigation }) => {
       //   setPhoneNumberError("Invalid phone number");
       //   return;
       // }
-      navigation.navigate("payment");
+      navigation.navigate("verification");
     } catch (error) {
       setLoading(false);
       console.error(error);
