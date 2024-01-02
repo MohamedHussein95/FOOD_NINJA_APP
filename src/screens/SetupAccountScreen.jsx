@@ -1,3 +1,6 @@
+import { Octicons } from "@expo/vector-icons";
+import { Formik } from "formik";
+import React, { useRef, useState } from "react";
 import {
   Image,
   ScrollView,
@@ -7,15 +10,10 @@ import {
   View,
 } from "react-native";
 import PhoneInput from "react-native-phone-number-input";
-import React, { useEffect, useRef, useState } from "react";
-import { Colors } from "../constants";
-import { LinearGradient } from "expo-linear-gradient";
-import { hp, wp } from "../utils";
-import { Octicons } from "@expo/vector-icons";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Formik } from "formik";
 import * as Yup from "yup";
 import { Input, PrimaryButton } from "../components";
+import { Colors } from "../constants";
+import { hp, wp } from "../utils";
 
 const validationSchema = Yup.object().shape({
   firstName: Yup.string()

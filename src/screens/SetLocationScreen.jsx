@@ -1,5 +1,4 @@
 import { Octicons } from "@expo/vector-icons";
-import * as ImagePicker from "expo-image-picker";
 import React, { useState } from "react";
 import {
   Image,
@@ -15,7 +14,7 @@ import { hp, wp } from "../utils";
 
 const SetLocationScreen = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
-  const [location, setLocation] = useState("");
+  const [location, setLocation] = useState("California State,Simba Flat");
 
   return (
     <ScrollView
@@ -93,8 +92,12 @@ const SetLocationScreen = ({ navigation }) => {
               resizeMode="contain"
               style={styles.image}
             />
-            <Text style={{ fontFamily: "medium", fontSize: wp(5) }}>
-              Your Location
+            <Text
+              style={{ fontFamily: "medium", fontSize: wp(4) }}
+              numberOfLines={2}
+              ellipsizeMode="tail"
+            >
+              {location.trim().length <= 0 ? "Your Location" : location}
             </Text>
           </View>
           <TouchableOpacity
@@ -114,7 +117,7 @@ const SetLocationScreen = ({ navigation }) => {
       </View>
       <PrimaryButton
         text={"Next"}
-        onPress={() => {}}
+        onPress={() => navigation.navigate("signUp_success")}
         styles={{ marginBottom: hp(2) }}
         disabled={location.trim().length <= 0}
       />

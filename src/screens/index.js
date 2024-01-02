@@ -7,3 +7,5 @@ export { default as SetupAccountScreen } from "./SetupAccountScreen";
 export { default as PaymentMethodScreen } from "./PaymentMethodScreen";
 export { default as UploadPhotoScreen } from "./UploadPhotoScreen";
 export { default as SetLocationScreen } from "./SetLocationScreen";
+export { default as SignUpSuccessScreen } from "./SignUpSuccessScreen";
+export { default as VerificationScreen } from "./VerificationScreen";
