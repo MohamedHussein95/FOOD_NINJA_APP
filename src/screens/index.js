@@ -14,3 +14,6 @@ export { default as ForgotPasswordEmailPromptScreen } from "./ForgotPasswordEmai
 export { default as ForgotPasswordNumberPromptScreen } from "./ForgotPasswordNumberPromptScreen";
 export { default as ResetPasswordScreen } from "./ResetPasswordScreen";
 export { default as ResetPasswordSuccessScreen } from "./ResetPasswordSuccessScreen";
+export { default as CartScreen } from "./CartScreen";
+export { default as ChatScreen } from "./ChatScreen";
+export { default as ProfileScreen } from "./ProfileScreen";

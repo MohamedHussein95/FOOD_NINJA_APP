@@ -30,7 +30,7 @@ const SlideComponent = ({ title, description, image }) => {
       />
       <View
         style={{
-          paddingHorizontal: wp(5),
+          paddingHorizontal: wp(7),
           alignItems: "center",
           gap: hp(3),
           marginTop: hp(2),
@@ -38,7 +38,7 @@ const SlideComponent = ({ title, description, image }) => {
       >
         <Text
           style={{
-            fontFamily: "black",
+            fontFamily: "bold",
             fontSize: wp(7),
             textAlign: "center",
             lineHeight: hp(5),
