@@ -9,17 +9,19 @@ const BottomTabBar = ({ state, descriptors, navigation }) => {
   return (
     <View
       style={{
-        height: hp(6),
         flexDirection: "row",
         alignItems: "center",
-        justifyContent: "space-around",
+        justifyContent: "space-between",
         backgroundColor: Colors.white,
         marginBottom: hp(1),
-        marginHorizontal: wp(2),
         borderRadius: wp(6),
-        paddingHorizontal: wp(3),
+        paddingHorizontal: wp(4),
         height: hp(10),
         elevation: 0.1,
+        position: "absolute",
+        bottom: 0,
+        width: "95%",
+        alignSelf: "center",
       }}
     >
       {state.routes.map((route, index) => {

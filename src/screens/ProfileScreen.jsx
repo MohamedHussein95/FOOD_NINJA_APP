@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
+import { Colors } from "../constants";
 
 const ProfileScreen = () => {
   return (
-    <View>
+    <View style={styles.screen}>
       <Text>ProfileScreen</Text>
     </View>
   );
@@ -11,4 +12,8 @@ const ProfileScreen = () => {
 
 export default ProfileScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+  },
+});

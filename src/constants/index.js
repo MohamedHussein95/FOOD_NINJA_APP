@@ -20,7 +20,6 @@ export const logoStyles = {
   maskedContainer: {
     height: hp(7.5),
     flexDirection: "row",
-    backgroundColor: "red",
     marginTop: -hp(3),
   },
   logo: {
