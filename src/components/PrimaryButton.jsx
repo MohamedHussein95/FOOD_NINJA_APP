@@ -3,7 +3,15 @@ import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { Colors } from "../constants";
 import { hp, wp } from "../utils";
 
-const PrimaryButton = ({ text, styles, onPress, disabled, loading }) => {
+const PrimaryButton = ({
+  text,
+  styles,
+  onPress,
+  disabled,
+  loading,
+  width,
+  height,
+}) => {
   return (
     <TouchableOpacity
       activeOpacity={0.8}
@@ -18,8 +26,8 @@ const PrimaryButton = ({ text, styles, onPress, disabled, loading }) => {
         style={{
           justifyContent: "center",
           alignItems: "center",
-          height: hp(8),
-          width: wp(60),
+          height: height || hp(8),
+          width: width || wp(60),
           paddingHorizontal: wp(5),
           borderRadius: wp(3),
           overflow: "hidden",

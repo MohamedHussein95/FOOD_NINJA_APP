@@ -1,7 +1,13 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { CartScreen, ChatScreen, HomeScreen, ProfileScreen } from "../screens";
+import {
+  CartScreen,
+  ChatScreen,
+  HomeScreen,
+  ProfileScreen,
+  SearchScreen,
+} from "../screens";
 import { BottomTabBar } from "../components";
 
 const Stack = createStackNavigator();
@@ -25,6 +31,7 @@ const MainNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="tab" component={TabStack} />
+      <Stack.Screen name="search" component={SearchScreen} />
     </Stack.Navigator>
   );
 };

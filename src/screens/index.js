@@ -17,3 +17,5 @@ export { default as ResetPasswordSuccessScreen } from "./ResetPasswordSuccessScr
 export { default as CartScreen } from "./CartScreen";
 export { default as ChatScreen } from "./ChatScreen";
 export { default as ProfileScreen } from "./ProfileScreen";
+export { default as ExploreScreen } from "./ExploreScreen";
+export { default as SearchScreen } from "./SearchScreen";

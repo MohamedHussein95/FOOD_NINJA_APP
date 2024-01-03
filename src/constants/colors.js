@@ -6,7 +6,7 @@ export default {
   secondary400: "#DA6317",
   secondary300: "#E38751",
   secondary200: "#E6A986",
-  secondary100: "#E3CBBC",
+  secondary100: "#FDE6D8",
   black400: "#09051C",
   black300: "#444352",
   black200: "#86848F",

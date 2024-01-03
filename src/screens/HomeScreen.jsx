@@ -41,18 +41,33 @@ const popularRestaurants = [
     time: "8 Mins",
   },
 ];
+const popularMenu = [
+  {
+    id: "1",
+    image: require("../../assets/images/herbal_pancake.png"),
+    title: "Herbal Pancake",
+    restaurant: "Warung Herbal",
+    price: "$7",
+  },
+  {
+    id: "2",
+    image: require("../../assets/images/fruit_salad.png"),
+    title: "Fruit Salad",
+    restaurant: "Wijie Resto",
+    price: "$5",
+  },
+  {
+    id: "3",
+    image: require("../../assets/images/green_noodle.png"),
+    title: "Green Noodle",
+    restaurant: "Noodle Home",
+    price: "$15",
+  },
+];
 
 const HomeScreen = ({ navigation }) => {
   return (
-    <ScrollView
-      style={styles.screen}
-      contentContainerStyle={{
-        flexGrow: 1,
-        paddingBottom: hp(12),
-        paddingTop: hp(8),
-      }}
-      showsVerticalScrollIndicator={false}
-    >
+    <>
       <View style={styles.imageContainer}>
         <Image
           source={require("../../assets/images/Pattern_diagnol.png")}
@@ -60,227 +75,321 @@ const HomeScreen = ({ navigation }) => {
           resizeMode="cover"
         />
       </View>
+      <FlatList
+        style={styles.screen}
+        contentContainerStyle={{
+          flexGrow: 1,
+          paddingBottom: hp(12),
+          paddingTop: hp(5),
+        }}
+        showsVerticalScrollIndicator={false}
+        ListHeaderComponent={
+          <>
+            <View style={{ paddingHorizontal: wp(4) }}>
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <Text
+                  style={{
+                    fontFamily: "bold",
+                    fontSize: wp(8),
+                    lineHeight: hp(5),
+                    marginVertical: hp(4),
+                    width: "60%",
+                  }}
+                >
+                  Find Your Favorite Food
+                </Text>
+                <View
+                  style={{
+                    flex: 1,
+                    flexDirection: "row",
+                    justifyContent: "flex-end",
+                  }}
+                >
+                  <TouchableOpacity
+                    style={{
+                      backgroundColor: Colors.white,
+                      justifyContent: "center",
+                      alignItems: "center",
+                      padding: wp(1),
+                      borderRadius: wp(5),
+                      height: hp(6),
+                      aspectRatio: 1,
+                    }}
+                  >
+                    <Feather
+                      name="bell"
+                      size={28}
+                      color={Colors.green_gradient[0]}
+                    />
+                  </TouchableOpacity>
+                </View>
+              </View>
 
-      <View style={{ paddingHorizontal: wp(4) }}>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Text
-            style={{
-              fontFamily: "bold",
-              fontSize: wp(8),
-              lineHeight: hp(5),
-              marginVertical: hp(4),
-              width: "60%",
-            }}
-          >
-            Find Your Favorite Food
-          </Text>
-          <View
-            style={{
-              flex: 1,
-              flexDirection: "row",
-              justifyContent: "flex-end",
-            }}
-          >
-            <TouchableOpacity
+              <TouchableOpacity
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  gap: wp(3),
+                }}
+                onPress={() => navigation.navigate("search")}
+              >
+                <View
+                  style={{
+                    paddingHorizontal: wp(4),
+                    flex: 1,
+                    backgroundColor: Colors.secondary100,
+                    flexDirection: "row",
+                    alignItems: "center",
+                    paddingVertical: hp(2),
+                    borderRadius: wp(4),
+                    gap: wp(3),
+                    height: hp(7),
+                  }}
+                >
+                  <Feather
+                    name="search"
+                    size={24}
+                    color={Colors.secondary400}
+                  />
+                  <Text
+                    style={{
+                      fontFamily: "inter_semiBold",
+                      color: Colors.secondary300,
+                      fontSize: wp(4),
+                    }}
+                  >
+                    What do you want to order?
+                  </Text>
+                </View>
+                <View
+                  style={{
+                    backgroundColor: Colors.secondary100,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    padding: wp(1),
+                    borderRadius: wp(5),
+                    height: hp(7),
+                    aspectRatio: 1,
+                  }}
+                >
+                  <MaterialCommunityIcons
+                    name="tune-variant"
+                    size={24}
+                    color={Colors.secondary400}
+                  />
+                </View>
+              </TouchableOpacity>
+            </View>
+
+            <CustomCarousel />
+
+            <View style={{ gap: hp(2), marginTop: hp(1) }}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  marginVertical: hp(1),
+                  paddingHorizontal: wp(4),
+                }}
+              >
+                <Text style={{ flex: 1, fontFamily: "bold", fontSize: wp(5) }}>
+                  Nearest Restaurant
+                </Text>
+                <Text
+                  style={{
+                    fontFamily: "book",
+                    fontSize: wp(4),
+                    color: Colors.secondary400,
+                  }}
+                >
+                  View More
+                </Text>
+              </View>
+              <FlatList
+                data={NearestRestaurants}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={{
+                  flexGrow: 1,
+                  gap: wp(3),
+                  paddingHorizontal: wp(4),
+                }}
+                style={{ flex: 1 }}
+                keyExtractor={(item) => item.id.toString()}
+                renderItem={({ item }) => (
+                  <TouchableOpacity
+                    style={{
+                      backgroundColor: Colors.white,
+                      borderRadius: wp(3),
+                      padding: wp(3),
+                      justifyContent: "center",
+                      alignItems: "center",
+                      width: wp(50),
+                      aspectRatio: 1,
+                    }}
+                  >
+                    <Image
+                      source={item.image}
+                      resizeMode="contain"
+                      style={{ height: hp(15), aspectRatio: 1 }}
+                    />
+                    <Text
+                      style={{ flex: 1, fontFamily: "bold", fontSize: wp(5) }}
+                    >
+                      {item.title}
+                    </Text>
+                    <Text
+                      style={{
+                        flex: 1,
+                        fontFamily: "regular",
+                        fontSize: wp(4),
+                        color: Colors.black100,
+                      }}
+                    >
+                      {item.time}
+                    </Text>
+                  </TouchableOpacity>
+                )}
+              />
+            </View>
+            <View style={{ gap: hp(2), marginTop: hp(1) }}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  marginVertical: hp(1),
+                  paddingHorizontal: wp(4),
+                }}
+              >
+                <Text style={{ flex: 1, fontFamily: "bold", fontSize: wp(5) }}>
+                  Popular Restaurant
+                </Text>
+                <Text
+                  style={{
+                    fontFamily: "book",
+                    fontSize: wp(4),
+                    color: Colors.secondary400,
+                  }}
+                >
+                  View More
+                </Text>
+              </View>
+              <FlatList
+                data={popularRestaurants}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={{
+                  flexGrow: 1,
+                  gap: wp(3),
+                  paddingHorizontal: wp(4),
+                }}
+                style={{ flex: 1 }}
+                keyExtractor={(item) => item.id.toString()}
+                renderItem={({ item }) => (
+                  <TouchableOpacity
+                    style={{
+                      backgroundColor: Colors.white,
+                      borderRadius: wp(3),
+                      padding: wp(3),
+                      justifyContent: "center",
+                      alignItems: "center",
+                      width: wp(50),
+                      aspectRatio: 1,
+                    }}
+                  >
+                    <Image
+                      source={item.image}
+                      resizeMode="contain"
+                      style={{ height: hp(15), aspectRatio: 1 }}
+                    />
+                    <Text
+                      style={{ flex: 1, fontFamily: "bold", fontSize: wp(5) }}
+                    >
+                      {item.title}
+                    </Text>
+                    <Text
+                      style={{
+                        flex: 1,
+                        fontFamily: "regular",
+                        fontSize: wp(4),
+                        color: Colors.black100,
+                      }}
+                    >
+                      {item.time}
+                    </Text>
+                  </TouchableOpacity>
+                )}
+              />
+            </View>
+            <View
               style={{
-                backgroundColor: Colors.white,
-                justifyContent: "center",
+                flexDirection: "row",
                 alignItems: "center",
-                padding: wp(1),
-                borderRadius: wp(5),
-                height: hp(6),
-                aspectRatio: 1,
+                marginVertical: hp(2),
+                paddingHorizontal: wp(4),
               }}
             >
-              <Feather name="bell" size={28} color={Colors.green_gradient[0]} />
-            </TouchableOpacity>
-          </View>
-        </View>
-
-        <TouchableOpacity
-          style={{ flexDirection: "row", alignItems: "center", gap: wp(3) }}
-        >
-          <View
+              <Text style={{ flex: 1, fontFamily: "bold", fontSize: wp(5) }}>
+                Popular Menu
+              </Text>
+              <Text
+                style={{
+                  fontFamily: "book",
+                  fontSize: wp(4),
+                  color: Colors.secondary400,
+                }}
+              >
+                View More
+              </Text>
+            </View>
+          </>
+        }
+        data={popularMenu}
+        renderItem={({ item }) => (
+          <TouchableOpacity
             style={{
-              paddingHorizontal: wp(4),
-              flex: 1,
-              backgroundColor: Colors.secondary100,
               flexDirection: "row",
               alignItems: "center",
-              paddingVertical: hp(2),
-              borderRadius: wp(4),
-              gap: wp(3),
-              height: hp(7),
+              backgroundColor: Colors.white,
+              borderRadius: wp(5),
+              marginHorizontal: wp(4),
+              marginVertical: hp(1),
+              padding: wp(2),
             }}
           >
-            <Feather name="search" size={24} color={Colors.secondary400} />
+            <Image
+              source={item.image}
+              resizeMode="contain"
+              style={{ width: wp(30), aspectRatio: 1 }}
+            />
+            <View style={{ flex: 1, marginLeft: wp(3), gap: hp(1) }}>
+              <Text style={{ fontFamily: "medium", fontSize: wp(5) }}>
+                {item.title}
+              </Text>
+              <Text
+                style={{
+                  fontFamily: "regular",
+                  fontSize: wp(4),
+                  color: Colors.black100,
+                }}
+              >
+                {item.restaurant}
+              </Text>
+            </View>
             <Text
               style={{
-                fontFamily: "inter_semiBold",
-                color: Colors.secondary300,
-                fontSize: wp(4),
+                fontFamily: "bold",
+                fontSize: wp(7),
+                color: Colors.secondary400,
+                marginRight: wp(3),
               }}
             >
-              What do you want to order?
+              {item.price}
             </Text>
-          </View>
-          <View
-            style={{
-              backgroundColor: Colors.secondary100,
-              justifyContent: "center",
-              alignItems: "center",
-              padding: wp(1),
-              borderRadius: wp(5),
-              height: hp(7),
-              aspectRatio: 1,
-            }}
-          >
-            <MaterialCommunityIcons
-              name="tune-variant"
-              size={24}
-              color={Colors.secondary400}
-            />
-          </View>
-        </TouchableOpacity>
-      </View>
-
-      <CustomCarousel />
-
-      <View style={{ gap: hp(2), marginTop: hp(1) }}>
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            marginVertical: hp(1),
-            paddingHorizontal: wp(4),
-          }}
-        >
-          <Text style={{ flex: 1, fontFamily: "bold", fontSize: wp(5) }}>
-            Nearest Restaurant
-          </Text>
-          <Text
-            style={{
-              fontFamily: "book",
-              fontSize: wp(4),
-              color: Colors.secondary400,
-            }}
-          >
-            View More
-          </Text>
-        </View>
-        <FlatList
-          data={NearestRestaurants}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{
-            flexGrow: 1,
-            gap: wp(3),
-            paddingHorizontal: wp(4),
-          }}
-          style={{ flex: 1 }}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => (
-            <TouchableOpacity
-              style={{
-                backgroundColor: Colors.white,
-                borderRadius: wp(3),
-                padding: wp(3),
-                justifyContent: "center",
-                alignItems: "center",
-                width: wp(50),
-                aspectRatio: 1,
-              }}
-            >
-              <Image
-                source={item.image}
-                resizeMode="contain"
-                style={{ height: hp(15), aspectRatio: 1 }}
-              />
-              <Text style={{ flex: 1, fontFamily: "bold", fontSize: wp(5) }}>
-                {item.title}
-              </Text>
-              <Text
-                style={{
-                  flex: 1,
-                  fontFamily: "regular",
-                  fontSize: wp(4),
-                  color: Colors.black100,
-                }}
-              >
-                {item.time}
-              </Text>
-            </TouchableOpacity>
-          )}
-        />
-      </View>
-      <View style={{ gap: hp(2), marginTop: hp(1) }}>
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            marginVertical: hp(1),
-            paddingHorizontal: wp(4),
-          }}
-        >
-          <Text style={{ flex: 1, fontFamily: "bold", fontSize: wp(5) }}>
-            Popular Restaurant
-          </Text>
-          <Text
-            style={{
-              fontFamily: "book",
-              fontSize: wp(4),
-              color: Colors.secondary400,
-            }}
-          >
-            View More
-          </Text>
-        </View>
-        <FlatList
-          data={popularRestaurants}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{
-            flexGrow: 1,
-            gap: wp(3),
-            paddingHorizontal: wp(4),
-          }}
-          style={{ flex: 1 }}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => (
-            <TouchableOpacity
-              style={{
-                backgroundColor: Colors.white,
-                borderRadius: wp(3),
-                padding: wp(3),
-                justifyContent: "center",
-                alignItems: "center",
-                width: wp(50),
-                aspectRatio: 1,
-              }}
-            >
-              <Image
-                source={item.image}
-                resizeMode="contain"
-                style={{ height: hp(15), aspectRatio: 1 }}
-              />
-              <Text style={{ flex: 1, fontFamily: "bold", fontSize: wp(5) }}>
-                {item.title}
-              </Text>
-              <Text
-                style={{
-                  flex: 1,
-                  fontFamily: "regular",
-                  fontSize: wp(4),
-                  color: Colors.black100,
-                }}
-              >
-                {item.time}
-              </Text>
-            </TouchableOpacity>
-          )}
-        />
-      </View>
-    </ScrollView>
+          </TouchableOpacity>
+        )}
+      />
+    </>
   );
 };
 
