@@ -21,7 +21,7 @@ const PrimaryButton = ({
     >
       <LinearGradient
         colors={disabled ? Colors.disabled_gradient : Colors.green_gradient}
-        start={{ x: 0, y: 0 }}
+        start={{ x: 1, y: 1 }}
         end={{ x: 1, y: 0 }}
         style={{
           justifyContent: "center",

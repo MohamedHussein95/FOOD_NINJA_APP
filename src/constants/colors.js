@@ -18,7 +18,7 @@ export default {
   red: "#FF4B4B",
   white: "#FFFFFF",
   success: "#15BE77",
-  light_white: "#FFFDFD",
+  light_white: "#F6F7FE",
   backgroundPrimary: "#e8f9f1",
   backgroundDanger: "#fcebec",
   greyScale500: "#9E9E9E",

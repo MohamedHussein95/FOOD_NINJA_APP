@@ -5,8 +5,10 @@ import {
   CartScreen,
   ChatScreen,
   HomeScreen,
+  NotificationsScreen,
   ProfileScreen,
   SearchScreen,
+  VoucherPromoScreen,
 } from "../screens";
 import { BottomTabBar } from "../components";
 
@@ -31,7 +33,27 @@ const MainNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="tab" component={TabStack} />
-      <Stack.Screen name="search" component={SearchScreen} />
+      <Stack.Screen
+        name="search"
+        component={SearchScreen}
+        options={{
+          presentation: "modal",
+        }}
+      />
+      <Stack.Screen
+        name="notifications"
+        component={NotificationsScreen}
+        options={{
+          presentation: "modal",
+        }}
+      />
+      <Stack.Screen
+        name="voucher_promo"
+        component={VoucherPromoScreen}
+        options={{
+          presentation: "modal",
+        }}
+      />
     </Stack.Navigator>
   );
 };

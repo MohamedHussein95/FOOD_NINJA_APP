@@ -19,3 +19,5 @@ export { default as ChatScreen } from "./ChatScreen";
 export { default as ProfileScreen } from "./ProfileScreen";
 export { default as ExploreScreen } from "./ExploreScreen";
 export { default as SearchScreen } from "./SearchScreen";
+export { default as NotificationsScreen } from "./NotificationsScreen";
+export { default as VoucherPromoScreen } from "./VoucherPromoScreen";

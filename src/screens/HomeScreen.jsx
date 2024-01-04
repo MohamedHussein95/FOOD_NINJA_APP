@@ -115,6 +115,7 @@ const HomeScreen = ({ navigation }) => {
                       height: hp(6),
                       aspectRatio: 1,
                     }}
+                    onPress={() => navigation.navigate("notifications")}
                   >
                     <Feather
                       name="bell"
@@ -179,9 +180,8 @@ const HomeScreen = ({ navigation }) => {
                   />
                 </View>
               </TouchableOpacity>
+              <CustomCarousel />
             </View>
-
-            <CustomCarousel />
 
             <View style={{ gap: hp(2), marginTop: hp(1) }}>
               <View

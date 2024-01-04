@@ -1,5 +1,5 @@
 import { Feather, MaterialCommunityIcons } from "@expo/vector-icons";
-import React from "react";
+import React, { useState } from "react";
 import {
   Image,
   ScrollView,
@@ -14,6 +14,16 @@ import { hp, wp } from "../utils";
 import { PrimaryButton } from "../components";
 
 const SearchScreen = ({ navigation }) => {
+  const [selectedFilters, setSelectedFilters] = useState([""]);
+  const handlePress = (filter) => {
+    if (selectedFilters.includes(filter)) {
+      return setSelectedFilters(
+        selectedFilters.filter((item) => item !== filter)
+      );
+    }
+
+    setSelectedFilters([...selectedFilters, filter]);
+  };
   return (
     <ScrollView
       style={{ flex: 1, backgroundColor: Colors.light_white }}
@@ -52,6 +62,7 @@ const SearchScreen = ({ navigation }) => {
             }}
           >
             <TouchableOpacity
+              activeOpacity={0.8}
               style={{
                 backgroundColor: Colors.white,
                 justifyContent: "center",
@@ -131,38 +142,50 @@ const SearchScreen = ({ navigation }) => {
             }}
           >
             <TouchableOpacity
+              activeOpacity={0.8}
               style={{
-                backgroundColor: Colors.secondary100,
+                backgroundColor: selectedFilters.includes("Restaurant")
+                  ? Colors.secondary400
+                  : Colors.secondary100,
                 borderRadius: wp(3),
                 padding: wp(3),
                 justifyContent: "center",
                 alignItems: "center",
               }}
+              onPress={() => handlePress("Restaurant")}
             >
               <Text
                 style={{
                   fontFamily: "medium",
                   fontSize: wp(4),
-                  color: Colors.secondary400,
+                  color: selectedFilters.includes("Restaurant")
+                    ? Colors.white
+                    : Colors.secondary400,
                 }}
               >
                 Restaurant
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
+              activeOpacity={0.8}
               style={{
-                backgroundColor: Colors.secondary100,
+                backgroundColor: selectedFilters.includes("Menu")
+                  ? Colors.secondary400
+                  : Colors.secondary100,
                 borderRadius: wp(3),
                 padding: wp(3),
                 justifyContent: "center",
                 alignItems: "center",
               }}
+              onPress={() => handlePress("Menu")}
             >
               <Text
                 style={{
                   fontFamily: "medium",
                   fontSize: wp(4),
-                  color: Colors.secondary400,
+                  color: selectedFilters.includes("Menu")
+                    ? Colors.white
+                    : Colors.secondary400,
                 }}
               >
                 Menu
@@ -188,57 +211,75 @@ const SearchScreen = ({ navigation }) => {
             }}
           >
             <TouchableOpacity
+              activeOpacity={0.8}
               style={{
-                backgroundColor: Colors.secondary100,
+                backgroundColor: selectedFilters.includes("1 Km")
+                  ? Colors.secondary400
+                  : Colors.secondary100,
                 borderRadius: wp(3),
                 padding: wp(3),
                 justifyContent: "center",
                 alignItems: "center",
               }}
+              onPress={() => handlePress("1 Km")}
             >
               <Text
                 style={{
                   fontFamily: "medium",
                   fontSize: wp(4),
-                  color: Colors.secondary400,
+                  color: selectedFilters.includes("1 Km")
+                    ? Colors.white
+                    : Colors.secondary400,
                 }}
               >
                 1 Km
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
+              activeOpacity={0.8}
               style={{
-                backgroundColor: Colors.secondary100,
+                backgroundColor: selectedFilters.includes(">10Km")
+                  ? Colors.secondary400
+                  : Colors.secondary100,
                 borderRadius: wp(3),
                 padding: wp(3),
                 justifyContent: "center",
                 alignItems: "center",
               }}
+              onPress={() => handlePress(">10Km")}
             >
               <Text
                 style={{
                   fontFamily: "medium",
                   fontSize: wp(4),
-                  color: Colors.secondary400,
+                  color: selectedFilters.includes(">10Km")
+                    ? Colors.white
+                    : Colors.secondary400,
                 }}
               >
                 {">10Km"}
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
+              activeOpacity={0.8}
               style={{
-                backgroundColor: Colors.secondary100,
+                backgroundColor: selectedFilters.includes("<10Km")
+                  ? Colors.secondary400
+                  : Colors.secondary100,
                 borderRadius: wp(3),
                 padding: wp(3),
                 justifyContent: "center",
                 alignItems: "center",
               }}
+              onPress={() => handlePress("<10Km")}
             >
               <Text
                 style={{
                   fontFamily: "medium",
                   fontSize: wp(4),
-                  color: Colors.secondary400,
+                  color: selectedFilters.includes("<10Km")
+                    ? Colors.white
+                    : Colors.secondary400,
                 }}
               >
                 {"<10Km"}
@@ -264,95 +305,125 @@ const SearchScreen = ({ navigation }) => {
             }}
           >
             <TouchableOpacity
+              activeOpacity={0.8}
               style={{
-                backgroundColor: Colors.secondary100,
+                backgroundColor: selectedFilters.includes("Cake")
+                  ? Colors.secondary400
+                  : Colors.secondary100,
                 borderRadius: wp(3),
                 padding: wp(3),
                 justifyContent: "center",
                 alignItems: "center",
               }}
+              onPress={() => handlePress("Cake")}
             >
               <Text
                 style={{
                   fontFamily: "medium",
                   fontSize: wp(4),
-                  color: Colors.secondary400,
+                  color: selectedFilters.includes("Cake")
+                    ? Colors.white
+                    : Colors.secondary400,
                 }}
               >
                 Cake
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
+              activeOpacity={0.8}
               style={{
-                backgroundColor: Colors.secondary100,
+                backgroundColor: selectedFilters.includes("Appetizer")
+                  ? Colors.secondary400
+                  : Colors.secondary100,
                 borderRadius: wp(3),
                 padding: wp(3),
                 justifyContent: "center",
                 alignItems: "center",
               }}
+              onPress={() => handlePress("Appetizer")}
             >
               <Text
                 style={{
                   fontFamily: "medium",
                   fontSize: wp(4),
-                  color: Colors.secondary400,
+                  color: selectedFilters.includes("Appetizer")
+                    ? Colors.white
+                    : Colors.secondary400,
                 }}
               >
                 Appetizer
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
+              activeOpacity={0.8}
               style={{
-                backgroundColor: Colors.secondary100,
+                backgroundColor: selectedFilters.includes("Main Course")
+                  ? Colors.secondary400
+                  : Colors.secondary100,
                 borderRadius: wp(3),
                 padding: wp(3),
                 justifyContent: "center",
                 alignItems: "center",
               }}
+              onPress={() => handlePress("Main Course")}
             >
               <Text
                 style={{
                   fontFamily: "medium",
                   fontSize: wp(4),
-                  color: Colors.secondary400,
+                  color: selectedFilters.includes("Main Course")
+                    ? Colors.white
+                    : Colors.secondary400,
                 }}
               >
                 Main Course
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
+              activeOpacity={0.8}
               style={{
-                backgroundColor: Colors.secondary100,
+                backgroundColor: selectedFilters.includes("Soup")
+                  ? Colors.secondary400
+                  : Colors.secondary100,
                 borderRadius: wp(3),
                 padding: wp(3),
                 justifyContent: "center",
                 alignItems: "center",
               }}
+              onPress={() => handlePress("Soup")}
             >
               <Text
                 style={{
                   fontFamily: "medium",
                   fontSize: wp(4),
-                  color: Colors.secondary400,
+                  color: selectedFilters.includes("Soup")
+                    ? Colors.white
+                    : Colors.secondary400,
                 }}
               >
                 Soup
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
+              activeOpacity={0.8}
               style={{
-                backgroundColor: Colors.secondary100,
+                backgroundColor: selectedFilters.includes("Dessert")
+                  ? Colors.secondary400
+                  : Colors.secondary100,
                 borderRadius: wp(3),
                 padding: wp(3),
                 justifyContent: "center",
                 alignItems: "center",
               }}
+              onPress={() => handlePress("Dessert")}
             >
               <Text
                 style={{
                   fontFamily: "medium",
                   fontSize: wp(4),
-                  color: Colors.secondary400,
+                  color: selectedFilters.includes("Dessert")
+                    ? Colors.white
+                    : Colors.secondary400,
                 }}
               >
                 Dessert
