@@ -3,6 +3,7 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   CartScreen,
+  ChatListScreen,
   ChatScreen,
   HomeScreen,
   NotificationsScreen,
@@ -24,7 +25,7 @@ const TabStack = () => {
       <Tab.Screen name="home" component={HomeScreen} />
       <Tab.Screen name="profile" component={ProfileScreen} />
       <Tab.Screen name="cart" component={CartScreen} />
-      <Tab.Screen name="chat" component={ChatScreen} />
+      <Tab.Screen name="chat" component={ChatListScreen} />
     </Tab.Navigator>
   );
 };
