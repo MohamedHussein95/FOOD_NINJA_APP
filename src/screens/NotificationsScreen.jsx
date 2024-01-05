@@ -1,4 +1,3 @@
-import { Octicons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import {
   FlatList,
@@ -8,6 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { BackButton, Header } from "../components";
 import { Colors } from "../constants";
 import { hp, wp } from "../utils";
 
@@ -37,13 +37,7 @@ const NotificationsScreen = ({ navigation }) => {
 
   return (
     <>
-      <View style={styles.imageContainer}>
-        <Image
-          source={require("../../assets/images/Pattern_diagnol.png")}
-          style={styles.imagePattern}
-          resizeMode="cover"
-        />
-      </View>
+      <Header />
       <FlatList
         data={Notifications}
         showsHorizontalScrollIndicator={false}
@@ -52,41 +46,9 @@ const NotificationsScreen = ({ navigation }) => {
           flexGrow: 1,
           paddingBottom: hp(1),
           paddingTop: hp(8),
-          paddingHorizontal: wp(4),
         }}
         showsVerticalScrollIndicator={false}
-        ListHeaderComponent={
-          <>
-            <TouchableOpacity
-              style={{
-                backgroundColor: Colors.secondary100,
-                padding: wp(1),
-                borderRadius: wp(3),
-                width: wp(13),
-                aspectRatio: 1,
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-              onPress={() => navigation.goBack()}
-            >
-              <Octicons
-                name="chevron-left"
-                size={30}
-                color={Colors.secondary400}
-              />
-            </TouchableOpacity>
-            <Text
-              style={{
-                fontFamily: "bold",
-                fontSize: wp(7),
-                lineHeight: hp(4),
-                marginVertical: hp(4),
-              }}
-            >
-              Notifications
-            </Text>
-          </>
-        }
+        ListHeaderComponent={<BackButton title={"Notifications"} />}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <TouchableOpacity
@@ -98,6 +60,7 @@ const NotificationsScreen = ({ navigation }) => {
               padding: wp(4),
               gap: wp(4),
               marginBottom: hp(2),
+              marginHorizontal: wp(4),
             }}
             activeOpacity={0.7}
           >

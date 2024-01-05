@@ -1,4 +1,3 @@
-import { Octicons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import {
   Image,
@@ -8,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { PrimaryButton } from "../components";
+import { BackButton, Header, PrimaryButton } from "../components";
 import { Colors } from "../constants";
 import { hp, wp } from "../utils";
 
@@ -26,50 +25,15 @@ const SetLocationScreen = ({ navigation }) => {
       }}
       showsVerticalScrollIndicator={false}
     >
-      <View style={styles.imageContainer}>
-        <Image
-          source={require("../../assets/images/Pattern_diagnol.png")}
-          style={styles.imagePattern}
-          resizeMode="cover"
-        />
-      </View>
+      <Header />
+      <BackButton
+        title={"Set Your Location"}
+        subtitle={
+          "This data will be displayed in your account profile for security"
+        }
+      />
 
       <View style={{ paddingHorizontal: wp(4), flex: 1 }}>
-        <TouchableOpacity
-          style={{
-            backgroundColor: Colors.secondary100,
-            padding: wp(1),
-            borderRadius: wp(3),
-            width: wp(13),
-            aspectRatio: 1,
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-          onPress={() => {}}
-        >
-          <Octicons name="chevron-left" size={30} color={Colors.secondary400} />
-        </TouchableOpacity>
-        <Text
-          style={{
-            fontFamily: "bold",
-            fontSize: wp(7),
-            lineHeight: hp(4),
-            marginVertical: hp(4),
-          }}
-        >
-          Set Your Location
-        </Text>
-        <Text
-          style={{
-            fontFamily: "book",
-            fontSize: wp(4),
-            lineHeight: hp(3),
-            marginVertical: hp(0),
-          }}
-        >
-          This data will be displayed in your account profile for security
-        </Text>
-
         <View
           style={{
             backgroundColor: Colors.white,
@@ -78,6 +42,7 @@ const SetLocationScreen = ({ navigation }) => {
             height: hp(20),
             gap: hp(4),
             marginVertical: hp(2),
+            elevation: 1,
           }}
         >
           <View
@@ -102,11 +67,12 @@ const SetLocationScreen = ({ navigation }) => {
           </View>
           <TouchableOpacity
             style={{
-              backgroundColor: Colors.light_white,
+              backgroundColor: Colors.greyScale100,
               padding: wp(4),
               borderRadius: wp(4),
               justifyContent: "center",
               alignItems: "center",
+              elevation: 1,
             }}
           >
             <Text style={{ fontFamily: "bold", fontSize: wp(4) }}>

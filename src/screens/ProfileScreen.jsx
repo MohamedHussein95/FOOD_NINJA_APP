@@ -1,9 +1,11 @@
-import React, { useCallback, useMemo, useRef } from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import BottomSheet, { BottomSheetFlatList } from "@gorhom/bottom-sheet";
-import { wp, hp } from "../utils";
-import { Colors } from "../constants";
+import MaskedView from "@react-native-masked-view/masked-view";
+import { LinearGradient } from "expo-linear-gradient";
+import React, { useCallback, useMemo, useRef } from "react";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { PrimaryButton } from "../components";
+import { Colors } from "../constants";
+import { hp, wp } from "../utils";
 
 const popularMenu = [
   {
@@ -75,15 +77,41 @@ const ProfileScreen = () => {
           >
             {item.restaurant}
           </Text>
-          <Text
+          <MaskedView
             style={{
-              fontFamily: "bold",
-              fontSize: wp(7),
-              color: Colors.success,
+              width: 50,
+              height: 28,
             }}
+            maskElement={
+              <View
+                style={{
+                  width: "100%",
+                  height: "100%",
+                }}
+              >
+                <Text
+                  style={{
+                    fontFamily: "bold",
+                    fontSize: wp(7),
+                    color: Colors.success,
+                  }}
+                >
+                  {item.price}
+                </Text>
+              </View>
+            }
           >
-            {item.price}
-          </Text>
+            <LinearGradient
+              colors={Colors.green_gradient}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 0 }}
+              style={{
+                height: "100%",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            />
+          </MaskedView>
         </View>
         <View
           style={{
@@ -190,7 +218,7 @@ const ProfileScreen = () => {
                   />
                 </TouchableOpacity>
               </View>
-              <View
+              <TouchableOpacity
                 style={{
                   flexDirection: "row",
                   alignItems: "center",
@@ -201,6 +229,7 @@ const ProfileScreen = () => {
                   gap: wp(4),
                   marginVertical: hp(2),
                 }}
+                activeOpacity={0.8}
               >
                 <Image
                   source={require("../../assets/images/Voucher_Icon.png")}
@@ -215,11 +244,11 @@ const ProfileScreen = () => {
                 >
                   You have 3 Voucher
                 </Text>
-              </View>
+              </TouchableOpacity>
               <Text
                 style={{
                   fontFamily: "bold",
-                  fontSize: wp(5),
+                  fontSize: wp(4),
                 }}
               >
                 Favorite

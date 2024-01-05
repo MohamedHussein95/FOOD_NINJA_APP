@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { PrimaryButton } from "../components";
+import { BackButton, Header, PrimaryButton } from "../components";
 import { Colors } from "../constants";
 import { hp, wp } from "../utils";
 
@@ -56,50 +56,15 @@ const UploadPhotoScreen = ({ navigation }) => {
       }}
       showsVerticalScrollIndicator={false}
     >
-      <View style={styles.imageContainer}>
-        <Image
-          source={require("../../assets/images/Pattern_diagnol.png")}
-          style={styles.imagePattern}
-          resizeMode="cover"
-        />
-      </View>
+      <Header />
+      <BackButton
+        title={"Upload Your Photo Profile"}
+        subtitle={
+          "This data will be displayed in your account profile for security"
+        }
+      />
 
       <View style={{ paddingHorizontal: wp(4), flex: 1 }}>
-        <TouchableOpacity
-          style={{
-            backgroundColor: Colors.secondary100,
-            padding: wp(1),
-            borderRadius: wp(3),
-            width: wp(13),
-            aspectRatio: 1,
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-          onPress={() => {}}
-        >
-          <Octicons name="chevron-left" size={30} color={Colors.secondary400} />
-        </TouchableOpacity>
-        <Text
-          style={{
-            fontFamily: "bold",
-            fontSize: wp(7),
-            lineHeight: hp(4),
-            marginVertical: hp(4),
-          }}
-        >
-          Upload Your Photo Profile
-        </Text>
-        <Text
-          style={{
-            fontFamily: "book",
-            fontSize: wp(4),
-            lineHeight: hp(3),
-            marginVertical: hp(0),
-          }}
-        >
-          This data will be displayed in your account profile for security
-        </Text>
-
         {imgUrl ? (
           <View
             style={{
@@ -148,6 +113,7 @@ const UploadPhotoScreen = ({ navigation }) => {
                 height: hp(18),
                 gap: hp(2),
                 marginVertical: hp(2),
+                elevation: 1,
               }}
               onPress={handleGallery}
             >
@@ -170,6 +136,7 @@ const UploadPhotoScreen = ({ navigation }) => {
                 height: hp(18),
                 gap: hp(2),
                 marginVertical: hp(2),
+                elevation: 1,
               }}
               onPress={handleCamera}
             >

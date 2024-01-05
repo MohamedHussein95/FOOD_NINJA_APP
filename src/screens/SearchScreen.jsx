@@ -1,7 +1,6 @@
 import { Feather, MaterialCommunityIcons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import {
-  Image,
   ScrollView,
   StyleSheet,
   Text,
@@ -9,9 +8,9 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { Header, PrimaryButton } from "../components";
 import { Colors } from "../constants";
 import { hp, wp } from "../utils";
-import { PrimaryButton } from "../components";
 
 const SearchScreen = ({ navigation }) => {
   const [selectedFilters, setSelectedFilters] = useState([""]);
@@ -34,13 +33,7 @@ const SearchScreen = ({ navigation }) => {
       }}
       showsVerticalScrollIndicator={false}
     >
-      <View style={styles.imageContainer}>
-        <Image
-          source={require("../../assets/images/Pattern_diagnol.png")}
-          style={styles.imagePattern}
-          resizeMode="cover"
-        />
-      </View>
+      <Header />
       <View style={{ paddingHorizontal: wp(4) }}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <Text

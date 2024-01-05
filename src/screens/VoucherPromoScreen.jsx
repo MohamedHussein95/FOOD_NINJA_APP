@@ -1,7 +1,7 @@
 import { Octicons } from "@expo/vector-icons";
-import React, { useState } from "react";
 import MaskedView from "@react-native-masked-view/masked-view";
 import { LinearGradient } from "expo-linear-gradient";
+import React, { useState } from "react";
 import {
   FlatList,
   Image,
@@ -11,9 +11,9 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { PrimaryButton } from "../components";
 import { Colors } from "../constants";
 import { hp, wp } from "../utils";
-import { PrimaryButton } from "../components";
 
 const PROMOTIONS = [
   {

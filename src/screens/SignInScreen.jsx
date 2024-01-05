@@ -194,18 +194,44 @@ const SignInScreen = () => {
               style={{ alignItems: "flex-end" }}
               onPress={() => navigation.navigate("forgot_password")}
             >
-              <Text
+              <MaskedView
                 style={{
-                  fontFamily: "medium",
-                  fontSize: wp(3.5),
-                  letterSpacing: 0.5,
-                  textDecorationLine: "underline",
-                  textAlign: "center",
-                  color: Colors.success,
+                  width: "100%",
+                  height: 28,
                 }}
+                maskElement={
+                  <View
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                    }}
+                  >
+                    <Text
+                      style={{
+                        fontFamily: "medium",
+                        fontSize: wp(3.5),
+                        letterSpacing: 0.5,
+                        textDecorationLine: "underline",
+                        textAlign: "center",
+                        color: Colors.success,
+                      }}
+                    >
+                      Forgot Your Password?
+                    </Text>
+                  </View>
+                }
               >
-                Forgot Your Password?
-              </Text>
+                <LinearGradient
+                  colors={Colors.green_gradient}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 0 }}
+                  style={{
+                    height: "100%",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                />
+              </MaskedView>
             </TouchableOpacity>
             <Text
               style={{
@@ -234,7 +260,7 @@ const SignInScreen = () => {
                   borderRadius: wp(4),
                   borderWidth: 1,
                   borderColor: Colors.greyScale200,
-                  elevation: 0.3,
+                  elevation: 0.1,
                   justifyContent: "center",
                   alignItems: "center",
                   flexDirection: "row",
@@ -265,7 +291,7 @@ const SignInScreen = () => {
                   borderRadius: wp(4),
                   borderWidth: 1,
                   borderColor: Colors.greyScale200,
-                  elevation: 0.3,
+                  elevation: 0.1,
                   justifyContent: "center",
                   alignItems: "center",
                   flexDirection: "row",
@@ -306,18 +332,44 @@ const SignInScreen = () => {
         style={{}}
         onPress={() => navigation.navigate("signUp")}
       >
-        <Text
+        <MaskedView
           style={{
-            fontFamily: "medium",
-            fontSize: wp(3.5),
-            letterSpacing: 0.5,
-            textDecorationLine: "underline",
-            textAlign: "center",
-            color: Colors.success,
+            width: "100%",
+            height: 28,
           }}
+          maskElement={
+            <View
+              style={{
+                width: "100%",
+                height: "100%",
+              }}
+            >
+              <Text
+                style={{
+                  fontFamily: "medium",
+                  fontSize: wp(3.5),
+                  letterSpacing: 0.5,
+                  textDecorationLine: "underline",
+                  textAlign: "center",
+                  color: Colors.success,
+                }}
+              >
+                Don't have an account?
+              </Text>
+            </View>
+          }
         >
-          Don't have an account?
-        </Text>
+          <LinearGradient
+            colors={Colors.green_gradient}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            style={{
+              height: "100%",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          />
+        </MaskedView>
       </TouchableOpacity>
     </ScrollView>
   );

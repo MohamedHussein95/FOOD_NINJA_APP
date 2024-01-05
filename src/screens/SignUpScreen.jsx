@@ -190,7 +190,6 @@ const SignUpScreen = () => {
               errors={errors.email}
               touched={touched.email}
               autoCapitalize="none"
-              returnKeyType="done"
               inputMode="email"
             />
 
@@ -207,13 +206,12 @@ const SignUpScreen = () => {
               value={values.password}
               keyboardType="default"
               image={require("../../assets/images/Lock.png")}
-              iconRight={showPassword ? "eye" : "eye-off"}
+              iconRight={showPassword ? "eye-off" : "eye"}
               IconPack={Ionicons}
               secureTextEntry={showPassword ? false : true}
               onPressIconRight={() => setShowPassword(!showPassword)}
               errors={errors.password}
               touched={touched.password}
-              inputMode="text"
               autoComplete="password-new"
             />
             <View
@@ -283,18 +281,44 @@ const SignUpScreen = () => {
         style={{}}
         onPress={() => navigation.navigate("signIn")}
       >
-        <Text
+        <MaskedView
           style={{
-            fontFamily: "medium",
-            fontSize: wp(3.5),
-            letterSpacing: 0.5,
-            textDecorationLine: "underline",
-            textAlign: "center",
-            color: Colors.success,
+            width: "100%",
+            height: 28,
           }}
+          maskElement={
+            <View
+              style={{
+                width: "100%",
+                height: "100%",
+              }}
+            >
+              <Text
+                style={{
+                  fontFamily: "medium",
+                  fontSize: wp(3.5),
+                  letterSpacing: 0.5,
+                  textDecorationLine: "underline",
+                  textAlign: "center",
+                  color: Colors.success,
+                }}
+              >
+                Already Have an account?
+              </Text>
+            </View>
+          }
         >
-          Already Have an account?
-        </Text>
+          <LinearGradient
+            colors={Colors.green_gradient}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            style={{
+              height: "100%",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          />
+        </MaskedView>
       </TouchableOpacity>
     </ScrollView>
   );

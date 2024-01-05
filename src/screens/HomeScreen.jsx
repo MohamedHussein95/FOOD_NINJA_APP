@@ -3,12 +3,12 @@ import React from "react";
 import {
   FlatList,
   Image,
-  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
+import { Header } from "../components";
 import CustomCarousel from "../components/CustomCarousel";
 import { Colors } from "../constants";
 import { hp, wp } from "../utils";
@@ -68,13 +68,7 @@ const popularMenu = [
 const HomeScreen = ({ navigation }) => {
   return (
     <>
-      <View style={styles.imageContainer}>
-        <Image
-          source={require("../../assets/images/Pattern_diagnol.png")}
-          style={styles.imagePattern}
-          resizeMode="cover"
-        />
-      </View>
+      <Header />
       <FlatList
         style={styles.screen}
         contentContainerStyle={{

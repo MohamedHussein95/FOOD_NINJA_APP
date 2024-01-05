@@ -1,15 +1,7 @@
-import { Octicons } from "@expo/vector-icons";
 import OTPInputView from "@twotalltotems/react-native-otp-input";
 import React, { useEffect, useState } from "react";
-import {
-  Image,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import { PrimaryButton } from "../components";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { BackButton, Header, PrimaryButton } from "../components";
 import { Colors } from "../constants";
 import { hideCharacters, hp, wp } from "../utils";
 
@@ -49,39 +41,10 @@ const VerificationScreen = ({ navigation, route }) => {
       }}
       showsVerticalScrollIndicator={false}
     >
-      <View style={styles.imageContainer}>
-        <Image
-          source={require("../../assets/images/Pattern_diagnol.png")}
-          style={styles.imagePattern}
-          resizeMode="cover"
-        />
-      </View>
+      <Header />
+      <BackButton title={"Enter 4-digit Verification Code"} />
 
       <View style={{ paddingHorizontal: wp(4), flex: 1 }}>
-        <TouchableOpacity
-          style={{
-            backgroundColor: Colors.secondary100,
-            padding: wp(1),
-            borderRadius: wp(3),
-            width: wp(13),
-            aspectRatio: 1,
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-          onPress={() => navigation.goBack()}
-        >
-          <Octicons name="chevron-left" size={30} color={Colors.secondary400} />
-        </TouchableOpacity>
-        <Text
-          style={{
-            fontFamily: "bold",
-            fontSize: wp(7),
-            lineHeight: hp(4),
-            marginVertical: hp(4),
-          }}
-        >
-          Enter 4-digit Verification Code
-        </Text>
         <Text
           style={{
             fontFamily: "book",
