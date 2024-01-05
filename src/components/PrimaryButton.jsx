@@ -11,6 +11,7 @@ const PrimaryButton = ({
   loading,
   width,
   height,
+  fontSize,
 }) => {
   return (
     <TouchableOpacity
@@ -37,7 +38,7 @@ const PrimaryButton = ({
         <Text
           style={{
             fontFamily: "bold",
-            fontSize: hp(3),
+            fontSize: fontSize || hp(3),
             color: Colors.white,
           }}
         >
