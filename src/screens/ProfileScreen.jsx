@@ -27,48 +27,6 @@ const popularMenu = [
     restaurant: "Noodle Home",
     price: "$15",
   },
-  {
-    id: "4",
-    image: require("../../assets/images/herbal_pancake.png"),
-    title: "Herbal Pancake",
-    restaurant: "Warung Herbal",
-    price: "$7",
-  },
-  {
-    id: "5",
-    image: require("../../assets/images/fruit_salad.png"),
-    title: "Fruit Salad",
-    restaurant: "Wijie Resto",
-    price: "$5",
-  },
-  {
-    id: "6",
-    image: require("../../assets/images/green_noodle.png"),
-    title: "Green Noodle",
-    restaurant: "Noodle Home",
-    price: "$15",
-  },
-  {
-    id: "7",
-    image: require("../../assets/images/herbal_pancake.png"),
-    title: "Herbal Pancake",
-    restaurant: "Warung Herbal",
-    price: "$7",
-  },
-  {
-    id: "8",
-    image: require("../../assets/images/fruit_salad.png"),
-    title: "Fruit Salad",
-    restaurant: "Wijie Resto",
-    price: "$5",
-  },
-  {
-    id: "9",
-    image: require("../../assets/images/green_noodle.png"),
-    title: "Green Noodle",
-    restaurant: "Noodle Home",
-    price: "$15",
-  },
 ];
 
 const ProfileScreen = () => {
@@ -92,8 +50,6 @@ const ProfileScreen = () => {
           alignItems: "center",
           borderRadius: wp(5),
           padding: wp(2),
-          width: "100%",
-          justifyContent: "space-between",
         }}
       >
         <Image
@@ -123,8 +79,7 @@ const ProfileScreen = () => {
             style={{
               fontFamily: "bold",
               fontSize: wp(7),
-              color: Colors.secondary400,
-              marginRight: wp(3),
+              color: Colors.success,
             }}
           >
             {item.price}
@@ -132,8 +87,10 @@ const ProfileScreen = () => {
         </View>
         <View
           style={{
-            justifyContent: "center",
-            alignItems: "center",
+            justifyContent: "flex-end",
+
+            alignItems: "flex-end",
+            flex: 1,
           }}
         >
           <PrimaryButton
@@ -160,11 +117,11 @@ const ProfileScreen = () => {
       />
       <BottomSheet
         ref={bottomSheetRef}
-        index={1}
+        index={0}
         snapPoints={snapPoints}
         onChange={handleSheetChanges}
         animateOnMount
-        initialSnap={1}
+        initialSnap={0}
         backgroundStyle={{
           borderRadius: wp(10),
           backgroundColor: Colors.light_white,
@@ -181,31 +138,93 @@ const ProfileScreen = () => {
           renderItem={renderItem}
           contentContainerStyle={styles.contentContainer}
           ListHeaderComponent={
-            <>
-              <View>
-                <View
+            <View>
+              <View
+                style={{
+                  backgroundColor: Colors.gold,
+                  paddingHorizontal: wp(1),
+                  paddingVertical: hp(1),
+                  borderRadius: wp(3),
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: wp(35),
+                  marginVertical: hp(1),
+                }}
+              >
+                <Text
                   style={{
-                    backgroundColor: Colors.gold,
-                    paddingHorizontal: wp(1),
-                    paddingVertical: hp(1),
-                    borderRadius: wp(3),
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: wp(35),
+                    fontFamily: "medium",
+                    fontSize: wp(4),
+                    color: Colors.gold200,
                   }}
                 >
+                  Member Gold
+                </Text>
+              </View>
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <View style={{ marginVertical: hp(1), gap: hp(1), flex: 1 }}>
+                  <Text
+                    style={{ fontFamily: "bold", fontSize: wp(6) }}
+                    numberOfLines={1}
+                    ellipsizeMode="tail"
+                  >
+                    Anam Wusano
+                  </Text>
                   <Text
                     style={{
-                      fontFamily: "medium",
+                      fontFamily: "regular",
                       fontSize: wp(4),
-                      color: Colors.gold200,
+                      color: Colors.black100,
                     }}
+                    numberOfLines={1}
+                    ellipsizeMode="tail"
                   >
-                    Member Gold
+                    anamwp66@gmail.com
                   </Text>
                 </View>
+                <TouchableOpacity>
+                  <Image
+                    source={require("../../assets/images/Edit_Icon.png")}
+                    resizeMode="contain"
+                    style={{ height: hp(4), aspectRatio: 1 }}
+                  />
+                </TouchableOpacity>
               </View>
-            </>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  backgroundColor: Colors.white,
+                  paddingHorizontal: wp(5),
+                  paddingVertical: hp(1),
+                  borderRadius: wp(3),
+                  gap: wp(4),
+                  marginVertical: hp(2),
+                }}
+              >
+                <Image
+                  source={require("../../assets/images/Voucher_Icon.png")}
+                  resizeMode="contain"
+                  style={{ width: wp(15), aspectRatio: 1 }}
+                />
+                <Text
+                  style={{
+                    fontFamily: "medium",
+                    fontSize: wp(4),
+                  }}
+                >
+                  You have 3 Voucher
+                </Text>
+              </View>
+              <Text
+                style={{
+                  fontFamily: "bold",
+                  fontSize: wp(5),
+                }}
+              >
+                Favorite
+              </Text>
+            </View>
           }
         />
       </BottomSheet>
@@ -224,6 +243,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     paddingHorizontal: wp(4),
     gap: hp(2),
+    paddingBottom: hp(12),
   },
   image: {
     width: "100%",
