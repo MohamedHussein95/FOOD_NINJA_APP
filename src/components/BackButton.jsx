@@ -11,7 +11,7 @@ const BackButton = ({ title, subtitle }) => {
     <View style={{ paddingHorizontal: wp(4) }}>
       <TouchableOpacity
         style={{
-          backgroundColor: Colors.secondary100,
+          backgroundColor: Colors.backgroundPrimary,
           padding: wp(1),
           borderRadius: wp(3),
           width: wp(13),
@@ -21,7 +21,7 @@ const BackButton = ({ title, subtitle }) => {
         }}
         onPress={() => navigation.goBack()}
       >
-        <Octicons name="chevron-left" size={30} color={Colors.secondary400} />
+        <Octicons name="chevron-left" size={30} color={Colors.success} />
       </TouchableOpacity>
       {title && (
         <Text

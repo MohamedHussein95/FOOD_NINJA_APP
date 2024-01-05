@@ -67,10 +67,10 @@ const popularMenu = [
 
 const HomeScreen = ({ navigation }) => {
   return (
-    <>
+    <View style={styles.screen}>
       <Header />
       <FlatList
-        style={styles.screen}
+        style={{ flex: 1 }}
         contentContainerStyle={{
           flexGrow: 1,
           paddingBottom: hp(12),
@@ -108,6 +108,9 @@ const HomeScreen = ({ navigation }) => {
                       borderRadius: wp(5),
                       height: hp(6),
                       aspectRatio: 1,
+                      elevation: 0.5,
+                      borderWidth: 0.5,
+                      borderColor: Colors.greyScale100,
                     }}
                     onPress={() => navigation.navigate("notifications")}
                   >
@@ -132,7 +135,7 @@ const HomeScreen = ({ navigation }) => {
                   style={{
                     paddingHorizontal: wp(4),
                     flex: 1,
-                    backgroundColor: Colors.secondary100,
+                    backgroundColor: Colors.backgroundPrimary,
                     flexDirection: "row",
                     alignItems: "center",
                     paddingVertical: hp(2),
@@ -141,15 +144,11 @@ const HomeScreen = ({ navigation }) => {
                     height: hp(7),
                   }}
                 >
-                  <Feather
-                    name="search"
-                    size={24}
-                    color={Colors.secondary400}
-                  />
+                  <Feather name="search" size={24} color={Colors.success} />
                   <Text
                     style={{
                       fontFamily: "inter_semiBold",
-                      color: Colors.secondary300,
+                      color: Colors.success,
                       fontSize: wp(4),
                     }}
                   >
@@ -158,7 +157,7 @@ const HomeScreen = ({ navigation }) => {
                 </View>
                 <View
                   style={{
-                    backgroundColor: Colors.secondary100,
+                    backgroundColor: Colors.backgroundPrimary,
                     justifyContent: "center",
                     alignItems: "center",
                     padding: wp(1),
@@ -170,7 +169,7 @@ const HomeScreen = ({ navigation }) => {
                   <MaterialCommunityIcons
                     name="tune-variant"
                     size={24}
-                    color={Colors.secondary400}
+                    color={Colors.success}
                   />
                 </View>
               </TouchableOpacity>
@@ -213,7 +212,7 @@ const HomeScreen = ({ navigation }) => {
                 renderItem={({ item }) => (
                   <TouchableOpacity
                     style={{
-                      backgroundColor: Colors.white,
+                      backgroundColor: Colors.greyScale100,
                       borderRadius: wp(3),
                       padding: wp(3),
                       justifyContent: "center",
@@ -282,7 +281,7 @@ const HomeScreen = ({ navigation }) => {
                 renderItem={({ item }) => (
                   <TouchableOpacity
                     style={{
-                      backgroundColor: Colors.white,
+                      backgroundColor: Colors.greyScale100,
                       borderRadius: wp(3),
                       padding: wp(3),
                       justifyContent: "center",
@@ -344,7 +343,7 @@ const HomeScreen = ({ navigation }) => {
             style={{
               flexDirection: "row",
               alignItems: "center",
-              backgroundColor: Colors.white,
+              backgroundColor: Colors.greyScale100,
               borderRadius: wp(5),
               marginHorizontal: wp(4),
               marginVertical: hp(1),
@@ -383,7 +382,7 @@ const HomeScreen = ({ navigation }) => {
           </TouchableOpacity>
         )}
       />
-    </>
+    </View>
   );
 };
 
@@ -392,6 +391,7 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
+    backgroundColor: Colors.white,
   },
   imageContainer: {
     position: "absolute",

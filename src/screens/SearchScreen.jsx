@@ -25,7 +25,7 @@ const SearchScreen = ({ navigation }) => {
   };
   return (
     <ScrollView
-      style={{ flex: 1, backgroundColor: Colors.light_white }}
+      style={{ flex: 1, backgroundColor: Colors.white }}
       contentContainerStyle={{
         flexGrow: 1,
         paddingBottom: hp(1),
@@ -81,26 +81,26 @@ const SearchScreen = ({ navigation }) => {
         >
           <View
             style={{
-              paddingHorizontal: wp(4),
               flex: 1,
-              backgroundColor: Colors.secondary100,
+              paddingLeft: wp(4),
+              backgroundColor: Colors.backgroundPrimary,
               flexDirection: "row",
               alignItems: "center",
-              paddingVertical: hp(2),
               borderRadius: wp(4),
               gap: wp(3),
-              height: hp(7),
+              overflow: "hidden",
             }}
           >
-            <Feather name="search" size={24} color={Colors.secondary400} />
+            <Feather name="search" size={24} color={Colors.success} />
             <TextInput
               placeholder=" What do you want to order?"
-              placeholderTextColor={Colors.secondary300}
+              placeholderTextColor={Colors.success}
+              style={{ flex: 1, height: hp(7) }}
             />
           </View>
           <View
             style={{
-              backgroundColor: Colors.secondary100,
+              backgroundColor: Colors.backgroundPrimary,
               justifyContent: "center",
               alignItems: "center",
               padding: wp(1),
@@ -112,7 +112,7 @@ const SearchScreen = ({ navigation }) => {
             <MaterialCommunityIcons
               name="tune-variant"
               size={24}
-              color={Colors.secondary400}
+              color={Colors.success}
             />
           </View>
         </View>
@@ -138,8 +138,8 @@ const SearchScreen = ({ navigation }) => {
               activeOpacity={0.8}
               style={{
                 backgroundColor: selectedFilters.includes("Restaurant")
-                  ? Colors.secondary400
-                  : Colors.secondary100,
+                  ? Colors.success
+                  : Colors.backgroundPrimary,
                 borderRadius: wp(3),
                 padding: wp(3),
                 justifyContent: "center",
@@ -153,7 +153,7 @@ const SearchScreen = ({ navigation }) => {
                   fontSize: wp(4),
                   color: selectedFilters.includes("Restaurant")
                     ? Colors.white
-                    : Colors.secondary400,
+                    : Colors.success,
                 }}
               >
                 Restaurant
@@ -163,8 +163,8 @@ const SearchScreen = ({ navigation }) => {
               activeOpacity={0.8}
               style={{
                 backgroundColor: selectedFilters.includes("Menu")
-                  ? Colors.secondary400
-                  : Colors.secondary100,
+                  ? Colors.success
+                  : Colors.backgroundPrimary,
                 borderRadius: wp(3),
                 padding: wp(3),
                 justifyContent: "center",
@@ -178,7 +178,7 @@ const SearchScreen = ({ navigation }) => {
                   fontSize: wp(4),
                   color: selectedFilters.includes("Menu")
                     ? Colors.white
-                    : Colors.secondary400,
+                    : Colors.success,
                 }}
               >
                 Menu
@@ -207,8 +207,8 @@ const SearchScreen = ({ navigation }) => {
               activeOpacity={0.8}
               style={{
                 backgroundColor: selectedFilters.includes("1 Km")
-                  ? Colors.secondary400
-                  : Colors.secondary100,
+                  ? Colors.success
+                  : Colors.backgroundPrimary,
                 borderRadius: wp(3),
                 padding: wp(3),
                 justifyContent: "center",
@@ -222,7 +222,7 @@ const SearchScreen = ({ navigation }) => {
                   fontSize: wp(4),
                   color: selectedFilters.includes("1 Km")
                     ? Colors.white
-                    : Colors.secondary400,
+                    : Colors.success,
                 }}
               >
                 1 Km
@@ -232,8 +232,8 @@ const SearchScreen = ({ navigation }) => {
               activeOpacity={0.8}
               style={{
                 backgroundColor: selectedFilters.includes(">10Km")
-                  ? Colors.secondary400
-                  : Colors.secondary100,
+                  ? Colors.success
+                  : Colors.backgroundPrimary,
                 borderRadius: wp(3),
                 padding: wp(3),
                 justifyContent: "center",
@@ -247,7 +247,7 @@ const SearchScreen = ({ navigation }) => {
                   fontSize: wp(4),
                   color: selectedFilters.includes(">10Km")
                     ? Colors.white
-                    : Colors.secondary400,
+                    : Colors.success,
                 }}
               >
                 {">10Km"}
@@ -257,8 +257,8 @@ const SearchScreen = ({ navigation }) => {
               activeOpacity={0.8}
               style={{
                 backgroundColor: selectedFilters.includes("<10Km")
-                  ? Colors.secondary400
-                  : Colors.secondary100,
+                  ? Colors.success
+                  : Colors.backgroundPrimary,
                 borderRadius: wp(3),
                 padding: wp(3),
                 justifyContent: "center",
@@ -272,7 +272,7 @@ const SearchScreen = ({ navigation }) => {
                   fontSize: wp(4),
                   color: selectedFilters.includes("<10Km")
                     ? Colors.white
-                    : Colors.secondary400,
+                    : Colors.success,
                 }}
               >
                 {"<10Km"}
@@ -301,8 +301,8 @@ const SearchScreen = ({ navigation }) => {
               activeOpacity={0.8}
               style={{
                 backgroundColor: selectedFilters.includes("Cake")
-                  ? Colors.secondary400
-                  : Colors.secondary100,
+                  ? Colors.success
+                  : Colors.backgroundPrimary,
                 borderRadius: wp(3),
                 padding: wp(3),
                 justifyContent: "center",
@@ -316,7 +316,7 @@ const SearchScreen = ({ navigation }) => {
                   fontSize: wp(4),
                   color: selectedFilters.includes("Cake")
                     ? Colors.white
-                    : Colors.secondary400,
+                    : Colors.success,
                 }}
               >
                 Cake
@@ -326,8 +326,8 @@ const SearchScreen = ({ navigation }) => {
               activeOpacity={0.8}
               style={{
                 backgroundColor: selectedFilters.includes("Appetizer")
-                  ? Colors.secondary400
-                  : Colors.secondary100,
+                  ? Colors.success
+                  : Colors.backgroundPrimary,
                 borderRadius: wp(3),
                 padding: wp(3),
                 justifyContent: "center",
@@ -341,7 +341,7 @@ const SearchScreen = ({ navigation }) => {
                   fontSize: wp(4),
                   color: selectedFilters.includes("Appetizer")
                     ? Colors.white
-                    : Colors.secondary400,
+                    : Colors.success,
                 }}
               >
                 Appetizer
@@ -351,8 +351,8 @@ const SearchScreen = ({ navigation }) => {
               activeOpacity={0.8}
               style={{
                 backgroundColor: selectedFilters.includes("Main Course")
-                  ? Colors.secondary400
-                  : Colors.secondary100,
+                  ? Colors.success
+                  : Colors.backgroundPrimary,
                 borderRadius: wp(3),
                 padding: wp(3),
                 justifyContent: "center",
@@ -366,7 +366,7 @@ const SearchScreen = ({ navigation }) => {
                   fontSize: wp(4),
                   color: selectedFilters.includes("Main Course")
                     ? Colors.white
-                    : Colors.secondary400,
+                    : Colors.success,
                 }}
               >
                 Main Course
@@ -376,8 +376,8 @@ const SearchScreen = ({ navigation }) => {
               activeOpacity={0.8}
               style={{
                 backgroundColor: selectedFilters.includes("Soup")
-                  ? Colors.secondary400
-                  : Colors.secondary100,
+                  ? Colors.success
+                  : Colors.backgroundPrimary,
                 borderRadius: wp(3),
                 padding: wp(3),
                 justifyContent: "center",
@@ -391,7 +391,7 @@ const SearchScreen = ({ navigation }) => {
                   fontSize: wp(4),
                   color: selectedFilters.includes("Soup")
                     ? Colors.white
-                    : Colors.secondary400,
+                    : Colors.success,
                 }}
               >
                 Soup
@@ -401,8 +401,8 @@ const SearchScreen = ({ navigation }) => {
               activeOpacity={0.8}
               style={{
                 backgroundColor: selectedFilters.includes("Dessert")
-                  ? Colors.secondary400
-                  : Colors.secondary100,
+                  ? Colors.success
+                  : Colors.backgroundPrimary,
                 borderRadius: wp(3),
                 padding: wp(3),
                 justifyContent: "center",
@@ -416,7 +416,7 @@ const SearchScreen = ({ navigation }) => {
                   fontSize: wp(4),
                   color: selectedFilters.includes("Dessert")
                     ? Colors.white
-                    : Colors.secondary400,
+                    : Colors.success,
                 }}
               >
                 Dessert

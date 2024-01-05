@@ -31,7 +31,7 @@ const popularMenu = [
   },
 ];
 
-const ProfileScreen = () => {
+const ProfileScreen = ({ navigation }) => {
   // ref
   const bottomSheetRef = useRef();
 
@@ -155,7 +155,7 @@ const ProfileScreen = () => {
           backgroundColor: Colors.light_white,
         }}
         handleIndicatorStyle={{
-          backgroundColor: Colors.secondary100,
+          backgroundColor: Colors.backgroundPrimary,
           width: wp(15),
           height: hp(1),
         }}
@@ -222,7 +222,7 @@ const ProfileScreen = () => {
                 style={{
                   flexDirection: "row",
                   alignItems: "center",
-                  backgroundColor: Colors.white,
+                  backgroundColor: Colors.greyScale100,
                   paddingHorizontal: wp(5),
                   paddingVertical: hp(1),
                   borderRadius: wp(3),
@@ -230,6 +230,7 @@ const ProfileScreen = () => {
                   marginVertical: hp(2),
                 }}
                 activeOpacity={0.8}
+                onPress={() => navigation.navigate("voucher_promo")}
               >
                 <Image
                   source={require("../../assets/images/Voucher_Icon.png")}
@@ -238,11 +239,11 @@ const ProfileScreen = () => {
                 />
                 <Text
                   style={{
-                    fontFamily: "medium",
+                    fontFamily: "inter_semiBold",
                     fontSize: wp(4),
                   }}
                 >
-                  You have 3 Voucher
+                  You have 3 Vouchers
                 </Text>
               </TouchableOpacity>
               <Text

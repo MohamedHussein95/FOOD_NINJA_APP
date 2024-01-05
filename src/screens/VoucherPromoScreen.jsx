@@ -11,7 +11,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { PrimaryButton } from "../components";
+import { BackButton, Header, PrimaryButton } from "../components";
 import { Colors } from "../constants";
 import { hp, wp } from "../utils";
 
@@ -29,13 +29,7 @@ const VoucherPromoScreen = ({ navigation }) => {
 
   return (
     <>
-      <View style={styles.imageContainer}>
-        <Image
-          source={require("../../assets/images/Pattern_diagnol.png")}
-          style={styles.imagePattern}
-          resizeMode="cover"
-        />
-      </View>
+      <Header />
       <FlatList
         data={PROMOTIONS}
         showsHorizontalScrollIndicator={false}
@@ -44,41 +38,9 @@ const VoucherPromoScreen = ({ navigation }) => {
           flexGrow: 1,
           paddingBottom: hp(1),
           paddingTop: hp(8),
-          paddingHorizontal: wp(4),
         }}
         showsVerticalScrollIndicator={false}
-        ListHeaderComponent={
-          <>
-            <TouchableOpacity
-              style={{
-                backgroundColor: Colors.secondary100,
-                padding: wp(1),
-                borderRadius: wp(3),
-                width: wp(13),
-                aspectRatio: 1,
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-              onPress={() => navigation.goBack()}
-            >
-              <Octicons
-                name="chevron-left"
-                size={30}
-                color={Colors.secondary400}
-              />
-            </TouchableOpacity>
-            <Text
-              style={{
-                fontFamily: "bold",
-                fontSize: wp(7),
-                lineHeight: hp(4),
-                marginVertical: hp(4),
-              }}
-            >
-              Voucher Promo
-            </Text>
-          </>
-        }
+        ListHeaderComponent={<BackButton title={"Voucher Promo"} />}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <ImageBackground
@@ -88,6 +50,7 @@ const VoucherPromoScreen = ({ navigation }) => {
               elevation: 1,
               borderRadius: wp(5),
               marginBottom: hp(2),
+              marginHorizontal: wp(4),
             }}
           >
             <TouchableOpacity

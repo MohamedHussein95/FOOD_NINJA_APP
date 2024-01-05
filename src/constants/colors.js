@@ -7,6 +7,7 @@ export default {
   secondary300: "#E38751",
   secondary200: "#E6A986",
   secondary100: "#F5D5C3",
+  black500: "#000000",
   black400: "#09051C",
   black300: "#444352",
   black200: "#86848F",
@@ -27,6 +28,6 @@ export default {
   greyScale400: "#BDBDBD",
   greyScale300: "#E0E0E0",
   greyScale200: "#EEEEEE",
-  greyScale100: "#F5F5F5",
+  greyScale100: "#F6F6F6",
   greyScale50: "#FAFAFA",
 };

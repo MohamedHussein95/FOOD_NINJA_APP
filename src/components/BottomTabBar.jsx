@@ -17,10 +17,12 @@ const BottomTabBar = ({ state, descriptors, navigation }) => {
         borderRadius: wp(6),
         paddingHorizontal: wp(4),
         height: hp(10),
-        elevation: 0.1,
+        elevation: 0.2,
         position: "absolute",
         bottom: 0,
         width: "95%",
+        borderWidth: 0.5,
+        borderColor: Colors.greyScale100,
         alignSelf: "center",
       }}
     >

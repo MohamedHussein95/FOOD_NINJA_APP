@@ -25,12 +25,12 @@ const SlideComponent = ({ title, description, image }) => {
     <View style={styles.container}>
       <Image
         source={image}
-        resizeMode="cover"
+        resizeMode="contain"
         style={{ width: "100%", height: hp(55) }}
       />
       <View
         style={{
-          paddingHorizontal: wp(7),
+          width: "90%",
           alignItems: "center",
           gap: hp(3),
           marginTop: hp(2),
@@ -47,10 +47,19 @@ const SlideComponent = ({ title, description, image }) => {
         >
           {title}
         </Text>
+      </View>
+      <View
+        style={{
+          width: "65%",
+          alignItems: "center",
+          gap: hp(3),
+          marginTop: hp(2),
+        }}
+      >
         <Text
           style={{
             fontFamily: "regular",
-            fontSize: wp(4.5),
+            fontSize: wp(4),
             textAlign: "center",
             lineHeight: hp(3),
           }}

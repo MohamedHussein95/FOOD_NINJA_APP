@@ -24,7 +24,11 @@ const TabStack = () => {
     >
       <Tab.Screen name="home" component={HomeScreen} />
       <Tab.Screen name="profile" component={ProfileScreen} />
-      <Tab.Screen name="cart" component={CartScreen} />
+      <Tab.Screen
+        name="cart"
+        component={CartScreen}
+        options={{ tabBarBadge: 7 }}
+      />
       <Tab.Screen name="chat" component={ChatListScreen} />
     </Tab.Navigator>
   );
