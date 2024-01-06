@@ -9,6 +9,7 @@ import {
   HomeScreen,
   NotificationsScreen,
   ProfileScreen,
+  RatingScreen,
   SearchScreen,
   VoucherPromoScreen,
 } from "../screens";
@@ -30,7 +31,11 @@ const TabStack = () => {
         component={CartScreen}
         options={{ tabBarBadge: 7 }}
       />
-      <Tab.Screen name="chat_list" component={ChatListScreen} />
+      <Tab.Screen
+        name="chat_list"
+        component={ChatListScreen}
+        options={{ tabBarLabel: "chat" }}
+      />
     </Tab.Navigator>
   );
 };
@@ -38,7 +43,7 @@ const TabStack = () => {
 const MainNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="tab" component={TabStack} />
+      {/* <Stack.Screen name="tab" component={TabStack} />
       <Stack.Screen
         name="search"
         component={SearchScreen}
@@ -70,6 +75,13 @@ const MainNavigator = () => {
       <Stack.Screen
         name="call"
         component={CallScreen}
+        options={{
+          presentation: "modal",
+        }}
+      /> */}
+      <Stack.Screen
+        name="rating"
+        component={RatingScreen}
         options={{
           presentation: "modal",
         }}

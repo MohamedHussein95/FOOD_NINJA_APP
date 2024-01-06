@@ -23,3 +23,4 @@ export { default as NotificationsScreen } from "./NotificationsScreen";
 export { default as VoucherPromoScreen } from "./VoucherPromoScreen";
 export { default as ChatListScreen } from "./ChatListScreen";
 export { default as CallScreen } from "./CallScreen";
+export { default as RatingScreen } from "./RatingScreen";

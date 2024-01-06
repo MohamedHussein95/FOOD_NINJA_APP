@@ -1,6 +1,6 @@
 import { FontAwesome5, Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
-import React from "react";
+import React, { useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Colors } from ".././constants";
 
@@ -9,6 +9,7 @@ import { hp, wp } from "../utils";
 
 const CallScreen = ({ navigation, route }) => {
   const { user } = route.params || {};
+  const [volumeOn, setVolumeOn] = useState(true);
   return (
     <View style={styles.screen}>
       <View style={styles.imageContainer}>
@@ -53,7 +54,7 @@ const CallScreen = ({ navigation, route }) => {
       >
         <Text
           style={{
-            fontFamily: "medium",
+            fontFamily: "bold",
             fontSize: wp(7),
           }}
           numberOfLines={1}
@@ -84,7 +85,10 @@ const CallScreen = ({ navigation, route }) => {
           gap: wp(10),
         }}
       >
-        <TouchableOpacity activeOpacity={0.8} onPress={() => {}}>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={() => setVolumeOn(!volumeOn)}
+        >
           <LinearGradient
             colors={Colors.light_green_gradient}
             start={{ x: 1, y: 1 }}
@@ -98,9 +102,9 @@ const CallScreen = ({ navigation, route }) => {
               aspectRatio: 1,
             }}
           >
-            <FontAwesome5
-              name="volume-up"
-              size={hp(3)}
+            <Ionicons
+              name={volumeOn ? "volume-medium" : "volume-mute"}
+              size={hp(4)}
               color={Colors.success}
             />
           </LinearGradient>

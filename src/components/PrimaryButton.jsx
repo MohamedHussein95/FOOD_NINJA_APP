@@ -12,6 +12,7 @@ const PrimaryButton = ({
   width,
   height,
   fontSize,
+  containerStyle,
 }) => {
   return (
     <TouchableOpacity
@@ -24,16 +25,19 @@ const PrimaryButton = ({
         colors={disabled ? Colors.disabled_gradient : Colors.green_gradient}
         start={{ x: 1, y: 1 }}
         end={{ x: 1, y: 0 }}
-        style={{
-          justifyContent: "center",
-          alignItems: "center",
-          height: height || hp(8),
-          width: width || wp(60),
-          paddingHorizontal: wp(5),
-          borderRadius: wp(3),
-          overflow: "hidden",
-          alignSelf: "center",
-        }}
+        style={[
+          {
+            justifyContent: "center",
+            alignItems: "center",
+            height: height || hp(8),
+            width: width || wp(60),
+            paddingHorizontal: wp(5),
+            borderRadius: wp(3),
+            overflow: "hidden",
+            alignSelf: "center",
+          },
+          containerStyle,
+        ]}
       >
         <Text
           style={{
