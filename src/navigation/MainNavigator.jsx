@@ -2,6 +2,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
+  CallScreen,
   CartScreen,
   ChatListScreen,
   ChatScreen,
@@ -62,6 +63,13 @@ const MainNavigator = () => {
       <Stack.Screen
         name="chat"
         component={ChatScreen}
+        options={{
+          presentation: "modal",
+        }}
+      />
+      <Stack.Screen
+        name="call"
+        component={CallScreen}
         options={{
           presentation: "modal",
         }}

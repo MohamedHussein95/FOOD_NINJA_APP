@@ -1,3 +1,5 @@
+import { FontAwesome } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import {
   FlatList,
@@ -7,13 +9,9 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { Colors, logoStyles } from ".././constants";
-import { Entypo, FontAwesome } from "@expo/vector-icons";
-import { LinearGradient } from "expo-linear-gradient";
+import { Colors } from ".././constants";
 
-import MaskedView from "@react-native-masked-view/masked-view";
-
-import { BackButton, Header, PrimaryButton } from "../components";
+import { BackButton } from "../components";
 import colors from "../constants/colors";
 import { hp, wp } from "../utils";
 
@@ -124,7 +122,7 @@ const ChatScreen = ({ navigation, route }) => {
               </View>
               <TouchableOpacity
                 activeOpacity={0.8}
-                onPress={() => navigation.navigate("call")}
+                onPress={() => navigation.navigate("call", { user })}
               >
                 <LinearGradient
                   colors={Colors.light_green_gradient}
