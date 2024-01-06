@@ -1,10 +1,7 @@
-import { FontAwesome5 } from "@expo/vector-icons";
 import MaskedView from "@react-native-masked-view/masked-view";
 import { LinearGradient } from "expo-linear-gradient";
 import React, { useState } from "react";
 import {
-  Animated,
-  FlatList,
   Image,
   ImageBackground,
   StyleSheet,
@@ -14,182 +11,149 @@ import {
 } from "react-native";
 import { BackButton, Header } from "../components";
 import { Colors } from "../constants";
-import { hp, wp } from "../utils";
+import { hideCharacters, hp, wp } from "../utils";
 
-const popularMenu = [
-  {
-    id: "1",
-    image: require("../../assets/images/herbal_pancake.png"),
-    title: "Herbal Pancake",
-    restaurant: "Warung Herbal",
-    price: "$7",
-  },
-  {
-    id: "2",
-    image: require("../../assets/images/fruit_salad.png"),
-    title: "Fruit Salad",
-    restaurant: "Wijie Resto",
-    price: "$5",
-  },
-  {
-    id: "3",
-    image: require("../../assets/images/green_noodle.png"),
-    title: "Green Noodle",
-    restaurant: "Noodle Home",
-    price: "$15",
-  },
-];
-
-const OrderDetailsScreen = ({ navigation }) => {
+const ConfirmOrderScreen = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
 
   return (
     <View style={styles.screen}>
       <Header />
-      <FlatList
-        data={popularMenu}
-        showsHorizontalScrollIndicator={false}
-        style={{ flex: 1 }}
-        contentContainerStyle={{
-          flexGrow: 1,
-          paddingBottom: hp(1),
-          paddingTop: hp(8),
+      <BackButton title={"Confirm Order"} />
+
+      <View
+        style={{
+          backgroundColor: Colors.greyScale100,
+          elevation: 0.3,
+          marginHorizontal: wp(4),
+          borderRadius: wp(4),
+          alignItems: "center",
+          paddingHorizontal: wp(3),
+          marginBottom: hp(2),
+          height: hp(15),
         }}
-        showsVerticalScrollIndicator={false}
-        ListHeaderComponent={<BackButton title={"Order details"} />}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <View style={{ width: "100%", paddingHorizontal: wp(4) }}>
-            <Animated.View
-              style={[
-                {
-                  backgroundColor: Colors.greyScale100,
-                  flexDirection: "row",
-                  alignItems: "center",
-                  borderRadius: wp(5),
-                  padding: wp(2),
-                  marginBottom: hp(2),
-                },
-              ]}
+      >
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            marginTop: hp(3),
+          }}
+        >
+          <Text
+            style={{
+              flex: 1,
+              fontFamily: "regular",
+              fontSize: wp(4.5),
+              color: Colors.greyScale400,
+            }}
+          >
+            Deliver To
+          </Text>
+          <TouchableOpacity onPress={() => navigation.navigate("shipping")}>
+            <Text
+              style={{
+                fontFamily: "regular",
+                color: Colors.success,
+                fontSize: wp(4.5),
+              }}
             >
-              <Image
-                source={item.image}
-                resizeMode="contain"
-                style={{ width: wp(20), aspectRatio: 1 }}
-              />
-              <View
-                style={{
-                  gap: hp(1),
-                  marginLeft: wp(2),
-                  flex: 1,
-                }}
-              >
-                <Text style={{ fontFamily: "medium", fontSize: wp(5) }}>
-                  {item.title}
-                </Text>
-                <Text
-                  style={{
-                    fontFamily: "regular",
-                    fontSize: wp(4),
-                    color: Colors.black100,
-                  }}
-                >
-                  {item.restaurant}
-                </Text>
-                <MaskedView
-                  style={{
-                    width: 50,
-                    height: 28,
-                  }}
-                  maskElement={
-                    <View
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                      }}
-                    >
-                      <Text
-                        style={{
-                          fontFamily: "bold",
-                          fontSize: wp(7),
-                          color: Colors.success,
-                        }}
-                      >
-                        {item.price}
-                      </Text>
-                    </View>
-                  }
-                >
-                  <LinearGradient
-                    colors={Colors.green_gradient}
-                    start={{ x: 0, y: 0 }}
-                    end={{ x: 1, y: 0 }}
-                    style={{
-                      height: "100%",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  />
-                </MaskedView>
-              </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  gap: wp(2),
-                  marginRight: wp(1),
-                }}
-              >
-                <TouchableOpacity activeOpacity={0.8} onPress={() => {}}>
-                  <LinearGradient
-                    colors={Colors.light_green_gradient}
-                    start={{ x: 1, y: 1 }}
-                    end={{ x: 1, y: 0 }}
-                    style={{
-                      borderRadius: hp(1),
-                      justifyContent: "center",
-                      alignItems: "center",
-                      overflow: "hidden",
-                      width: wp(9),
-                      aspectRatio: 1,
-                    }}
-                  >
-                    <FontAwesome5
-                      name="minus"
-                      size={hp(2)}
-                      color={Colors.green_gradient[0]}
-                    />
-                  </LinearGradient>
-                </TouchableOpacity>
-                <Text style={{ fontFamily: "inter_semiBold", fontSize: wp(5) }}>
-                  9
-                </Text>
-                <TouchableOpacity activeOpacity={0.8} onPress={() => {}}>
-                  <LinearGradient
-                    colors={Colors.green_gradient}
-                    start={{ x: 1, y: 1 }}
-                    end={{ x: 1, y: 0 }}
-                    style={{
-                      borderRadius: hp(1),
-                      justifyContent: "center",
-                      alignItems: "center",
-                      overflow: "hidden",
-                      width: wp(9),
-                      aspectRatio: 1,
-                    }}
-                  >
-                    <FontAwesome5
-                      name="plus"
-                      size={hp(2)}
-                      color={Colors.white}
-                    />
-                  </LinearGradient>
-                </TouchableOpacity>
-              </View>
-            </Animated.View>
-          </View>
-        )}
-      />
+              Edit
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            marginTop: hp(1),
+            gap: wp(3),
+          }}
+        >
+          <Image
+            source={require("../../assets/images/Pin_Logo.png")}
+            resizeMode="contain"
+            style={styles.image}
+          />
+          <Text
+            style={{
+              flex: 1,
+              fontFamily: "medium",
+              fontSize: wp(4),
+              lineHeight: hp(3),
+            }}
+          >
+            4517 Washington Ave. Manchester, Kentucky 39495
+          </Text>
+        </View>
+      </View>
+      <View
+        style={{
+          backgroundColor: Colors.greyScale100,
+          elevation: 0.3,
+          marginHorizontal: wp(4),
+          borderRadius: wp(4),
+          alignItems: "center",
+          paddingHorizontal: wp(3),
+          marginBottom: hp(2),
+          height: hp(15),
+        }}
+      >
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            marginTop: hp(3),
+          }}
+        >
+          <Text
+            style={{
+              flex: 1,
+              fontFamily: "regular",
+              fontSize: wp(4.5),
+              color: Colors.greyScale400,
+            }}
+          >
+            Payment Method
+          </Text>
+          <TouchableOpacity onPress={() => navigation.navigate("payment")}>
+            <Text
+              style={{
+                fontFamily: "regular",
+                color: Colors.success,
+                fontSize: wp(4.5),
+              }}
+            >
+              Edit
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+            marginTop: hp(1),
+            gap: wp(3),
+            width: "100%",
+          }}
+        >
+          <Image
+            source={require("../../assets/images/paypal.png")}
+            resizeMode="contain"
+            style={{ width: wp(25), height: hp(5) }}
+          />
+          <Text
+            style={{
+              fontFamily: "regular",
+              fontSize: wp(4.5),
+              letterSpacing: 0.5,
+            }}
+          >
+            {hideCharacters("2121 6352 8465 4578", "end")}
+          </Text>
+        </View>
+      </View>
       <LinearGradient
         colors={Colors.green_gradient}
         start={{ x: 0, y: 0 }}
@@ -200,6 +164,8 @@ const OrderDetailsScreen = ({ navigation }) => {
           marginBottom: hp(2),
           borderRadius: hp(1),
           gap: hp(1),
+          position: "absolute",
+          bottom: 0,
         }}
       >
         <ImageBackground
@@ -334,7 +300,6 @@ const OrderDetailsScreen = ({ navigation }) => {
               height: hp(7),
             }}
             activeOpacity={0.8}
-            onPress={() => navigation.navigate("confirm_order")}
           >
             <MaskedView
               style={{
@@ -383,12 +348,13 @@ const OrderDetailsScreen = ({ navigation }) => {
   );
 };
 
-export default OrderDetailsScreen;
+export default ConfirmOrderScreen;
 
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
     backgroundColor: Colors.white,
+    paddingTop: hp(8),
   },
   imageContainer: {
     position: "absolute",
@@ -397,11 +363,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  image: { aspectRatio: 1, height: hp(15) },
+
   logoContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
   },
+  image: { aspectRatio: 1, width: wp(10) },
 });

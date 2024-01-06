@@ -9,12 +9,15 @@ import {
   HomeScreen,
   NotificationsScreen,
   OrderDetailsScreen,
+  PaymentScreen,
   ProfileScreen,
   RatingScreen,
   SearchScreen,
+  ShippingScreen,
   VoucherPromoScreen,
 } from "../screens";
 import { BottomTabBar } from "../components";
+import ConfirmOrderScreen from "../screens/ConfirmOrderScreen";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -88,6 +91,21 @@ const MainNavigator = () => {
         }}
       /> */}
       <Stack.Screen name="order_details" component={OrderDetailsScreen} />
+      <Stack.Screen name="confirm_order" component={ConfirmOrderScreen} />
+      <Stack.Screen
+        name="payment"
+        component={PaymentScreen}
+        options={{
+          presentation: "modal",
+        }}
+      />
+      <Stack.Screen
+        name="shipping"
+        component={ShippingScreen}
+        options={{
+          presentation: "modal",
+        }}
+      />
     </Stack.Navigator>
   );
 };
