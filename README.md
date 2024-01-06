@@ -4,6 +4,10 @@
 
 frontend
 
+## DESIGN
+
+https://www.figma.com/community/file/1171114576781497346
+
 ## Screenshots
 
 ![Search](./assets/screenshots/Screenshot_1704573668.png)
