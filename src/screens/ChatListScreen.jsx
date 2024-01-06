@@ -39,12 +39,12 @@ const ChatListScreen = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
 
   return (
-    <>
+    <View style={styles.screen}>
       <Header />
       <FlatList
         data={Chats}
         showsHorizontalScrollIndicator={false}
-        style={styles.screen}
+        style={{ flex: 1 }}
         contentContainerStyle={{
           flexGrow: 1,
           paddingBottom: hp(1),
@@ -58,7 +58,7 @@ const ChatListScreen = ({ navigation }) => {
             style={{
               flexDirection: "row",
               alignItems: "center",
-              backgroundColor: Colors.white,
+              backgroundColor: Colors.greyScale100,
               borderRadius: wp(4),
               padding: wp(4),
               gap: wp(4),
@@ -94,7 +94,7 @@ const ChatListScreen = ({ navigation }) => {
                 style={{
                   fontFamily: "regular",
                   fontSize: wp(4),
-                  color: Colors.black100,
+                  color: Colors.greyScale500,
                 }}
               >
                 {item.lastMessage}
@@ -116,7 +116,7 @@ const ChatListScreen = ({ navigation }) => {
           </TouchableOpacity>
         )}
       />
-    </>
+    </View>
   );
 };
 
@@ -125,6 +125,7 @@ export default ChatListScreen;
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
+    backgroundColor: Colors.white,
   },
   imageContainer: {
     position: "absolute",

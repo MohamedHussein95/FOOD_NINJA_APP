@@ -36,12 +36,12 @@ const NotificationsScreen = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
 
   return (
-    <>
+    <View style={styles.screen}>
       <Header />
       <FlatList
         data={Notifications}
         showsHorizontalScrollIndicator={false}
-        style={styles.screen}
+        style={{ flex: 1 }}
         contentContainerStyle={{
           flexGrow: 1,
           paddingBottom: hp(1),
@@ -55,7 +55,7 @@ const NotificationsScreen = ({ navigation }) => {
             style={{
               flexDirection: "row",
               alignItems: "center",
-              backgroundColor: Colors.white,
+              backgroundColor: Colors.greyScale100,
               borderRadius: wp(4),
               padding: wp(4),
               gap: wp(4),
@@ -99,7 +99,7 @@ const NotificationsScreen = ({ navigation }) => {
           </TouchableOpacity>
         )}
       />
-    </>
+    </View>
   );
 };
 
@@ -108,6 +108,7 @@ export default NotificationsScreen;
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
+    backgroundColor: Colors.white,
   },
   imageContainer: {
     position: "absolute",
