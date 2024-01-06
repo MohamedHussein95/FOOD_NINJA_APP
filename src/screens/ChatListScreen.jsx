@@ -66,6 +66,7 @@ const ChatListScreen = ({ navigation }) => {
               marginHorizontal: wp(4),
             }}
             activeOpacity={0.7}
+            onPress={() => navigation.navigate("chat", { user: item })}
           >
             <Image
               source={item.image}

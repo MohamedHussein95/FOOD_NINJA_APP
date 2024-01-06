@@ -29,7 +29,7 @@ const TabStack = () => {
         component={CartScreen}
         options={{ tabBarBadge: 7 }}
       />
-      <Tab.Screen name="chat" component={ChatListScreen} />
+      <Tab.Screen name="chat_list" component={ChatListScreen} />
     </Tab.Navigator>
   );
 };
@@ -55,6 +55,13 @@ const MainNavigator = () => {
       <Stack.Screen
         name="voucher_promo"
         component={VoucherPromoScreen}
+        options={{
+          presentation: "modal",
+        }}
+      />
+      <Stack.Screen
+        name="chat"
+        component={ChatScreen}
         options={{
           presentation: "modal",
         }}

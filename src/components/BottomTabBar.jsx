@@ -67,7 +67,7 @@ const BottomTabBar = ({ state, descriptors, navigation }) => {
               style={{ width: wp(7), height: hp(4) }}
             />
           );
-        } else if (route.name === "chat") {
+        } else if (route.name === "chat_list") {
           iconName = isFocused ? (
             <Image
               source={require("../../assets/images/Chat_a.png")}
