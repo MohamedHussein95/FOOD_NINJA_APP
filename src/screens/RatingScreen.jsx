@@ -106,10 +106,7 @@ const RatingScreen = ({ navigation, route }) => {
         <Input
           placeholder="Leave feedback"
           onChangeText={setFeedback}
-          onBlur={(e) => {
-            handleBlur("email")(e);
-            setFeedbackFocused(false);
-          }}
+          onBlur={(e) => setFeedbackFocused(false)}
           active={feedbackFocused}
           onFocus={() => setFeedbackFocused(true)}
           value={feedback}
@@ -137,6 +134,7 @@ const RatingScreen = ({ navigation, route }) => {
               width: wp(30),
             }}
             activeOpacity={0.8}
+            onPress={() => navigation.navigate("tab")}
           >
             <MaskedView
               style={{

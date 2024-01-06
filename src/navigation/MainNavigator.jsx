@@ -8,6 +8,7 @@ import {
   ChatScreen,
   HomeScreen,
   NotificationsScreen,
+  OrderDetailsScreen,
   ProfileScreen,
   RatingScreen,
   SearchScreen,
@@ -78,14 +79,15 @@ const MainNavigator = () => {
         options={{
           presentation: "modal",
         }}
-      /> */}
+      />
       <Stack.Screen
         name="rating"
         component={RatingScreen}
         options={{
           presentation: "modal",
         }}
-      />
+      /> */}
+      <Stack.Screen name="order_details" component={OrderDetailsScreen} />
     </Stack.Navigator>
   );
 };
