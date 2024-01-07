@@ -25,34 +25,33 @@ const VerificationScreen = ({ navigation, route }) => {
   }, [seconds]);
 
   const displayTime = () => {
-    //const min = Math.floor(seconds / 60);
     const sec = seconds % 60;
     const formattedSec = sec < 10 ? `0${sec}` : sec;
     return `${formattedSec}`;
   };
 
+  const handleVerification = () => {
+    try {
+      setLoading(true);
+      // TODO:  handle verification
+      if (reset) {
+        navigation.navigate("reset");
+      } else {
+        navigation.navigate("payment");
+      }
+    } catch (error) {}
+  };
   return (
     <ScrollView
       style={styles.screen}
-      contentContainerStyle={{
-        flexGrow: 1,
-        paddingBottom: hp(1),
-        paddingTop: hp(8),
-      }}
+      contentContainerStyle={styles.contentContainer}
       showsVerticalScrollIndicator={false}
     >
       <Header />
       <BackButton title={"Enter 4-digit Verification Code"} />
 
-      <View style={{ paddingHorizontal: wp(4), flex: 1 }}>
-        <Text
-          style={{
-            fontFamily: "book",
-            fontSize: wp(4),
-            lineHeight: hp(3),
-            marginVertical: hp(0),
-          }}
-        >
+      <View style={styles.bodyContainer}>
+        <Text style={styles.methodText}>
           Code sent to{" "}
           {phoneNumber
             ? hideCharacters(phoneNumber, "end")
@@ -70,25 +69,14 @@ const VerificationScreen = ({ navigation, route }) => {
             </Text>
           )}
         </Text>
-        <View
-          style={{
-            backgroundColor: Colors.white,
-            elevation: 0.3,
-            borderRadius: wp(4),
-            height: hp(15),
-            justifyContent: "center",
-            alignItems: "center",
-            marginTop: hp(5),
-            paddingHorizontal: wp(4),
-          }}
-        >
+        <View style={styles.otpWrapper}>
           <OTPInputView
-            style={{ width: "100%", height: "100%" }}
+            style={styles.otpView}
             pinCount={4}
             code={code}
             onCodeChanged={(code) => setCode(code)}
             autoFocusOnLoad
-            codeInputFieldStyle={styles.underlineStyleBase}
+            codeInputFieldStyle={styles.otpBase}
             codeInputHighlightStyle={styles.underlineStyleHighLighted}
             onCodeFilled={(code) => {
               console.log(`Code is ${code}, you are good to go!`);
@@ -99,13 +87,7 @@ const VerificationScreen = ({ navigation, route }) => {
 
       <PrimaryButton
         text={"Next"}
-        onPress={() => {
-          if (reset) {
-            navigation.navigate("reset");
-          } else {
-            navigation.navigate("payment");
-          }
-        }}
+        onPress={handleVerification}
         styles={{ marginBottom: hp(2) }}
         disabled={code.trim().length <= 3}
       />
@@ -116,71 +98,54 @@ const VerificationScreen = ({ navigation, route }) => {
 export default VerificationScreen;
 
 const styles = StyleSheet.create({
+  otpView: {
+    width: "100%",
+    height: "100%",
+  },
+  otpWrapper: {
+    backgroundColor: Colors.white,
+    elevation: 0.3,
+    borderRadius: wp(4),
+    height: hp(15),
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: hp(5),
+    paddingHorizontal: wp(4),
+  },
+  methodText: {
+    fontFamily: "book",
+    fontSize: wp(4),
+    lineHeight: hp(3),
+    marginVertical: hp(0),
+  },
+  bodyContainer: {
+    paddingHorizontal: wp(4),
+    flex: 1,
+  },
+  contentContainer: {
+    flexGrow: 1,
+    paddingBottom: hp(1),
+    paddingTop: hp(8),
+  },
   screen: {
     flex: 1,
     backgroundColor: Colors.light_white,
   },
-  imageContainer: {
-    position: "absolute",
-    top: 0,
-    width: "100%",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  image: { aspectRatio: 1, width: wp(10) },
-  logoContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "column",
-  },
-  inputContainer: {
-    marginVertical: hp(5),
-    justifyContent: "space-between",
-    alignItems: "center",
-    flexDirection: "row",
-    width: "100%",
-    alignSelf: "center",
-    backgroundColor: Colors.white,
-    borderRadius: wp(4),
-    height: hp(15),
-    elevation: 0.3,
-    paddingHorizontal: wp(4),
-  },
-  otpBox: {
-    justifyContent: "center",
-    alignItems: "center",
-    width: wp(20),
-  },
-  otpText: {
-    fontSize: wp(8),
-    fontFamily: "medium",
-    textAlign: "center",
-    padding: wp(0),
-  },
+
   timerText: {
     fontSize: wp(4),
     fontFamily: "bold",
-    color: Colors.primary400,
-  },
-  borderStyleBase: {
-    width: 30,
-    height: 45,
+    color: Colors.success,
   },
 
-  borderStyleHighLighted: {
-    borderColor: Colors.primary100,
-  },
-
-  underlineStyleBase: {
+  otpBase: {
     borderWidth: 0,
     borderBottomWidth: 1,
     fontFamily: "medium",
     fontSize: wp(7),
     color: Colors.black300,
   },
-
   underlineStyleHighLighted: {
-    borderColor: Colors.primary100,
+    borderColor: Colors.success,
   },
 });

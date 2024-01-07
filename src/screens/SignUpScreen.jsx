@@ -57,6 +57,7 @@ const SignUpScreen = () => {
   const handleSubmitValues = async (email, password) => {
     try {
       setLoading(true);
+      // TODO: store the data Only.user will be created once onboarding setup is complete
       navigation.navigate("setup");
     } catch (error) {
       setLoading(false);

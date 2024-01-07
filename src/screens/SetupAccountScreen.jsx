@@ -44,10 +44,11 @@ const SetupAccountScreen = ({ navigation }) => {
         return;
       }
       const checkValid = phoneInput.current?.isValidNumber(phoneNumber);
-      // if (!checkValid) {
-      //   setPhoneNumberError("Invalid phone number");
-      //   return;
-      // }
+      if (!checkValid) {
+        setPhoneNumberError("Invalid phone number");
+        return;
+      }
+      // TODO: store the data Only.user will be created once onboarding setup is complete
       navigation.navigate("verification");
     } catch (error) {
       setLoading(false);
@@ -58,11 +59,7 @@ const SetupAccountScreen = ({ navigation }) => {
   return (
     <ScrollView
       style={styles.screen}
-      contentContainerStyle={{
-        flexGrow: 1,
-        paddingBottom: hp(1),
-        paddingTop: hp(8),
-      }}
+      contentContainerStyle={styles.contentContainer}
       showsVerticalScrollIndicator={false}
     >
       <Header />
@@ -75,8 +72,8 @@ const SetupAccountScreen = ({ navigation }) => {
 
       <Formik
         initialValues={{
-          firstName: "Mohamed",
-          lastName: "Abdikafi",
+          firstName: "John",
+          lastName: "Doe",
           phoneNumber: "712345678",
         }}
         onSubmit={(values) =>
@@ -97,15 +94,7 @@ const SetupAccountScreen = ({ navigation }) => {
           errors,
           touched,
         }) => (
-          <View
-            style={{
-              gap: 12,
-              flex: 1,
-              flexGrow: 1,
-              marginTop: hp(5),
-              paddingHorizontal: wp(4),
-            }}
-          >
+          <View style={styles.formik}>
             <Input
               name="firstName"
               placeholder="First Name"
@@ -184,24 +173,23 @@ const SetupAccountScreen = ({ navigation }) => {
 export default SetupAccountScreen;
 
 const styles = StyleSheet.create({
+  formik: {
+    gap: 12,
+    flex: 1,
+    flexGrow: 1,
+    marginTop: hp(5),
+    paddingHorizontal: wp(4),
+  },
+  contentContainer: {
+    flexGrow: 1,
+    paddingBottom: hp(1),
+    paddingTop: hp(8),
+  },
   screen: {
     flex: 1,
     backgroundColor: Colors.light_white,
   },
-  imageContainer: {
-    position: "absolute",
-    top: 0,
-    width: "100%",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  imagePattern: { width: "100%", height: hp(30) },
-  logoContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "column",
-  },
+
   phoneContainer: {
     width: "100%",
     backgroundColor: Colors.white,

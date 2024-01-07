@@ -63,6 +63,8 @@ const OnboardingScreen = ({ navigation }) => {
     }
   };
 
+  //TODO: should appear for the first time only
+
   return (
     <View style={styles.screen}>
       <FlatList

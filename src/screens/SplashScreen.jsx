@@ -20,6 +20,8 @@ const SplashScreen = ({ navigation }) => {
     return () => clearTimeout(timeOut);
   }, []);
 
+  // TODO:retreive the stored USER data
+
   return (
     <View style={styles.screen}>
       <View style={styles.imageContainer}>

@@ -40,6 +40,7 @@ const SignInScreen = ({ navigation }) => {
   const handleSubmitValues = async (email, password) => {
     try {
       setLoading(true);
+      // TODO: Sign in the user
     } catch (error) {
       setLoading(false);
       console.error(error);
