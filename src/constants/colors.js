@@ -17,6 +17,7 @@ export default {
   light_green_gradient: ["#E7F8ED", "#EDFCF3"],
   disabled_gradient: ["#BDBDBD", "#E0E0E0"],
   red: "#FF4B4B",
+  light_red: "#FFE9E9",
   gold: "#FFF7E9",
   gold200: "#FEAD1D",
   white: "#FFFFFF",

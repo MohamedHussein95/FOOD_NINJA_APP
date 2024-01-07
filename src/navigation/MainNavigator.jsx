@@ -12,6 +12,7 @@ import {
   PaymentScreen,
   ProfileScreen,
   RatingScreen,
+  RestaurantDetailsScreen,
   SearchScreen,
   ShippingScreen,
   VoucherPromoScreen,
@@ -102,6 +103,13 @@ const MainNavigator = () => {
       <Stack.Screen
         name="shipping"
         component={ShippingScreen}
+        options={{
+          presentation: "modal",
+        }}
+      />
+      <Stack.Screen
+        name="restaurant"
+        component={RestaurantDetailsScreen}
         options={{
           presentation: "modal",
         }}

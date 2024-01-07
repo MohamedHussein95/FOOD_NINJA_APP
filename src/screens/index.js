@@ -27,3 +27,4 @@ export { default as RatingScreen } from "./RatingScreen";
 export { default as OrderDetailsScreen } from "./OrderDetailsScreen";
 export { default as PaymentScreen } from "./PaymentScreen";
 export { default as ShippingScreen } from "./ShippingScreen";
+export { default as RestaurantDetailsScreen } from "./RestaurantDetailsScreen";

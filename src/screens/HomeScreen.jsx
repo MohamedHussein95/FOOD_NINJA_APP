@@ -220,6 +220,9 @@ const HomeScreen = ({ navigation }) => {
                       width: wp(50),
                       aspectRatio: 1,
                     }}
+                    onPress={() =>
+                      navigation.navigate("restaurant", { restaurant: item })
+                    }
                   >
                     <Image
                       source={item.image}
