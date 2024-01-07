@@ -32,13 +32,7 @@ const SplashScreen = ({ navigation }) => {
           colors={["transparent", colors.white]}
           start={{ x: 1, y: 0 }}
           end={{ x: 1, y: 1 }}
-          style={{
-            position: "absolute",
-            left: 0,
-            right: 0,
-            bottom: 0,
-            height: "50%",
-          }}
+          style={styles.linearGradientImageTop}
         />
       </View>
 
@@ -51,14 +45,7 @@ const SplashScreen = ({ navigation }) => {
         <MaskedView
           style={logoStyles.maskedContainer}
           maskElement={
-            <View
-              style={{
-                backgroundColor: "transparent",
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
+            <View style={styles.container2}>
               <Text style={logoStyles.appName}>{appName}</Text>
             </View>
           }
@@ -67,12 +54,7 @@ const SplashScreen = ({ navigation }) => {
             colors={colors.green_gradient}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
-            style={{
-              flex: 1,
-              height: "100%",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
+            style={styles.linearGradient}
           />
         </MaskedView>
         <Text style={logoStyles.appDescription}>{appDescription}</Text>
@@ -84,6 +66,25 @@ const SplashScreen = ({ navigation }) => {
 export default SplashScreen;
 
 const styles = StyleSheet.create({
+  linearGradientImageTop: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: 0,
+    height: "50%",
+  },
+  linearGradient: {
+    flex: 1,
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  container2: {
+    backgroundColor: "transparent",
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   screen: {
     flex: 1,
     justifyContent: "center",

@@ -1,11 +1,11 @@
 import { Ionicons } from "@expo/vector-icons";
 import MaskedView from "@react-native-masked-view/masked-view";
 import { useNavigation } from "@react-navigation/native";
+import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
 import { Formik } from "formik";
 import React, { useState } from "react";
 import {
-  Image,
   ScrollView,
   StyleSheet,
   Text,
@@ -17,7 +17,6 @@ import { appDescription, appName, logoStyles } from ".././constants";
 import { CustomSwitch, Input, PrimaryButton } from "../components/";
 import { Colors } from "../constants";
 import { hp, wp } from "../utils";
-
 const validationSchema = Yup.object().shape({
   email: Yup.string()
     .email()
@@ -67,27 +66,21 @@ const SignUpScreen = () => {
 
   return (
     <ScrollView
-      style={{ flex: 1, backgroundColor: Colors.light_white }}
-      contentContainerStyle={{ flexGrow: 1, paddingBottom: hp(1) }}
+      style={styles.scrollview}
+      contentContainerStyle={styles.contentContainer}
       showsVerticalScrollIndicator={false}
     >
       <View style={styles.imageContainer}>
         <Image
           source={require("../../assets/images/Pattern.png")}
           style={styles.imagePattern}
-          resizeMode="cover"
+          contentFit="cover"
         />
         <LinearGradient
           colors={["transparent", Colors.light_white]}
           start={{ x: 1, y: 0 }}
           end={{ x: 1, y: 1 }}
-          style={{
-            position: "absolute",
-            left: 0,
-            right: 0,
-            bottom: 0,
-            height: "50%",
-          }}
+          style={styles.linearGradientImage}
         />
       </View>
 
@@ -95,19 +88,12 @@ const SignUpScreen = () => {
         <Image
           source={require("../../assets/images/Logo.png")}
           style={logoStyles.logo}
-          resizeMode="contain"
+          contentFit="contain"
         />
         <MaskedView
           style={logoStyles.maskedContainer}
           maskElement={
-            <View
-              style={{
-                backgroundColor: "transparent",
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
+            <View style={styles.maskedContainer}>
               <Text style={logoStyles.appName}>{appName}</Text>
             </View>
           }
@@ -116,32 +102,17 @@ const SignUpScreen = () => {
             colors={Colors.green_gradient}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
-            style={{
-              flex: 1,
-              height: "100%",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
+            style={styles.linearGradientMask}
           />
         </MaskedView>
         <Text style={logoStyles.appDescription}>{appDescription}</Text>
       </View>
-      <Text
-        style={{
-          fontFamily: "bold",
-          fontSize: wp(5),
-          letterSpacing: 0.5,
-          textAlign: "center",
-          marginVertical: hp(5),
-        }}
-      >
-        Sign Up For Free
-      </Text>
+      <Text style={styles.screenTitle}>Sign Up For Free</Text>
       <Formik
         initialValues={{
-          email: "asd@gmail.com",
+          email: "johndoe@gmail.com",
           password: "U12345678",
-          userName: "@asdsad",
+          userName: "@john_doe",
         }}
         onSubmit={(values) => handleSubmitValues(values.email, values.password)}
         validationSchema={validationSchema}
@@ -155,7 +126,7 @@ const SignUpScreen = () => {
           errors,
           touched,
         }) => (
-          <View style={{ paddingHorizontal: wp(4), gap: 12, flex: 1 }}>
+          <View style={styles.formik}>
             <Input
               name="userName"
               placeholder="Username"
@@ -214,56 +185,22 @@ const SignUpScreen = () => {
               touched={touched.password}
               autoComplete="password-new"
             />
-            <View
-              style={{ flexGrow: 1, flex: 1, marginTop: hp(1), gap: hp(1) }}
-            >
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  gap: 13,
-                  marginTop: hp(1),
-                }}
-              >
+            <View style={styles.switchWrapper}>
+              <View style={styles.switchInnerWrapper}>
                 <CustomSwitch
                   status={rememberMe}
                   onPress={() => setRememberMe(!rememberMe)}
                   size={0.5}
                 />
-                <Text
-                  style={{
-                    fontFamily: "book",
-                    fontSize: wp(4),
-                    letterSpacing: 0.5,
-                    textAlign: "center",
-                    color: Colors.greyScale500,
-                  }}
-                >
-                  Keep Me Signed In
-                </Text>
+                <Text style={styles.switchText}>Keep Me Signed In</Text>
               </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  gap: 13,
-                  marginTop: hp(1),
-                }}
-              >
+              <View style={styles.switchInnerWrapper}>
                 <CustomSwitch
                   status={emailMe}
                   onPress={() => setEmailMe(!emailMe)}
                   size={0.5}
                 />
-                <Text
-                  style={{
-                    fontFamily: "book",
-                    fontSize: wp(4),
-                    letterSpacing: 0.5,
-                    textAlign: "center",
-                    color: Colors.greyScale500,
-                  }}
-                >
+                <Text style={styles.switchText}>
                   Email Me About Special Pricing
                 </Text>
               </View>
@@ -282,27 +219,10 @@ const SignUpScreen = () => {
         onPress={() => navigation.navigate("signIn")}
       >
         <MaskedView
-          style={{
-            width: "100%",
-            height: 28,
-          }}
+          style={styles.haveAccountMaskContainer}
           maskElement={
-            <View
-              style={{
-                width: "100%",
-                height: "100%",
-              }}
-            >
-              <Text
-                style={{
-                  fontFamily: "medium",
-                  fontSize: wp(3.5),
-                  letterSpacing: 0.5,
-                  textDecorationLine: "underline",
-                  textAlign: "center",
-                  color: Colors.success,
-                }}
-              >
+            <View style={styles.haveAccountMask}>
+              <Text style={styles.haveAccountText}>
                 Already Have an account?
               </Text>
             </View>
@@ -312,11 +232,7 @@ const SignUpScreen = () => {
             colors={Colors.green_gradient}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
-            style={{
-              height: "100%",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
+            style={styles.gradientText}
           />
         </MaskedView>
       </TouchableOpacity>
@@ -327,6 +243,85 @@ const SignUpScreen = () => {
 export default SignUpScreen;
 
 const styles = StyleSheet.create({
+  gradientText: {
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  haveAccountText: {
+    fontFamily: "medium",
+    fontSize: wp(3.5),
+    letterSpacing: 0.5,
+    textDecorationLine: "underline",
+    textAlign: "center",
+    color: Colors.success,
+  },
+  haveAccountMask: {
+    width: "100%",
+    height: "100%",
+  },
+  haveAccountMaskContainer: {
+    width: "100%",
+    height: 28,
+  },
+  switchText: {
+    fontFamily: "book",
+    fontSize: wp(4),
+    letterSpacing: 0.5,
+    textAlign: "center",
+    color: Colors.greyScale500,
+  },
+  switchInnerWrapper: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 13,
+    marginTop: hp(1),
+  },
+  switchWrapper: {
+    flexGrow: 1,
+    flex: 1,
+    marginTop: hp(1),
+    gap: hp(1),
+  },
+  formik: {
+    paddingHorizontal: wp(4),
+    gap: 12,
+    flex: 1,
+  },
+  screenTitle: {
+    fontFamily: "bold",
+    fontSize: wp(5),
+    letterSpacing: 0.5,
+    textAlign: "center",
+    marginVertical: hp(5),
+  },
+  linearGradientMask: {
+    flex: 1,
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  maskedContainer: {
+    backgroundColor: "transparent",
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  linearGradientImage: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: 0,
+    height: "50%",
+  },
+  contentContainer: {
+    flexGrow: 1,
+    paddingBottom: hp(1),
+  },
+  scrollview: {
+    flex: 1,
+    backgroundColor: Colors.light_white,
+  },
   imageContainer: {
     position: "absolute",
     top: 0,

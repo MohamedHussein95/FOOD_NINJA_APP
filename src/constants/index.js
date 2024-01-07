@@ -4,7 +4,7 @@ export { default as Colors } from "./colors";
 export { default as Fonts } from "./fonts";
 
 export const appName = "FoodNinja";
-export const appDescription = "Deliver Favorite Food";
+export const appDescription = "Your favorite foods";
 
 export const logoStyles = {
   appName: {

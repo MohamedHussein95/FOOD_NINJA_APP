@@ -1,5 +1,6 @@
+import { Image } from "expo-image";
 import React, { useRef, useState } from "react";
-import { FlatList, Image, StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 import { Colors } from ".././constants";
 import { PrimaryButton } from "../components";
 import { DEVICE_WIDTH, hp, wp } from "../utils";
@@ -23,48 +24,14 @@ const ITEMS = [
 const SlideComponent = ({ title, description, image }) => {
   return (
     <View style={styles.container}>
-      <Image
-        source={image}
-        resizeMode="contain"
-        style={{ width: "100%", height: hp(55) }}
-      />
-      <View
-        style={{
-          width: "90%",
-          alignItems: "center",
-          gap: hp(3),
-          marginTop: hp(2),
-        }}
-      >
-        <Text
-          style={{
-            fontFamily: "bold",
-            fontSize: wp(7),
-            textAlign: "center",
-            lineHeight: hp(5),
-          }}
-          numberOfLines={2}
-        >
+      <Image source={image} contentFit="contain" style={styles.slideImage} />
+      <View style={styles.titleWrapper}>
+        <Text style={styles.title} numberOfLines={2}>
           {title}
         </Text>
       </View>
-      <View
-        style={{
-          width: "65%",
-          alignItems: "center",
-          gap: hp(3),
-          marginTop: hp(2),
-        }}
-      >
-        <Text
-          style={{
-            fontFamily: "regular",
-            fontSize: wp(4),
-            textAlign: "center",
-            lineHeight: hp(3),
-          }}
-          numberOfLines={2}
-        >
+      <View style={styles.descWrapper}>
+        <Text style={styles.description} numberOfLines={2}>
           {description}
         </Text>
       </View>
@@ -95,6 +62,7 @@ const OnboardingScreen = ({ navigation }) => {
       navigation.replace("signIn");
     }
   };
+
   return (
     <View style={styles.screen}>
       <FlatList
@@ -103,13 +71,8 @@ const OnboardingScreen = ({ navigation }) => {
         pagingEnabled
         data={ITEMS}
         keyExtractor={(item) => item.id.toString()}
-        style={{ flex: 1 }}
-        contentContainerStyle={{
-          flexGrow: 1,
-          paddingVertical: hp(1),
-          alignItems: "center",
-          justifyContent: "center",
-        }}
+        style={styles.flatlist}
+        contentContainerStyle={styles.contentContainer}
         horizontal
         renderItem={({ item }) => (
           <SlideComponent
@@ -124,7 +87,7 @@ const OnboardingScreen = ({ navigation }) => {
       <PrimaryButton
         text={"Next"}
         onPress={goToNextSlide}
-        styles={{ marginBottom: hp(2) }}
+        styles={styles.primaryButton}
       />
     </View>
   );
@@ -133,6 +96,46 @@ const OnboardingScreen = ({ navigation }) => {
 export default OnboardingScreen;
 
 const styles = StyleSheet.create({
+  primaryButton: {
+    marginBottom: hp(2),
+  },
+  flatlist: {
+    flex: 1,
+  },
+  contentContainer: {
+    flexGrow: 1,
+    paddingVertical: hp(1),
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  description: {
+    fontFamily: "regular",
+    fontSize: wp(4),
+    textAlign: "center",
+    lineHeight: hp(3),
+  },
+  descWrapper: {
+    width: "65%",
+    alignItems: "center",
+    gap: hp(3),
+    marginTop: hp(2),
+  },
+  title: {
+    fontFamily: "bold",
+    fontSize: wp(7),
+    textAlign: "center",
+    lineHeight: hp(5),
+  },
+  titleWrapper: {
+    width: "90%",
+    alignItems: "center",
+    gap: hp(3),
+    marginTop: hp(2),
+  },
+  slideImage: {
+    width: "100%",
+    height: hp(55),
+  },
   screen: {
     flex: 1,
     justifyContent: "center",

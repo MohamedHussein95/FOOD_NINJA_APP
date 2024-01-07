@@ -1,10 +1,9 @@
 import MaskedView from "@react-native-masked-view/masked-view";
-import { useNavigation } from "@react-navigation/native";
+import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
 import { Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import {
-  Image,
   ScrollView,
   StyleSheet,
   Text,
@@ -30,15 +29,13 @@ const validationSchema = Yup.object().shape({
     .required(),
 });
 
-const SignInScreen = () => {
+const SignInScreen = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
   const [passwordFocused, setPasswordFocused] = useState(false);
   const [emailFocused, setEmailFocused] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-
-  const navigation = useNavigation();
 
   const handleSubmitValues = async (email, password) => {
     try {
@@ -65,27 +62,21 @@ const SignInScreen = () => {
 
   return (
     <ScrollView
-      style={{ flex: 1, backgroundColor: Colors.light_white }}
-      contentContainerStyle={{ flexGrow: 1, paddingBottom: hp(1) }}
+      style={styles.scrollView}
+      contentContainerStyle={styles.contentContainer}
       showsVerticalScrollIndicator={false}
     >
       <View style={styles.imageContainer}>
         <Image
           source={require("../../assets/images/Pattern.png")}
           style={styles.imagePattern}
-          resizeMode="cover"
+          contentFit="cover"
         />
         <LinearGradient
           colors={["transparent", Colors.light_white]}
           start={{ x: 1, y: 0 }}
           end={{ x: 1, y: 1 }}
-          style={{
-            position: "absolute",
-            left: 0,
-            right: 0,
-            bottom: 0,
-            height: "50%",
-          }}
+          style={styles.linearGradientImage}
         />
       </View>
 
@@ -93,19 +84,12 @@ const SignInScreen = () => {
         <Image
           source={require("../../assets/images/Logo.png")}
           style={logoStyles.logo}
-          resizeMode="contain"
+          contentFit="contain"
         />
         <MaskedView
           style={logoStyles.maskedContainer}
           maskElement={
-            <View
-              style={{
-                backgroundColor: "transparent",
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
+            <View style={styles.container}>
               <Text style={logoStyles.appName}>{appName}</Text>
             </View>
           }
@@ -114,27 +98,12 @@ const SignInScreen = () => {
             colors={Colors.green_gradient}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
-            style={{
-              flex: 1,
-              height: "100%",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
+            style={styles.linearGradientMask}
           />
         </MaskedView>
         <Text style={logoStyles.appDescription}>{appDescription}</Text>
       </View>
-      <Text
-        style={{
-          fontFamily: "bold",
-          fontSize: wp(5),
-          letterSpacing: 0.5,
-          textAlign: "center",
-          marginVertical: hp(5),
-        }}
-      >
-        Login To Your Account
-      </Text>
+      <Text style={styles.screenTitle}>Login To Your Account</Text>
       <Formik
         initialValues={{ email, password }}
         onSubmit={(values) => handleSubmitValues(values.email, values.password)}
@@ -149,9 +118,7 @@ const SignInScreen = () => {
           errors,
           touched,
         }) => (
-          <View
-            style={{ paddingHorizontal: wp(4), gap: 12, flex: 1, flexGrow: 1 }}
-          >
+          <View style={styles.formik}>
             <Input
               name="email"
               placeholder="Email"
@@ -195,29 +162,10 @@ const SignInScreen = () => {
               onPress={() => navigation.navigate("forgot_password")}
             >
               <MaskedView
-                style={{
-                  width: "100%",
-                  height: 28,
-                }}
+                style={styles.forgotMaskContainer}
                 maskElement={
-                  <View
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                    }}
-                  >
-                    <Text
-                      style={{
-                        fontFamily: "medium",
-                        fontSize: wp(3.5),
-                        letterSpacing: 0.5,
-                        textDecorationLine: "underline",
-                        textAlign: "center",
-                        color: Colors.success,
-                      }}
-                    >
-                      Forgot Your Password?
-                    </Text>
+                  <View style={styles.forgotMask}>
+                    <Text style={styles.forgotText}>Forgot Your Password?</Text>
                   </View>
                 }
               >
@@ -225,96 +173,28 @@ const SignInScreen = () => {
                   colors={Colors.green_gradient}
                   start={{ x: 0, y: 0 }}
                   end={{ x: 1, y: 0 }}
-                  style={{
-                    height: "100%",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
+                  style={styles.linearText}
                 />
               </MaskedView>
             </TouchableOpacity>
-            <Text
-              style={{
-                fontFamily: "bold",
-                fontSize: wp(4),
-                letterSpacing: 0.5,
-                textAlign: "center",
-                marginVertical: hp(1),
-              }}
-            >
-              Or Continue With
-            </Text>
+            <Text style={styles.orText}>Or Continue With</Text>
 
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-                flexGrow: 1,
-                flex: 1,
-              }}
-            >
-              <TouchableOpacity
-                style={{
-                  backgroundColor: Colors.white,
-                  borderRadius: wp(4),
-                  borderWidth: 1,
-                  borderColor: Colors.greyScale200,
-                  elevation: 0.1,
-                  justifyContent: "center",
-                  alignItems: "center",
-                  flexDirection: "row",
-                  gap: 13,
-                  width: wp(45),
-                }}
-              >
+            <View style={styles.socialContainer}>
+              <TouchableOpacity style={styles.social}>
                 <Image
                   source={require("../../assets/images/facebook.png")}
-                  style={{ width: hp(4), aspectRatio: 1 }}
-                  resizeMode="contain"
+                  style={styles.socialImage}
+                  contentFit="contain"
                 />
-                <Text
-                  style={{
-                    fontFamily: "bold",
-                    fontSize: wp(4),
-                    letterSpacing: 0.5,
-                    textAlign: "center",
-                    marginVertical: hp(4),
-                  }}
-                >
-                  Facebook
-                </Text>
+                <Text style={styles.socialText}>Facebook</Text>
               </TouchableOpacity>
-              <TouchableOpacity
-                style={{
-                  backgroundColor: Colors.white,
-                  borderRadius: wp(4),
-                  borderWidth: 1,
-                  borderColor: Colors.greyScale200,
-                  elevation: 0.1,
-                  justifyContent: "center",
-                  alignItems: "center",
-                  flexDirection: "row",
-                  gap: 13,
-                  width: wp(45),
-                }}
-              >
+              <TouchableOpacity style={styles.social}>
                 <Image
                   source={require("../../assets/images/google.png")}
-                  style={{ width: hp(4), aspectRatio: 1 }}
-                  resizeMode="contain"
+                  style={styles.socialImage}
+                  contentFit="contain"
                 />
-                <Text
-                  style={{
-                    fontFamily: "bold",
-                    fontSize: wp(4),
-                    letterSpacing: 0.5,
-                    textAlign: "center",
-                    marginVertical: hp(4),
-                  }}
-                >
-                  Google
-                </Text>
+                <Text style={styles.socialText}>Google</Text>
               </TouchableOpacity>
             </View>
 
@@ -328,34 +208,12 @@ const SignInScreen = () => {
           </View>
         )}
       </Formik>
-      <TouchableOpacity
-        style={{}}
-        onPress={() => navigation.navigate("signUp")}
-      >
+      <TouchableOpacity onPress={() => navigation.navigate("signUp")}>
         <MaskedView
-          style={{
-            width: "100%",
-            height: 28,
-          }}
+          style={styles.forgotMaskContainer}
           maskElement={
-            <View
-              style={{
-                width: "100%",
-                height: "100%",
-              }}
-            >
-              <Text
-                style={{
-                  fontFamily: "medium",
-                  fontSize: wp(3.5),
-                  letterSpacing: 0.5,
-                  textDecorationLine: "underline",
-                  textAlign: "center",
-                  color: Colors.success,
-                }}
-              >
-                Don't have an account?
-              </Text>
+            <View sstyle={styles.forgotMask}>
+              <Text style={styles.forgotText}>Don't have an account?</Text>
             </View>
           }
         >
@@ -363,11 +221,7 @@ const SignInScreen = () => {
             colors={Colors.green_gradient}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
-            style={{
-              height: "100%",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
+            style={styles.linearText}
           />
         </MaskedView>
       </TouchableOpacity>
@@ -378,6 +232,104 @@ const SignInScreen = () => {
 export default SignInScreen;
 
 const styles = StyleSheet.create({
+  socialImage: {
+    width: hp(4),
+    aspectRatio: 1,
+  },
+  socialText: {
+    fontFamily: "bold",
+    fontSize: wp(4),
+    letterSpacing: 0.5,
+    textAlign: "center",
+    marginVertical: hp(4),
+  },
+  social: {
+    backgroundColor: Colors.white,
+    borderRadius: wp(4),
+    borderWidth: 1,
+    borderColor: Colors.greyScale200,
+    elevation: 0.1,
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+    gap: 13,
+    width: wp(45),
+  },
+  socialContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    flexGrow: 1,
+    flex: 1,
+  },
+  orText: {
+    fontFamily: "bold",
+    fontSize: wp(4),
+    letterSpacing: 0.5,
+    textAlign: "center",
+    marginVertical: hp(1),
+  },
+  linearText: {
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  forgotMaskContainer: {
+    width: "100%",
+    height: 28,
+  },
+  forgotMask: {
+    width: "100%",
+    height: "100%",
+  },
+  forgotText: {
+    fontFamily: "medium",
+    fontSize: wp(3.5),
+    letterSpacing: 0.5,
+    textDecorationLine: "underline",
+    textAlign: "center",
+    color: Colors.success,
+  },
+  formik: {
+    paddingHorizontal: wp(4),
+    gap: 12,
+    flex: 1,
+    flexGrow: 1,
+  },
+  screenTitle: {
+    fontFamily: "bold",
+    fontSize: wp(5),
+    letterSpacing: 0.5,
+    textAlign: "center",
+    marginVertical: hp(5),
+  },
+  linearGradientMask: {
+    flex: 1,
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  container: {
+    backgroundColor: "transparent",
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  linearGradientImage: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: 0,
+    height: "50%",
+  },
+  contentContainer: {
+    flexGrow: 1,
+    paddingBottom: hp(1),
+  },
+  scrollView: {
+    flex: 1,
+    backgroundColor: Colors.light_white,
+  },
   imageContainer: {
     position: "absolute",
     top: 0,
