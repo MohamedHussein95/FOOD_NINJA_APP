@@ -1,20 +1,20 @@
-import { FontAwesome5 } from "@expo/vector-icons";
+import { FontAwesome5, Ionicons } from "@expo/vector-icons";
 import MaskedView from "@react-native-masked-view/masked-view";
+import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
 import React, { useState } from "react";
 import {
   Animated,
-  FlatList,
-  Image,
   ImageBackground,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
+import { SwipeListView } from "react-native-swipe-list-view";
 import { BackButton, Header } from "../components";
 import { Colors } from "../constants";
-import { hp, wp } from "../utils";
+import { DEVICE_WIDTH, hp, wp } from "../utils";
 
 const popularMenu = [
   {
@@ -40,83 +40,46 @@ const popularMenu = [
   },
 ];
 
+const renderHiddenItem = () => (
+  <TouchableOpacity style={styles.rowBack}>
+    <View style={[styles.backRightBtn, styles.backRightBtnRight]}>
+      <Ionicons name="trash" size={30} color={Colors.white} />
+    </View>
+  </TouchableOpacity>
+);
+
 const OrderDetailsScreen = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
 
   return (
     <View style={styles.screen}>
       <Header />
-      <FlatList
+      <SwipeListView
         data={popularMenu}
+        disableRightSwipe
         showsHorizontalScrollIndicator={false}
         style={{ flex: 1 }}
-        contentContainerStyle={{
-          flexGrow: 1,
-          paddingBottom: hp(1),
-          paddingTop: hp(8),
-        }}
+        contentContainerStyle={styles.contentContainer}
+        useNativeDriver={true}
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={<BackButton title={"Order details"} />}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <View style={{ width: "100%", paddingHorizontal: wp(4) }}>
-            <Animated.View
-              style={[
-                {
-                  backgroundColor: Colors.greyScale100,
-                  flexDirection: "row",
-                  alignItems: "center",
-                  borderRadius: wp(5),
-                  padding: wp(2),
-                  marginBottom: hp(2),
-                },
-              ]}
-            >
+            <Animated.View style={styles.itemContainer}>
               <Image
                 source={item.image}
-                resizeMode="contain"
+                contentFit="contain"
                 style={{ width: wp(20), aspectRatio: 1 }}
               />
-              <View
-                style={{
-                  gap: hp(1),
-                  marginLeft: wp(2),
-                  flex: 1,
-                }}
-              >
-                <Text style={{ fontFamily: "medium", fontSize: wp(5) }}>
-                  {item.title}
-                </Text>
-                <Text
-                  style={{
-                    fontFamily: "regular",
-                    fontSize: wp(4),
-                    color: Colors.black100,
-                  }}
-                >
-                  {item.restaurant}
-                </Text>
+              <View style={styles.middleView}>
+                <Text style={styles.title}>{item.title}</Text>
+                <Text style={styles.restaurant}>{item.restaurant}</Text>
                 <MaskedView
-                  style={{
-                    width: 50,
-                    height: 28,
-                  }}
+                  style={styles.maskContainer}
                   maskElement={
-                    <View
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                      }}
-                    >
-                      <Text
-                        style={{
-                          fontFamily: "bold",
-                          fontSize: wp(7),
-                          color: Colors.success,
-                        }}
-                      >
-                        {item.price}
-                      </Text>
+                    <View style={styles.priceMaskContainer}>
+                      <Text style={styles.price}>{item.price}</Text>
                     </View>
                   }
                 >
@@ -124,35 +87,17 @@ const OrderDetailsScreen = ({ navigation }) => {
                     colors={Colors.green_gradient}
                     start={{ x: 0, y: 0 }}
                     end={{ x: 1, y: 0 }}
-                    style={{
-                      height: "100%",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
+                    style={styles.linearMask}
                   />
                 </MaskedView>
               </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  gap: wp(2),
-                  marginRight: wp(1),
-                }}
-              >
+              <View style={styles.counterContainer}>
                 <TouchableOpacity activeOpacity={0.8} onPress={() => {}}>
                   <LinearGradient
                     colors={Colors.light_green_gradient}
                     start={{ x: 1, y: 1 }}
                     end={{ x: 1, y: 0 }}
-                    style={{
-                      borderRadius: hp(1),
-                      justifyContent: "center",
-                      alignItems: "center",
-                      overflow: "hidden",
-                      width: wp(9),
-                      aspectRatio: 1,
-                    }}
+                    style={styles.minusButton}
                   >
                     <FontAwesome5
                       name="minus"
@@ -161,22 +106,13 @@ const OrderDetailsScreen = ({ navigation }) => {
                     />
                   </LinearGradient>
                 </TouchableOpacity>
-                <Text style={{ fontFamily: "inter_semiBold", fontSize: wp(5) }}>
-                  9
-                </Text>
+                <Text style={styles.counterText}>9</Text>
                 <TouchableOpacity activeOpacity={0.8} onPress={() => {}}>
                   <LinearGradient
                     colors={Colors.green_gradient}
                     start={{ x: 1, y: 1 }}
                     end={{ x: 1, y: 0 }}
-                    style={{
-                      borderRadius: hp(1),
-                      justifyContent: "center",
-                      alignItems: "center",
-                      overflow: "hidden",
-                      width: wp(9),
-                      aspectRatio: 1,
-                    }}
+                    style={styles.plusButton}
                   >
                     <FontAwesome5
                       name="plus"
@@ -189,179 +125,46 @@ const OrderDetailsScreen = ({ navigation }) => {
             </Animated.View>
           </View>
         )}
+        renderHiddenItem={renderHiddenItem}
+        rightOpenValue={-DEVICE_WIDTH / 5}
       />
       <LinearGradient
         colors={Colors.green_gradient}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
-        style={{
-          width: "90%",
-          alignSelf: "center",
-          marginBottom: hp(2),
-          borderRadius: hp(1),
-          gap: hp(1),
-        }}
+        style={styles.orderDetailsContainer}
       >
         <ImageBackground
           source={require("../../assets/images/Pattern_order.png")}
-          resizeMode="cover"
-          style={{
-            paddingHorizontal: wp(4),
-            paddingVertical: hp(2),
-          }}
+          contentFit="cover"
+          style={styles.imageOrderBg}
         >
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            <Text
-              style={{
-                fontFamily: "medium",
-                color: Colors.white,
-                fontSize: wp(4),
-                letterSpacing: 0.5,
-              }}
-            >
-              Sub-Total
-            </Text>
-            <Text
-              style={{
-                fontFamily: "medium",
-                color: Colors.white,
-                fontSize: wp(5),
-                letterSpacing: 0.5,
-              }}
-            >
-              $120
-            </Text>
+          <View style={styles.subDetailsView}>
+            <Text style={styles.subDetailsTitle}>Sub-Total</Text>
+            <Text style={styles.subDetailsValue}>$120</Text>
           </View>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            <Text
-              style={{
-                fontFamily: "medium",
-                color: Colors.white,
-                fontSize: wp(4),
-                letterSpacing: 0.5,
-              }}
-            >
-              Delivery Charge
-            </Text>
-            <Text
-              style={{
-                fontFamily: "medium",
-                color: Colors.white,
-                fontSize: wp(5),
-                letterSpacing: 0.5,
-              }}
-            >
-              $10
-            </Text>
+          <View style={styles.subDetailsView}>
+            <Text style={styles.subDetailsTitle}>Delivery Charge</Text>
+            <Text style={styles.subDetailsValue}>$10</Text>
           </View>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            <Text
-              style={{
-                fontFamily: "medium",
-                color: Colors.white,
-                fontSize: wp(4),
-                letterSpacing: 0.5,
-              }}
-            >
-              Discount
-            </Text>
-            <Text
-              style={{
-                fontFamily: "medium",
-                color: Colors.white,
-                fontSize: wp(5),
-                letterSpacing: 0.5,
-              }}
-            >
-              $20
-            </Text>
+          <View style={styles.subDetailsView}>
+            <Text style={styles.subDetailsTitle}>Discount</Text>
+            <Text style={styles.subDetailsValue}>$20</Text>
           </View>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-              marginVertical: hp(2),
-            }}
-          >
-            <Text
-              style={{
-                fontFamily: "medium",
-                color: Colors.white,
-                fontSize: wp(6),
-                letterSpacing: 0.5,
-              }}
-            >
-              Total
-            </Text>
-            <Text
-              style={{
-                fontFamily: "medium",
-                color: Colors.white,
-                fontSize: wp(6),
-                letterSpacing: 0.5,
-              }}
-            >
-              $150
-            </Text>
+          <View style={styles.totalView}>
+            <Text style={styles.total}>Total</Text>
+            <Text style={styles.totalValue}>$150</Text>
           </View>
           <TouchableOpacity
-            style={{
-              backgroundColor: Colors.white,
-              padding: wp(2),
-              borderRadius: wp(4),
-              width: "100%",
-              justifyContent: "center",
-              alignItems: "center",
-              height: hp(7),
-            }}
+            style={styles.orderButton}
             activeOpacity={0.8}
             onPress={() => navigation.navigate("confirm_order")}
           >
             <MaskedView
-              style={{
-                width: "100%",
-                height: "100%",
-                flexDirection: "column",
-                justifyContent: "center",
-              }}
+              style={styles.orderButtonMask}
               maskElement={
-                <View
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <Text
-                    style={{
-                      fontSize: wp(5),
-                      fontFamily: "bold",
-                      textAlign: "center",
-                    }}
-                  >
-                    Place My Order
-                  </Text>
+                <View style={styles.orderButtonInnerMask}>
+                  <Text style={styles.orderButtonText}>Place My Order</Text>
                 </View>
               }
             >
@@ -369,11 +172,7 @@ const OrderDetailsScreen = ({ navigation }) => {
                 colors={Colors.green_gradient}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 0 }}
-                style={{
-                  height: "100%",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
+                style={styles.orderButtonGradient}
               />
             </MaskedView>
           </TouchableOpacity>
@@ -386,22 +185,180 @@ const OrderDetailsScreen = ({ navigation }) => {
 export default OrderDetailsScreen;
 
 const styles = StyleSheet.create({
+  orderButtonGradient: {
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  orderButtonText: {
+    fontSize: wp(5),
+    fontFamily: "bold",
+    textAlign: "center",
+  },
+  orderButtonInnerMask: {
+    width: "100%",
+    height: "100%",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  orderButtonMask: {
+    width: "100%",
+    height: "100%",
+    flexDirection: "column",
+    justifyContent: "center",
+  },
+  orderButton: {
+    backgroundColor: Colors.white,
+    padding: wp(2),
+    borderRadius: wp(4),
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    height: hp(7),
+  },
+  totalValue: {
+    fontFamily: "medium",
+    color: Colors.white,
+    fontSize: wp(6),
+    letterSpacing: 0.5,
+  },
+  total: {
+    fontFamily: "medium",
+    color: Colors.white,
+    fontSize: wp(6),
+    letterSpacing: 0.5,
+  },
+  totalView: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginVertical: hp(2),
+  },
+  subDetailsValue: {
+    fontFamily: "medium",
+    color: Colors.white,
+    fontSize: wp(5),
+    letterSpacing: 0.5,
+  },
+  subDetailsTitle: {
+    fontFamily: "medium",
+    color: Colors.white,
+    fontSize: wp(4),
+    letterSpacing: 0.5,
+  },
+  subDetailsView: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  imageOrderBg: {
+    paddingHorizontal: wp(4),
+    paddingVertical: hp(2),
+  },
+  orderDetailsContainer: {
+    width: "90%",
+    alignSelf: "center",
+    marginBottom: hp(2),
+    borderRadius: hp(1),
+    gap: hp(1),
+  },
+  plusButton: {
+    borderRadius: hp(1),
+    justifyContent: "center",
+    alignItems: "center",
+    overflow: "hidden",
+    width: wp(9),
+    aspectRatio: 1,
+  },
+  counterText: {
+    fontFamily: "inter_semiBold",
+    fontSize: wp(5),
+  },
+  minusButton: {
+    borderRadius: hp(1),
+    justifyContent: "center",
+    alignItems: "center",
+    overflow: "hidden",
+    width: wp(9),
+    aspectRatio: 1,
+  },
+  counterContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: wp(2),
+    marginRight: wp(1),
+  },
+  linearMask: {
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  priceMaskContainer: {
+    width: "100%",
+    height: "100%",
+  },
+  maskContainer: {
+    width: 50,
+    height: 28,
+  },
+  price: {
+    fontFamily: "bold",
+    fontSize: wp(7),
+    color: Colors.success,
+  },
+  restaurant: {
+    fontFamily: "regular",
+    fontSize: wp(4),
+    color: Colors.black100,
+  },
+  title: {
+    fontFamily: "medium",
+    fontSize: wp(5),
+  },
+  middleView: {
+    gap: hp(1),
+    marginLeft: wp(2),
+    flex: 1,
+  },
+  itemContainer: {
+    backgroundColor: Colors.greyScale100,
+    flexDirection: "row",
+    alignItems: "center",
+    padding: wp(2),
+    height: hp(12),
+    borderRadius: wp(4),
+  },
+  contentContainer: {
+    flexGrow: 1,
+    paddingBottom: hp(1),
+    paddingTop: hp(8),
+    gap: hp(1),
+  },
   screen: {
     flex: 1,
     backgroundColor: Colors.white,
   },
-  imageContainer: {
-    position: "absolute",
-    top: 0,
-    width: "100%",
-    justifyContent: "center",
+
+  rowBack: {
     alignItems: "center",
+    backgroundColor: "transparent",
+    height: hp(10),
   },
-  image: { aspectRatio: 1, height: hp(15) },
-  logoContainer: {
-    flex: 1,
-    justifyContent: "center",
+  backRightBtn: {
     alignItems: "center",
-    flexDirection: "column",
+    bottom: 0,
+    justifyContent: "center",
+    position: "absolute",
+    top: 15,
+    width: 80,
+    alignSelf: "center",
+    borderTopRightRadius: wp(10),
+    borderBottomRightRadius: wp(10),
+    marginRight: wp(4),
+  },
+  backRightBtnRight: {
+    backgroundColor: "red",
+    right: 0,
   },
 });
