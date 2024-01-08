@@ -1,6 +1,7 @@
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { BottomTabBar } from "../components";
 import {
   CallScreen,
   CartScreen,
@@ -15,9 +16,9 @@ import {
   RestaurantDetailsScreen,
   SearchScreen,
   ShippingScreen,
+  SignUpSuccessScreen,
   VoucherPromoScreen,
 } from "../screens";
-import { BottomTabBar } from "../components";
 import ConfirmOrderScreen from "../screens/ConfirmOrderScreen";
 
 const Stack = createStackNavigator();
@@ -49,6 +50,7 @@ const MainNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="tab" component={TabStack} />
+      <Stack.Screen name="signUp_success" component={SignUpSuccessScreen} />
       <Stack.Screen
         name="search"
         component={SearchScreen}

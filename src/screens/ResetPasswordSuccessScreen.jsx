@@ -73,9 +73,7 @@ const ResetPasswordSuccessScreen = ({ navigation }) => {
             }}
           />
         </MaskedView>
-        <Text style={{ fontFamily: "bold", fontSize: wp(6) }}>
-          Password reset successfull
-        </Text>
+        <Text style={styles.subtitle}>Password reset successfull</Text>
       </View>
       <PrimaryButton
         text={"Back"}
@@ -89,6 +87,10 @@ const ResetPasswordSuccessScreen = ({ navigation }) => {
 export default ResetPasswordSuccessScreen;
 
 const styles = StyleSheet.create({
+  subtitle: {
+    fontFamily: "bold",
+    fontSize: wp(6),
+  },
   screen: {
     flex: 1,
     justifyContent: "center",

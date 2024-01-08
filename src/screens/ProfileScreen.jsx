@@ -45,7 +45,7 @@ const ProfileScreen = ({ navigation }) => {
 
   const renderItem = useCallback(
     ({ item }) => (
-      <TouchableOpacity
+      <View
         style={{
           backgroundColor: Colors.white,
           flexDirection: "row",
@@ -130,7 +130,7 @@ const ProfileScreen = ({ navigation }) => {
             fontSize={wp(3.5)}
           />
         </View>
-      </TouchableOpacity>
+      </View>
     ),
     []
   );

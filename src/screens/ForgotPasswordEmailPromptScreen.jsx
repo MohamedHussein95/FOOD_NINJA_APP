@@ -23,6 +23,8 @@ const ForgotPasswordEmailPromptScreen = ({ navigation }) => {
   const handleSendOtp = async (email) => {
     try {
       console.log(email);
+      // TODO:send a verification to email address
+
       navigation.navigate("verification", {
         email: email || "",
         reset: true,
@@ -31,101 +33,88 @@ const ForgotPasswordEmailPromptScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.screen}>
-      <ScrollView
-        style={{ flex: 1 }}
-        contentContainerStyle={{
-          flexGrow: 1,
+    <ScrollView
+      style={styles.screen}
+      contentContainerStyle={styles.contentContainer}
+      showsVerticalScrollIndicator={false}
+    >
+      <Header />
+      <BackButton
+        title={"Enter Your Email Address"}
+        subtitle={
+          "Please enter your Email so we can help you recover your password"
+        }
+      />
 
-          gap: hp(5),
-          paddingTop: hp(10),
+      <Formik
+        initialValues={{
+          email: "",
         }}
-        showsVerticalScrollIndicator={false}
+        validationSchema={validationSchema}
+        onSubmit={(values) => handleSendOtp(values.email)}
       >
-        <Header />
-        <BackButton
-          title={"Enter Your Email Address"}
-          subtitle={
-            "Please enter your Email so we can help you recover your password"
-          }
-        />
-
-        <Formik
-          initialValues={{
-            email: "",
-          }}
-          validationSchema={validationSchema}
-          onSubmit={(values) => handleSendOtp(values.email)}
-        >
-          {({
-            handleChange,
-            handleBlur,
-            handleReset,
-            handleSubmit,
-            values,
-            errors,
-            touched,
-            isValid,
-          }) => (
-            <View style={{ paddingHorizontal: wp(4), gap: 12, flex: 1 }}>
-              <Input
-                name="email"
-                placeholder="Email"
-                onChangeText={handleChange("email")}
-                onBlur={(e) => {
-                  handleBlur("email")(e);
-                  setEmailFocused(false);
-                }}
-                active={emailFocused}
-                onFocus={() => setEmailFocused(true)}
-                value={values.email}
-                keyboardType="email-address"
-                autoComplete="email"
-                image={require("../../assets/images/Message.png")}
-                errors={errors.email}
-                touched={touched.email}
-                autoCapitalize="none"
-                returnKeyType="done"
-                inputMode="email"
+        {({
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          values,
+          errors,
+          touched,
+        }) => (
+          <View style={styles.formik}>
+            <Input
+              name="email"
+              placeholder="Email"
+              onChangeText={handleChange("email")}
+              onBlur={(e) => {
+                handleBlur("email")(e);
+                setEmailFocused(false);
+              }}
+              active={emailFocused}
+              onFocus={() => setEmailFocused(true)}
+              value={values.email}
+              keyboardType="email-address"
+              autoComplete="email"
+              image={require("../../assets/images/Message.png")}
+              errors={errors.email}
+              touched={touched.email}
+              autoCapitalize="none"
+              inputMode="email"
+            />
+            <View
+              style={{
+                flex: 1,
+                justifyContent: "flex-end",
+              }}
+            >
+              <PrimaryButton
+                text={"Next"}
+                onPress={handleSubmit}
+                styles={{ marginBottom: hp(2) }}
               />
-              <View
-                style={{
-                  flex: 1,
-                  justifyContent: "flex-end",
-                }}
-              >
-                <PrimaryButton
-                  text={"Next"}
-                  onPress={handleSubmit}
-                  styles={{ marginBottom: hp(2) }}
-                />
-              </View>
             </View>
-          )}
-        </Formik>
-      </ScrollView>
-    </View>
+          </View>
+        )}
+      </Formik>
+    </ScrollView>
   );
 };
 
 export default ForgotPasswordEmailPromptScreen;
 
 const styles = StyleSheet.create({
-  screen: {
+  formik: {
+    paddingHorizontal: wp(4),
+    gap: 12,
     flex: 1,
   },
-  textWrapper: {
-    alignItems: "center",
-    padding: wp(3),
-    gap: hp(4),
-    backgroundColor: Colors.background,
+  contentContainer: {
+    flexGrow: 1,
+    gap: hp(5),
+    paddingTop: hp(10),
   },
-  imageContainer: {
-    position: "absolute",
-    top: 0,
-    width: "100%",
-    justifyContent: "center",
-    alignItems: "center",
+  screen: {
+    flex: 1,
+    backgroundColor: Colors.white,
   },
-  imagePattern: { width: "100%", height: hp(30) },
 });

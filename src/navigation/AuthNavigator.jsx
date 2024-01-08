@@ -12,7 +12,6 @@ import {
   SetupAccountScreen,
   SignInScreen,
   SignUpScreen,
-  SignUpSuccessScreen,
   SplashScreen,
   UploadPhotoScreen,
   VerificationScreen,
@@ -31,7 +30,7 @@ const AuthNavigator = () => {
       <Stack.Screen name="payment" component={PaymentMethodScreen} />
       <Stack.Screen name="upload_photo" component={UploadPhotoScreen} />
       <Stack.Screen name="set_location" component={SetLocationScreen} />
-      <Stack.Screen name="signUp_success" component={SignUpSuccessScreen} />
+
       <Stack.Screen name="verification" component={VerificationScreen} />
       <Stack.Screen name="forgot_password" component={ForgotPasswordScreen} />
       <Stack.Screen

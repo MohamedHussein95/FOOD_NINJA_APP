@@ -52,12 +52,14 @@ const VerificationScreen = ({ navigation, route }) => {
 
       <View style={styles.bodyContainer}>
         <Text style={styles.methodText}>
-          Code sent to{" "}
-          {phoneNumber
-            ? hideCharacters(phoneNumber, "end")
-            : email
-            ? hideCharacters(email, "middle")
-            : "Not found"}{" "}
+          Code sent to{"  "}
+          <Text style={{ color: Colors.success }}>
+            {phoneNumber
+              ? hideCharacters(phoneNumber, "end")
+              : email
+              ? hideCharacters(email, "middle")
+              : "Not found"}
+          </Text>{" "}
           . This code will expire in{" "}
           {seconds === 0 ? (
             <Text onPress={() => setSeconds(59)} style={styles.timerText}>

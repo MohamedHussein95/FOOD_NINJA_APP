@@ -29,7 +29,8 @@ const ForgotPasswordNumberPromptScreen = ({ navigation }) => {
         return;
       }
 
-      console.log(phoneNumber);
+      // TODO:send a verification to phone number
+
       navigation.navigate("verification", {
         phoneNumber: phoneNumber || "",
         reset: true,
@@ -38,99 +39,89 @@ const ForgotPasswordNumberPromptScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.screen}>
-      <ScrollView
-        style={{ flex: 1 }}
-        contentContainerStyle={{
-          flexGrow: 1,
+    <ScrollView
+      style={styles.screen}
+      contentContainerStyle={styles.contentContainer}
+      showsVerticalScrollIndicator={false}
+    >
+      <Header />
+      <BackButton
+        title={"Enter Your Phone Number"}
+        subtitle={
+          "Please enter your Phone Number so we can help you recover your password"
+        }
+      />
 
-          gap: hp(5),
-          paddingTop: hp(10),
+      <Formik
+        initialValues={{
+          phoneNumber: "",
         }}
-        showsVerticalScrollIndicator={false}
+        validationSchema={validationSchema}
+        onSubmit={(values) => handleSendOtp(values.phoneNumber)}
       >
-        <Header />
-        <BackButton
-          title={"Enter Your Phone Number"}
-          subtitle={
-            "Please enter your Phone Number so we can help you recover your password"
-          }
-        />
-
-        <Formik
-          initialValues={{
-            phoneNumber: "",
-          }}
-          validationSchema={validationSchema}
-          onSubmit={(values) => handleSendOtp(values.phoneNumber)}
-        >
-          {({
-            handleChange,
-            handleBlur,
-            handleReset,
-            handleSubmit,
-            values,
-            errors,
-            touched,
-            isValid,
-          }) => (
-            <View style={{ paddingHorizontal: wp(4), gap: 12, flex: 1 }}>
-              <PhoneInput
-                ref={phoneInput}
-                defaultValue={values.phoneNumber}
-                defaultCode="KE"
-                layout="first"
-                value={values.phoneNumber}
-                onChangeFormattedText={(text) => {
-                  handleChange("phoneNumber")(text);
-                }}
-                containerStyle={[styles.phoneContainer, {}]}
-                textContainerStyle={styles.phoneTextContainer}
-                textInputStyle={styles.phoneText}
-                codeTextStyle={styles.phoneText}
-                placeholder="Mobile Number"
-              />
-              {phoneNumberError ? (
-                <View style={[styles.errorContainer]}>
-                  <Text style={[styles.errorText]}>{phoneNumberError}</Text>
-                </View>
-              ) : errors.phoneNumber && touched.phoneNumber ? (
-                <View style={[styles.errorContainer]}>
-                  <Text style={[styles.errorText]}>{errors.phoneNumber}</Text>
-                </View>
-              ) : null}
-              <View
-                style={{
-                  flex: 1,
-                  justifyContent: "flex-end",
-                }}
-              >
-                <PrimaryButton
-                  text={"Next"}
-                  onPress={handleSubmit}
-                  styles={{ marginBottom: hp(2) }}
-                />
+        {({ handleChange, handleSubmit, values, errors, touched }) => (
+          <View style={styles.formik}>
+            <PhoneInput
+              ref={phoneInput}
+              defaultValue={values.phoneNumber}
+              defaultCode="KE"
+              layout="first"
+              value={values.phoneNumber}
+              onChangeFormattedText={(text) => {
+                handleChange("phoneNumber")(text);
+              }}
+              containerStyle={[styles.phoneContainer, {}]}
+              textContainerStyle={styles.phoneTextContainer}
+              textInputStyle={styles.phoneText}
+              codeTextStyle={styles.phoneText}
+              placeholder="Mobile Number"
+            />
+            {phoneNumberError ? (
+              <View style={[styles.errorContainer]}>
+                <Text style={[styles.errorText]}>{phoneNumberError}</Text>
               </View>
+            ) : errors.phoneNumber && touched.phoneNumber ? (
+              <View style={[styles.errorContainer]}>
+                <Text style={[styles.errorText]}>{errors.phoneNumber}</Text>
+              </View>
+            ) : null}
+            <View
+              style={{
+                flex: 1,
+                justifyContent: "flex-end",
+              }}
+            >
+              <PrimaryButton
+                text={"Next"}
+                onPress={handleSubmit}
+                styles={{ marginBottom: hp(2) }}
+              />
             </View>
-          )}
-        </Formik>
-      </ScrollView>
-    </View>
+          </View>
+        )}
+      </Formik>
+    </ScrollView>
   );
 };
 
 export default ForgotPasswordNumberPromptScreen;
 
 const styles = StyleSheet.create({
-  screen: {
+  formik: {
+    paddingHorizontal: wp(4),
+    gap: 12,
     flex: 1,
   },
-  textWrapper: {
-    alignItems: "center",
-    padding: wp(3),
-    gap: hp(4),
-    backgroundColor: Colors.background,
+  contentContainer: {
+    flexGrow: 1,
+    gap: hp(5),
+    paddingTop: hp(10),
   },
+  screen: {
+    flex: 1,
+    backgroundColor: Colors.white,
+  },
+
   phoneContainer: {
     width: "100%",
     backgroundColor: Colors.white,
@@ -157,12 +148,4 @@ const styles = StyleSheet.create({
   },
   errorText: { color: Colors.red },
   errorContainer: { width: "100%" },
-  imageContainer: {
-    position: "absolute",
-    top: 0,
-    width: "100%",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  imagePattern: { width: "100%", height: hp(30) },
 });

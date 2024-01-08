@@ -12,7 +12,7 @@ const SignUpSuccessScreen = ({ navigation }) => {
   const handleNext = () => {
     try {
       // TODO:take user to home screen and dont show this screen again
-      navigation.navigate("home");
+      navigation.navigate("tab");
     } catch (error) {}
   };
 
