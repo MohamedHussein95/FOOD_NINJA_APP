@@ -7,7 +7,7 @@ import MainNavigator from "./MainNavigator";
 const RootNavigator = ({ onReady }) => {
   return (
     <NavigationContainer onReady={onReady}>
-      <MainNavigator />
+      <AuthNavigator />
     </NavigationContainer>
   );
 };

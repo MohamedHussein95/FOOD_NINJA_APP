@@ -49,7 +49,7 @@ const TabStack = () => {
 const MainNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      {/* <Stack.Screen name="tab" component={TabStack} />
+      <Stack.Screen name="tab" component={TabStack} />
       <Stack.Screen name="signUp_success" component={SignUpSuccessScreen} />
       <Stack.Screen
         name="search"
@@ -92,9 +92,9 @@ const MainNavigator = () => {
         options={{
           presentation: "modal",
         }}
-      /> */}
+      />
       <Stack.Screen name="order_details" component={OrderDetailsScreen} />
-      {/* <Stack.Screen name="confirm_order" component={ConfirmOrderScreen} />
+      <Stack.Screen name="confirm_order" component={ConfirmOrderScreen} />
       <Stack.Screen
         name="payment"
         component={PaymentScreen}
@@ -115,7 +115,7 @@ const MainNavigator = () => {
         options={{
           presentation: "modal",
         }}
-      /> */}
+      />
     </Stack.Navigator>
   );
 };
