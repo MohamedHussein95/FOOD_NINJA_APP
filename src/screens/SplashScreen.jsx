@@ -1,24 +1,63 @@
+import MaskedView from "@react-native-masked-view/masked-view";
+import { LinearGradient } from "expo-linear-gradient";
 import React, { useEffect } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
+import { useDispatch } from "react-redux";
 import { Colors, appDescription, appName, logoStyles } from ".././constants";
-
-import { LinearGradient } from "expo-linear-gradient";
-
-import MaskedView from "@react-native-masked-view/masked-view";
-
 import colors from "../constants/colors";
+import { SET_DID_TRY_AUTO_LOGIN } from "../store/authSlice";
 import { hp } from "../utils";
 
 const SplashScreen = ({ navigation }) => {
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    let timeOut;
+    const tryLogin = async () => {
+      try {
+        // const storedAuthInfo = await SecureStore.getItemAsync("userData");
 
-    timeOut = setTimeout(() => {
-      navigation.navigate("Onboarding");
-    }, 2000);
+        // if (storedAuthInfo == null) {
+        //   dispatch(SET_DID_TRY_AUTO_LOGIN());
+        //   console.log("no user data");
+        //   return;
+        // }
 
-    return () => clearTimeout(timeOut);
-  }, []);
+        // const parsedData = JSON.parse(storedAuthInfo);
+        // const { token, uid, expiryDate: expiryDateString } = parsedData;
+
+        // const expiryDate = new Date(expiryDateString);
+        // if (expiryDate <= new Date() || !token || !uid) {
+        //   dispatch(SET_DID_TRY_AUTO_LOGIN());
+        //   return;
+        // }
+
+        // auth.onAuthStateChanged(async (user) => {
+        //   if (user) {
+        //     try {
+        //       const userDoc = await getUserDataFromFireStore(user.uid);
+        //       await updateUserStatus("Online", uid);
+        //       dispatch(
+        //         AUTHENTICATE({
+        //           ...userDoc,
+        //           token,
+        //         })
+        //       );
+        //     } catch (error) {
+        //       dispatch(SET_DID_TRY_AUTO_LOGIN());
+        //     }
+        //   } else {
+        //     dispatch(SET_DID_TRY_AUTO_LOGIN());
+        //   }
+        // });
+        dispatch(SET_DID_TRY_AUTO_LOGIN());
+      } catch (error) {
+        console.log(error);
+        dispatch(SET_DID_TRY_AUTO_LOGIN());
+      }
+    };
+
+    tryLogin();
+  }, [dispatch]);
 
   // TODO:retreive the stored USER data
 

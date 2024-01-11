@@ -6,6 +6,8 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { PrimaryButton } from "../components";
 import { Colors } from "../constants";
 import { hp, wp } from "../utils";
+import { LOG_OUT } from "../store/authSlice";
+import { useDispatch } from "react-redux";
 
 const popularMenu = [
   {
@@ -32,6 +34,8 @@ const popularMenu = [
 ];
 
 const ProfileScreen = ({ navigation }) => {
+  const dispatch = useDispatch();
+
   // ref
   const bottomSheetRef = useRef();
 
@@ -169,25 +173,45 @@ const ProfileScreen = ({ navigation }) => {
             <View>
               <View
                 style={{
-                  backgroundColor: Colors.gold,
                   paddingHorizontal: wp(1),
-                  paddingVertical: hp(1),
-                  borderRadius: wp(3),
-                  justifyContent: "center",
+                  justifyContent: "space-between",
                   alignItems: "center",
-                  width: wp(35),
                   marginVertical: hp(1),
+                  flexDirection: "row",
                 }}
               >
-                <Text
+                <TouchableOpacity
                   style={{
-                    fontFamily: "medium",
-                    fontSize: wp(4),
-                    color: Colors.gold200,
+                    backgroundColor: Colors.gold,
+                    borderRadius: wp(3),
+                    width: wp(35),
+                    justifyContent: "center",
+                    alignItems: "center",
+                    paddingVertical: hp(1),
                   }}
                 >
-                  Member Gold
-                </Text>
+                  <Text
+                    style={{
+                      fontFamily: "medium",
+                      fontSize: wp(4),
+                      color: Colors.gold200,
+                    }}
+                  >
+                    Member Gold
+                  </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => LOG_OUT(dispatch)}>
+                  <Text
+                    style={{
+                      fontFamily: "medium",
+                      fontSize: wp(4),
+                      color: Colors.greyScale300,
+                    }}
+                  >
+                    Log out
+                  </Text>
+                </TouchableOpacity>
               </View>
               <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <View style={{ marginVertical: hp(1), gap: hp(1), flex: 1 }}>

@@ -10,12 +10,13 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { useDispatch } from "react-redux";
 import * as Yup from "yup";
 import { appDescription, appName, logoStyles } from ".././constants";
 import { Input, PrimaryButton } from "../components/";
 import { Colors } from "../constants";
+import { AUTHENTICATE } from "../store/authSlice";
 import { getStoredValues, hp, wp } from "../utils";
-
 const validationSchema = Yup.object().shape({
   email: Yup.string()
     .email()
@@ -30,6 +31,8 @@ const validationSchema = Yup.object().shape({
 });
 
 const SignInScreen = ({ navigation }) => {
+  const dispatch = useDispatch();
+
   const [loading, setLoading] = useState(false);
   const [passwordFocused, setPasswordFocused] = useState(false);
   const [emailFocused, setEmailFocused] = useState(false);
@@ -201,9 +204,7 @@ const SignInScreen = ({ navigation }) => {
 
             <PrimaryButton
               text={"Login"}
-              onPress={() =>
-                navigation.navigate("forgot_password", { email, phoneNumber })
-              }
+              onPress={() => dispatch(AUTHENTICATE({}))}
               styles={{ marginBottom: hp(2) }}
             />
           </View>

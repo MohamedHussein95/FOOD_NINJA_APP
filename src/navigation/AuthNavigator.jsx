@@ -19,12 +19,15 @@ import {
 
 const Stack = createStackNavigator();
 
-const AuthNavigator = () => {
+const AuthNavigator = ({ setAuthenticated }) => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="splash" component={SplashScreen} />
       <Stack.Screen name="Onboarding" component={OnboardingScreen} />
-      <Stack.Screen name="signIn" component={SignInScreen} />
+      <Stack.Screen
+        name="signIn"
+        component={SignInScreen}
+        setAuthenticated={setAuthenticated}
+      />
       <Stack.Screen name="signUp" component={SignUpScreen} />
       <Stack.Screen name="setup" component={SetupAccountScreen} />
       <Stack.Screen name="payment" component={PaymentMethodScreen} />
